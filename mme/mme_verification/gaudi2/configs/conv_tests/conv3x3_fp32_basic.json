@@ -1,0 +1,20 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["conv_3x3_fp32"]},
+    {"inTypeFloat":["fp32_non_ieee", "fp32_ieee", "tf32"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["fwd"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["false"]},
+    {"xSizes":["64", "112", "112", "1", "2"]},
+    {"ySizes":["512", "56", "56", "1", "2"]},
+    {"wSizes":["512", "64", "3", "3", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["2", "2", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"convPattern":["skf"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["2xh"]}
+    ]]
+}

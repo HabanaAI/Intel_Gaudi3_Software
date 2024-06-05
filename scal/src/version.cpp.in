@@ -1,0 +1,6 @@
+#include <string>
+
+extern const char* SCAL_SHA1_VERSION;
+const char* SCAL_SHA1_VERSION = "@SCAL_SHA1_VERSION@";
+extern const char* SCAL_BUILD_TIME;
+const char* SCAL_BUILD_TIME = "@SCAL_BUILD_TIME@";

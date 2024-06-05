@@ -1,0 +1,132 @@
+{
+"programInSram": "false",
+"tests":
+    [
+        [
+        {"testName": ["batch_gemm bert_large_squad:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["64", "384", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["384", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedw bert_large_squad:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["64", "384", "16", "24", "1"]},
+        {"wSizes": ["384", "384", "16", "24", "1"]},
+        {"ySizes": ["384", "64", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedx bert_large_squad:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["384", "384", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["64", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm bert_large_squad:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["384", "384", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["64", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedw bert_large_squad:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["384", "384", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["64", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedx bert_large_squad:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["64", "384", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["384", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm bert_large_squad:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["384", "384", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["64", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedw bert_large_squad:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["384", "384", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["64", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedx bert_large_squad:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["384", "64", "16", "24", "1"]},
+        {"wSizes": ["64", "384", "16", "24", "1"]},
+        {"ySizes": ["384", "384", "16", "24", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ]
+
+    ]
+}

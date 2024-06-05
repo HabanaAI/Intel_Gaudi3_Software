@@ -1,0 +1,29 @@
+{ "programInSram":"true",
+  "tests":[
+
+    [{"testName":["partial - bgemm - raster=False, reuse=B, FCD=2, SP=2, BATCH=10, partials=5, repeats=160, activations=40"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["ab"]},
+    {"sbReuse":["true"]},
+    {"signalMode":["random"]},
+    {"xSizes":["5700", "1024", "1", "2", "1"]},
+    {"wSizes":["1200", "5700", "1", "2", "1"]},
+    {"ySizes":["1200", "1024", "1", "2", "1"]},
+    {"geometry":["4xw"]},
+    {"dedwPattern":["fck"]}],
+
+    [{"testName":["partial - bgemm - raster=False, reuse=B, FCD=2, SP=6, BATCH=4, partials=2, repeats=168, activations=48"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["ab"]},
+    {"sbReuse":["true"]},
+    {"signalMode":["random"]},
+    {"xSizes":["2700", "2600", "1", "2", "1"]},
+    {"wSizes":["1200", "2700", "1", "2", "1"]},
+    {"ySizes":["1200", "2600", "1", "2", "1"]},
+    {"geometry":["4xw"]},
+    {"dedwPattern":["fck"]}]
+
+
+]}

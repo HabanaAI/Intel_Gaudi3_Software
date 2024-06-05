@@ -1,0 +1,47 @@
+{
+  "tests": [
+
+    [{"testName": ["partial reuse - at least one dim included, with empty dims"]},
+    {"inTypeFloat": ["bf16"]},
+    {"outTypeFloat": ["bf16"]},
+    {"operation": ["fwd"]},
+    {"useBrain": ["false"]},
+    {"lowerEn": ["true"]},
+    {"sbReuse": ["true"]},
+    {"recurringMisalignmentOptEn": ["true"]},
+    {"alignedAddresses":["true"]},
+    {"partialsToMemoryEn":["false"]},
+    {"xSizes": ["48","200","100","1","1"]},
+    {"wSizes": ["300","48","3","3","1"]},
+    {"ySizes": ["300","50","50","1","1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["4", "2", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"convPattern":["skf"]},
+    {"geometry":["4xh"]}
+    ],
+
+    [{"testName": ["It's intentional that 'alignToCL' is hardcoded 'true' and not 'shouldAlignToCl'"]},
+    {"inTypeFloat": ["fp32"]},
+    {"outTypeFloat": ["fp32"]},
+    {"operation": ["fwd"]},
+    {"useBrain": ["false"]},
+    {"packingFactor": ["236"]},
+    {"lowerEn": ["true"]},
+    {"sbReuse": ["true"]},
+    {"recurringMisalignmentOptEn": ["true"]},
+    {"alignedAddresses":["true"]},
+    {"xSizes": ["81", "8732", "128","1","1"]},
+    {"wSizes": ["236", "81", "236", "1", "1"]},
+    {"ySizes": ["236", "37", "128","1","1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["236", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"convPattern":["skf"]},
+    {"geometry":["4xh"]},
+    {"skipRef":["true"]},
+    {"skipRun":["true"]}
+    ]
+
+  ]
+}

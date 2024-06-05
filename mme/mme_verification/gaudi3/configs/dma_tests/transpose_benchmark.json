@@ -1,0 +1,124 @@
+{ "programInSram":"true",
+  "tests":[
+
+    [{"testName":["basic single MME"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["256", "256", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["256", "256", "1", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["basic single MME with batches"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["256", "256", "32", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["256", "256", "32", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["tiny"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["64", "64", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["64", "64", "1", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["tiny with batches"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["64", "64", "32", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["64", "64", "32", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["step with tail"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["384", "384", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["384", "384", "1", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["step with tail and batches"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["384", "384", "32", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["384", "384", "32", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["large"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["1024", "1024", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["1024", "1024", "1", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["large with batches"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["1024", "1024", "32", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["1024", "1024", "32", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["wide & short"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["4", "1184", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["1184", "4", "1", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["narrow & long"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose", "gemm_transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["1184", "4", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["4", "1184", "1", "1", "1"]},
+      {"skipRef": ["true"]},
+      {"geometry":["4xh"]}
+    ]
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "programInSram":"true",
+  "tests":[
+    [{"testName": ["ab all dims broadcast A full mme geometry 2xw"]},
+     {"inTypeFloat": ["fp32_ieee"]},
+     {"outTypeFloat": ["fp32"]},
+     {"operation": ["ab"]},
+     {"dedwPattern": ["ckf"]},
+     {"geometry": ["2xw"]},
+     {"xSizes":["64", "86", "1", "1", "1"]},
+     {"ySizes":["128", "86", "2", "3", "2"]},
+     {"wSizes":["128", "64", "2", "3", "2"]}
+   ],
+
+   [{"testName":["bgemm 1x atb fp8"]},
+    {"inTypeFloat":["fp8_152"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"xSizes":["256", "1", "2", "4", "1"]},
+    {"ySizes":["200", "256", "2", "4", "1"]},
+    {"wSizes":["200", "1", "2", "4", "1"]},
+    {"dedwPattern":["fkc"]},
+    {"geometry":["2xw"]}
+   ],
+
+   [{"testName":["full mme geometry 2xw"]},
+    {"inTypeFloat":["fp32_non_ieee"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["atbt"]},
+    {"xSizes":["256", "128", "2", "1", "1"]},
+    {"ySizes":["128", "256", "2", "1", "1"]},
+    {"wSizes":["128", "128", "2", "1", "1"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xw"]}
+   ],
+   [{"testName":["bgemm 2x atb, A fcd = 4 ports"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["atb"]},
+    {"xSizes":["250", "3", "3", "1", "1"]},
+    {"ySizes":["256", "250", "3", "1", "1"]},
+    {"wSizes":["256", "3", "3", "1", "1"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["2xh"]}
+   ],
+    [{"testName":["2x abt, B spatial = 4 ports"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["abt"]},
+    {"xSizes":["210", "92", "4", "2", "3"]},
+    {"ySizes":["242", "92", "4", "2", "3"]},
+    {"wSizes":["210", "242", "4", "2", "3"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xh"]}
+   ],
+
+    [{"testName":["4x fp32"]},
+    {"inTypeFloat":["fp32"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["ab"]},
+    {"xSizes":["101", "88", "4", "2", "3"]},
+    {"ySizes":["121", "88", "4", "2", "3"]},
+    {"wSizes":["121", "101", "4", "2", "3"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xh"]}
+   ],
+
+   [{"testName":["8x fp16 atb"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"xSizes":["57", "255", "13", "2", "3"]},
+    {"ySizes":["61", "57", "13", "2", "3"]},
+    {"wSizes":["61", "255", "13", "2", "3"]},
+    {"dedwPattern":["fkc"]},
+    {"geometry":["2xh"]}
+   ],
+
+   [{"testName":["ab 2xw - raster=False, reuse=N/A, FCD=2, SP=2, BATCH=1"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["ab"]},
+    {"xSizes":["64", "212", "2", "2", "1"]},
+    {"ySizes":["300", "212", "2", "2", "1"]},
+    {"wSizes":["300", "64", "2", "2", "1"]},
+    {"dedwPattern":["ckf"]},
+    {"geometry":["2xw"]}
+   ],
+
+   [{"testName":["abt 2xw- raster=True, reuse=N/A, FCD=2, SP=3, BATCH=1"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["abt"]},
+      {"sbReuse":["true"]},
+      {"xSizes":["64", "212", "2", "3", "1"]},
+      {"ySizes":["255", "212", "2", "3", "1"]},
+      {"wSizes":["64", "255", "2", "3", "1"]},
+      {"dedwPattern":["kcf"]},
+      {"geometry":["2xw"]}
+    ],
+
+     [{"testName":["atb 2xh - raster=True, reuse=N/A, FCD=2, SP=3, BATCH=1"]},
+      {"inTypeFloat":["fp32"]},
+      {"outTypeFloat":["fp32"]},
+      {"operation":["atb"]},
+      {"sbReuse":["true"]},
+      {"xSizes":["225", "64", "2", "2", "1"]},
+      {"ySizes":["300", "225", "2", "2", "1"]},
+      {"wSizes":["300", "64", "2", "2", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry":["2xh"]}
+     ],
+
+   [{"testName": ["abt broadcast dim #1 with steps"]},
+    {"operation":["abt"]},
+    {"inTypeFloat": ["bf16"]},
+    {"outTypeFloat": ["fp32"]},
+    {"dedwPattern": ["ckf"]},
+    {"geometry": ["2xw", "2xh"]},
+    {"sbReuse": ["1"]},
+    {"ySizes": ["168","268","3","1","2"]},
+    {"wSizes": ["270","168","3","1","2"]},
+    {"xSizes": ["270","268","1","1","2"]}
+  ]
+
+   ]
+}
+

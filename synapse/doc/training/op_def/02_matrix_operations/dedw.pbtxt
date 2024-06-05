@@ -1,0 +1,108 @@
+op {
+  name: "Dedw"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(float8), tensor(float16), tensor(tf32)"
+    description: "A 4D tensor of layout *NHWC* with the elements of type specified in the definition."
+  }
+  type {
+    name: "S"
+    definition: "tensor(float32), tensor(bfloat16), tensor(float8), tensor(float16), tensor(tf32)"
+    description: "A 4D tensor of layout *RSCK* with the elements of type specified in the definition."
+  }
+  input {
+    name: "Grad_In"
+    type: "T"
+    description: "Input Tensor of type ``T`` and dimensions [N, H', W', K] (see Convolution for H' and W')."
+  }
+  input {
+    name: "Input_Feature_Map"
+    type: "T"
+    description: "Input Tensor of type ``T`` and dimensions [N, H, W, C]."
+  }
+  output {
+    name: "Grad_Weights"
+    type: "S"
+    description: "Tensor of type ``S`` and dimensions [kH, kW, C, K]."
+  }
+  attr {
+    name: "padL"
+    type: "int"
+    description: "Number of pad elements added at the beginning along W axis."
+    default{ i: 0 }
+  }
+  attr {
+    name: "padR"
+    type: "int"
+    description: "Number of pad elements added at the end along W axis."
+    default{ i: 0 }
+  }
+  attr {
+    name: "padT"
+    type: "int"
+    description: "Number of pad elements added at the beginning along H axis."
+    default{ i: 0 }
+  }
+  attr {
+    name: "padB"
+    type: "int"
+    description: "Number of pad elements added at the end along H axis."
+    default{ i: 0 }
+  }
+  attr {
+    name: "kW"
+    type: "unsigned int"
+    description: "Size of the kernel along W axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "kH"
+    type: "unsigned int"
+    description: "Size of the kernel along H axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dW"
+    type: "unsigned int"
+    description: "Size of the stride along W axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dH"
+    type: "unsigned int"
+    description: "Size of the stride along H axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dilW"
+    type: "unsigned int"
+    description: "Size of the dilation along W axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dilH"
+    type: "unsigned int"
+    description: "Size of the dilation along H axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "nGroups"
+    type: "unsigned int"
+    description: "Number of convolution groups, 1 means regular convolution."
+    default{ i: 1 }
+  }
+  summary: "Weight gradient of the fwd convolution operation."
+  description: "The backward pass of Convolution operation propagates each grad-in value (dY element)"
+               "equally to all the relevant input tensor elements (X elements)."
+               "The relevant X elements are part of the calculation of the same-coordinate output element (Y element) in the forward pass."
+               "The relevant elements coordinates are determined by the convolution kernel size, dilation and stride."
+               "See Convolution documentation for the shape differences calculations."
+  constraints: ["Gaudi supports only float32 and bfloat16 datatypes.",
+               "All Inputs must be of the same datatype.\n",
+               "Number of batches in input and output tensors are the same.\n",
+               "$**Stride** - Number of pixels by which kernel is shifted along the spatial axis of Ifm.\n",
+               "$**Padding** - Number of pixels added at the beginning and end of spatial axis of Ifm.\n",
+               "$**Dilation** - Controls spacing between kernel points. If set to dilation k > 1, there will be k-1 skipped cells between each filter element on that dimension.\n"]
+  guid: "dedw"
+  c_structure: "struct synConvolutionParams;"
+}

@@ -1,0 +1,67 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["basic transpose long"]},
+    {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+    {"outTypeFloat":["asInput"]},
+    {"operation":["transpose"]},
+    {"xSizes":["1024", "256", "1", "1", "1"]},
+    {"ySizes":["256", "1024", "1", "1", "1"]},
+    {"geometry":["4xw", "2xw", "2xh", "4xh"]}
+    ],
+
+    [{"testName":["basic transpose wide"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"xSizes":["256", "1024", "1", "1", "1"]},
+      {"ySizes":["1024", "256", "1", "1", "1"]},
+      {"geometry":["4xw", "2xw", "2xh", "4xh"]}
+    ],
+
+    [{"testName":["short transpose with higher sp dims"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"xSizes":["1024", "256", "2", "3", "2"]},
+      {"ySizes":["256", "1024", "2", "3", "2"]},
+      {"geometry":["4xw", "2xw", "2xh", "4xh"]}
+    ],
+
+    [{"testName":["wide transpose with higher sp dims"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"xSizes":["256", "1024", "1", "1", "1"]},
+      {"ySizes":["1024", "256", "1", "1", "1"]},
+      {"geometry":["4xw", "2xw", "2xh", "4xh"]}
+    ],
+
+    [{"testName":["wide transpose with steps"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"xSizes":["400", "3200", "2", "2", "1"]},
+      {"ySizes":["3200", "400", "2", "2", "1"]},
+      {"geometry":["4xw", "2xw"]}
+    ],
+
+    [{"testName":["long transpose with steps"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"xSizes":["3200", "400", "2", "2", "1"]},
+      {"ySizes":["400", "3200", "2", "2", "1"]},
+      {"geometry":["4xh", "2xh"]}
+    ],
+
+    [{"testName":["transpose with odd CD"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"xSizes":["157", "256", "1", "1", "1"]},
+      {"ySizes":["256", "157", "1", "1", "1"]},
+      {"convPattern":["skf"]},
+      {"geometry":["4xw"]}]
+
+  ]
+}

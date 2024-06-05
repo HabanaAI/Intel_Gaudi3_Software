@@ -1,0 +1,28 @@
+{
+    "programInSram":"true",
+    "tests":
+    [
+    [{"testName":["sbReuse B over filter"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["ab"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["1600", "636", "1", "1", "1"]},
+    {"ySizes":["310", "636", "1", "1", "1"]},
+    {"wSizes":["310", "1600", "1", "1", "1"]},
+    {"dedwPattern":["kfc", "kcf"]},
+    {"geometry":["4xw"]}],
+
+    [{"testName":["sbReuse B over filter, B broadcast"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["ab"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["1600", "600", "2", "1", "1"]},
+    {"ySizes":["300", "600", "2", "1", "1"]},
+    {"wSizes":["300", "1600", "1", "1", "1"]},
+    {"dedwPattern":["kfc", "kcf"]},
+    {"geometry":["4xw"]}]
+
+    ]
+}

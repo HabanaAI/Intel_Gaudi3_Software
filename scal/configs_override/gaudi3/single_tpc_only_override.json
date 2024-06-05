@@ -1,0 +1,28 @@
+[
+    // must be in descending order
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/5" }, // 5 is cme
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/4" }, // 4 is rotator
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/3" }, // 3 is network_edma_slaves
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/2" }, // 2 is network_edma_0
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/1" }, // 1 is mme
+    { "op": "replace", "path" : "/gaudi3/cores/engine_clusters/0/engines", "value" : [ "TPC_0_2" ] },  // 0 is compute_tpc
+    { "op": "remove",  "path" : "/gaudi3/cores/nic_clusters" },
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/0/qman", "value": "TPC_0_2"}, // compute_media_scheduler
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/1/qman", "value": "TPC_0_2"}, // scaleout_receive
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/2/qman", "value": "TPC_0_2"}, // scaleout_send
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/3/qman", "value": "TPC_0_2"}, // network_garbage_collector_and_reduction
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/4/qman", "value": "TPC_0_2"}, // scaleup_receive
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/5/qman", "value": "TPC_0_2"}, // scaleup_send
+    // must be in descending order
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/1/qman", "value": "TPC_0_2" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/2/qman", "value": "TPC_0_2" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/3/qman", "value": "TPC_0_2" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/4/qman", "value": "TPC_0_2" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/5/qman", "value": "TPC_0_2" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/6/qman", "value": "TPC_0_2" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/7/qman", "value": "TPC_0_2" },
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/10" },
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/9" },
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/8" },
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/7" }
+]

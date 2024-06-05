@@ -1,0 +1,105 @@
+{
+  "programInSram":"true",
+  "tests":[
+
+   [{"testName":["ab_4x_GemmPerCore_topology_node"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["ab"]},
+    {"xSizes":["512", "512", "8", "2", "1"]},
+    {"wSizes":["64", "512", "8", "2", "1"]},
+    {"ySizes":["64", "512", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+   [{"testName":["ab_4x_GemmPerCore_wide_with_partial_height"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["ab"]},
+    {"xSizes":["120", "480", "8", "2", "1"]},
+    {"wSizes":["58", "120", "8", "2", "1"]},
+    {"ySizes":["58", "480", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+    [{"testName":["ab_4x_GemmPerCore_narrow_sp_steps"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["ab"]},
+    {"xSizes":["120", "520", "8", "2", "1"]},
+    {"wSizes":["48", "120", "8", "2", "1"]},
+    {"ySizes":["48", "520", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+   [{"testName":["atb_4x_GemmPerCore_wide_partial_height"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"xSizes":["511", "512", "8", "2", "1"]},
+    {"wSizes":["64", "512", "8", "2", "1"]},
+    {"ySizes":["64", "511", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+    [{"testName":["atb_4x_GemmPerCore_TooWideNoOptimization"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"xSizes":["66", "80", "3", "2", "1"]},
+    {"wSizes":["65", "80", "3", "2", "1"]},
+    {"ySizes":["65", "66", "3", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+    [{"testName":["atb_4x_GemmPerCore_tooShortSPNnoOptimization"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"xSizes":["220", "120", "8", "2", "1"]},
+    {"wSizes":["48", "120", "8", "2", "1"]},
+    {"ySizes":["48", "220", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+    [{"testName":["atb_4x_GemmPerCore_wide_partial_sp"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"xSizes":["260", "80", "8", "2", "1"]},
+    {"wSizes":["32", "80", "8", "2", "1"]},
+    {"ySizes":["32", "260", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+   [{"testName":["abt_4x_GemmPerCore_full_sp_partial_fcd"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["abt"]},
+    {"xSizes":["512", "510", "8", "2", "1"]},
+    {"wSizes":["512", "64", "8", "2", "1"]},
+    {"ySizes":["64", "510", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ],
+
+   [{"testName":["abt_4x_GemmPerCore_tooWideNoOptimization"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["abt"]},
+    {"xSizes":["120", "523", "8", "2", "1"]},
+    {"wSizes":["120", "68", "8", "2", "1"]},
+    {"ySizes":["68", "523", "8", "2", "1"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+    ]
+
+  ]
+}

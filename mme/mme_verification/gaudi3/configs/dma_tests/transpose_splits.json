@@ -1,0 +1,43 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["transpose with split on FCD"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["false", "true"]},
+      {"xSizes":["2", "360000"]},
+      {"ySizes":["360000", "2"]},
+      {"convPattern":["skf"]},
+      {"geometry":["4xh", "4xw"]}],
+
+    [{"testName":["transpose with split on SP"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["false", "true"]},
+      {"xSizes":["360000", "2"]},
+      {"ySizes":["2", "360000"]},
+      {"convPattern":["skf"]},
+      {"geometry":["4xh", "4xw"]}],
+
+    [{"testName":["transpose with split on conv loop dim"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["false", "true"]},
+      {"xSizes":["2", "1024", "512"]},
+      {"ySizes":["1024", "2", "512"]},
+      {"convPattern":["skf"]},
+      {"geometry":["4xw"]}],
+
+    [{"testName":["transpose with split on flattened FCD"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["false", "true"]},
+      {"xSizes":["2", "524288"]},
+      {"ySizes":["524288", "2"]},
+      {"convPattern":["skf"]},
+      {"geometry":["4xw"]}]
+
+    ]}

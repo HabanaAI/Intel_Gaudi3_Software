@@ -1,0 +1,40 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - TPCSIM
+    - RDMA_CORE
+    - COMPLEX_GUID
+    - TPC_FUSER
+  config:
+    testCommand: run_from_json
+    loadLKD: true
+    releaseFlag: true
+    lkdSimHealtcheckParams:
+      lkdParam: 'timeout_locked=40000'
+      startNetworkIfs: false
+      rebootOnFailure: true
+      checkDmesg: true
+  envVars:
+    ENABLE_EXPERIMENTAL_FLAGS: true
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi3_sim_resnet50_bf16:
+    stages:
+      Run resnet50 bf16 tests:
+        filter: -c gaudi3 --run -j "${SOFTWARE_LFS_DATA}/synapse/tests/full_resnet_batch4/resnet50_full_fwd_bwd_bf16_batch4_ASIC.recipe.pre.json" -d "${SOFTWARE_LFS_DATA}/synapse/tests/full_resnet_batch4/renset50_bf16_tensors.db"
+  Test_synapse_gaudi3_sim_resnet50_float32:
+    stages:
+      Run resnet50 bf16 tests:
+        filter: -c gaudi3 --run -j "${SOFTWARE_LFS_DATA}/synapse/tests/full_resnet_batch4/resnet50_full_fwd_bwd_float32_batch4_ASIC.recipe.pre.json" -d "${SOFTWARE_LFS_DATA}/synapse/tests/full_resnet_batch4/renset50_float32_tensors.db"

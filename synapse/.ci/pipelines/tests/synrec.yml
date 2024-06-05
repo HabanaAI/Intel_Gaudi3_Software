@@ -1,0 +1,37 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - COMPLEX_GUID
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - RDMA_CORE
+    - SWTOOLS_SDK
+    - SYNAPSE_PROFILER
+    - SYNAPSE_UTILS
+    - TPC_FUSER
+    - TPC_KERNELS
+    - TPC_LLVM
+    - TPCSIM
+  config:
+    testCommand: "run_synrec_tests"
+    requirementsFile: requirements-synapse-tests.txt
+    loadLKD: true
+    releaseFlag: false
+    saveToFileBeatMount: false
+  envVars:
+    ENABLE_CONSOLE : true
+    LOG_LEVEL_SYNREC: 0
+    LOG_LEVEL_ALL : 4
+    SCAL_TIMEOUT_VALUE_SECONDS : 1000
+testsMap:
+  Test_synapse_gaudi_sim_synrec:
+    stages:
+      Run synrec tests:
+        filter: "--junit-xml=synrec_test.xml"

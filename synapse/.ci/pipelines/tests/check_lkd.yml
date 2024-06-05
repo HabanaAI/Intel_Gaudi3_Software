@@ -1,0 +1,44 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - RDMA_CORE
+  config:
+    testCommand: run_death_test
+    loadLKD: true
+    releaseFlag: true
+  envVars:
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi_asic_check_lkd:
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=10'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run synapse check for LKD failures:
+        envVars:
+          ENABLE_CONSOLE: false
+  Test_synapse_gaudi2_asic_check_lkd:
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=10'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run synapse check for LKD failures:
+        envVars:
+          ENABLE_CONSOLE: false

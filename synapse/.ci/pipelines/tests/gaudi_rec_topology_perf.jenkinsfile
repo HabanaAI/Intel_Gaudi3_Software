@@ -1,0 +1,251 @@
+@Library('pipeline-library')
+import ai.habanalabs.jenkins.Gerrit
+import ai.habanalabs.jenkins.Constants
+
+def habanalabsGerrit = new Gerrit()  // gerrit shared library
+def habanalabsConstants = new Constants()  // constants shared library
+def JobTimeout = 450
+def OS = 'ubuntu20.04'
+def isStaging = JOB_BASE_NAME.contains('staging_') ? true : false
+def stableBranch = GERRIT_BRANCH - '_next'
+def skipStaging = JOB_NAME.contains('staging_') ? true : false
+def LFSProjects = ['mpm-test-data']
+def builder = ''
+def modelsTestsCmd = "models_tests_job --test-type perf --test-name GERRIT_PATCHSET_REVISION --database promotion --branch ${GERRIT_BRANCH} --chip-type gaudi --models-folder LFS_PATH --job promotion"
+def useKubeVirt = true
+def hlctlV2 = true
+def device = 'gaudi_hls'
+def cards = env.CARDS_NUMBER
+def checkDeviceHealthTimeout = 60
+
+def manifestName = "manifest_frozen_code.xml"
+def dependencies = [
+    "COMPLEX_GUID",
+    "CORAL_SIM",
+    "HCL",
+    "HL_THUNK",
+    "SWTOOLS_SDK",
+    "SYNAPSE_UTILS",
+    "TPC_FUSER",
+    "TPC_KERNELS",
+    "TPCSIM",
+    "TPC_LLVM",
+    "SYNAPSE_PROFILER"
+]
+
+if (useKubeVirt) {
+    node('launcher') {
+        builder = createKubeVirtBuilder(
+            hlctlV2: hlctlV2,
+            device: device,
+            cards: cards,
+            labelSelector: 'habana.ai/pci-id=1000'
+        )
+    }
+}
+
+pipeline {
+    agent {
+        label builder
+    }
+    options {
+        timeout(time:JobTimeout, unit: 'MINUTES')
+        timestamps()
+        ansiColor('xterm')
+        buildDiscarder(
+            logRotator(
+                artifactDaysToKeepStr: '3',
+                artifactNumToKeepStr: '300',
+                daysToKeepStr: '3',
+                numToKeepStr: '300'
+            )
+        )
+    }
+    stages {
+        stage('checkout infra code') {
+            steps {
+                script {
+                    habanalabsGerrit.checkoutProject('automation', stableBranch)
+                    habanalabsGerrit.checkoutProject('jenkins_files', stableBranch)
+                    util = load 'jenkins_files/src/main/lib-functions.groovy'
+                    // TODO: rmeove this after migration to new artifactory is done
+                    util.ARTIFACTORY_SERVER_ID = 'artifactory-kfs'
+                }
+            }
+        }
+        stage('Init workspace') {
+            environment {
+                GIT_PRINT_SHA1_ELLIPSIS = 'yes'
+            }
+            steps {
+                script {
+                    util.setBuildName(OS)
+                    util.initWorkSpace(util.JSLAVE_TYPE_ASIC)
+                    util.runShellCommand('ulimit -a')
+                    util.cleanBeforeCheckout(params.isResetBefore)
+                }
+            }
+        }
+        stage('Print Habana data') {
+            steps {
+                script {
+                    util.printHugePages()
+                    util.printHabanaRules()
+                }
+            }
+        }
+         stage('Download and Install build binaries and repo manifest'){
+            steps {
+                script {
+                    def extraPropertiesMap = ['OS':env.OS]
+                    gitVars()
+                    if(isStaging){
+                        env.GERRIT_BRANCH = stableBranch
+                        env.TRIGGER_BUILD = env.PROMOTE_BUILD_NAME
+                        env.TRIGGER_BUILD_NUMBER = getDependencyBuild(
+                            util: util,
+                            promoteBuildName: env.PROMOTE_BUILD_NAME
+                        )
+                    }
+                    if (env.TRIGGER_BUILD == "crossRepoBuild" || env.TRIGGER_BUILD.contains("Build_npu_stack_")) {  // backward compatibility
+                        util.installBuildDependecyWrapper(
+                            extraPropertiesMap: extraPropertiesMap,
+                            skipStaging:isStaging
+                        )
+                    } else {
+                        def tarballName = generateTarballName(
+                            'jobName': env.TRIGGER_BUILD,
+                            'buildNumber': env.TRIGGER_BUILD_NUMBER,
+                            'gitSHA': isStaging? null : env.GIT_REVISION
+                        )
+                        tarballName = "light_${tarballName}"
+                        util.installBuildDependecy(
+                            'GerritPatchSet',
+                            tarballName,
+                            "habanalabs-bin-local-precommit/${env.TRIGGER_BUILD}/",
+                            false,
+                            extraPropertiesMap
+                        )
+                        dependencies = readTestConfigyaml.adjustDependencies(dependencies)
+                    }
+                }
+            }
+        }
+        stage('Clean & Get repo') {
+            environment {
+                GIT_PRINT_SHA1_ELLIPSIS = 'yes'
+            }
+            steps {
+                script {
+                    util.CHECKOUT_DEPTH = 10
+                    util.checkoutRepoWrapper(params.isResetBefore, null, skipStaging, manifestName)
+                }
+            }
+        }
+        stage('Download test dependencies') {
+            steps {
+                script {
+                    if (dependencies && env.TRIGGER_BUILD != "crossRepoBuild" && !env.TRIGGER_BUILD.contains("Build_npu_stack_")) {
+                        getDependenciesArtifacts(
+                            utils: util,
+                            manifestName: manifestName,
+                            dependencies: dependencies,
+                            destinationDir: util.ARTIFACT_DOWNLOAD_DIR
+                        )
+                    }
+                }
+            }
+        }
+        stage('Fetch LFS data') {
+            steps {
+                script {
+                    fetchGitLFSProjects(LFSProjects: LFSProjects, util: util)
+                }
+            }
+        }
+        stage('Download and Install Python dependencies'){
+            steps {
+                script {
+                    // in docker we run inside virtual env so we dont need --user
+                    def user_install = env.runInDocker == 'true' ? '' : '--user'
+                    util.runShellCommandWrapper("install_requirements")
+                }
+            }
+        }
+        stage('Disable Weka'){
+            steps {
+                script {
+                    util.runShellCommand("sudo systemctl disable weka-init.service", null, false, true)
+                    util.runShellCommand("sudo systemctl stop weka-init.service", null, false, true)
+                    util.runShellCommand("sudo systemctl disable weka-prepare.service", null, false, true)
+                    util.runShellCommand("sudo systemctl stop  weka-prepare.service", null, false, true)
+                    util.runShellCommand("sudo systemctl disable mnt-weka.mount", null, false, true)
+                    util.runShellCommand("sudo systemctl stop  mnt-weka.mount", null, false, true)
+                }
+            }
+        }
+        stage('Start LKD'){
+            steps {
+                script{
+                    util.runShellCommand('build_and_insmod_habanalabs -p timeout_locked=1000')
+                    util.printDmesg()
+                    util.checkHabanaDeviceHealth('hl0', 'LKD', checkDeviceHealthTimeout, true, true)
+                    util.runShellCommand('$HABANA_SCRIPTS_FOLDER/manage_network_ifs.sh --up')
+                }
+            }
+        }
+        stage('Print tools version'){
+            steps {
+                script{
+                    util.printHabanaComponentsVersion()
+                    util.runShellCommand("sudo /usr/bin/hl-smi -L")
+                }
+            }
+        }
+        stage("Run models tests"){
+            steps {
+                script {
+                     def modelsTestsEnv = [
+                        'ENABLE_CONSOLE': false,
+                        'LOG_LEVEL_ALL': 3,
+                    ]
+                    if (!GERRIT_PATCHSET_REVISION) {
+                        GERRIT_PATCHSET_REVISION = sh(returnStdout:true, script:
+                        """#!/bin/bash -l
+                            ${HABANA_ENV_CMD} > /dev/null
+                            cd \$SYNAPSE_ROOT
+                            bash -c 'git rev-parse HEAD'
+                        """
+                        ).trim()
+                    }
+                    modelsTestsCmd = modelsTestsCmd.replace('GERRIT_PATCHSET_REVISION', GERRIT_PATCHSET_REVISION)
+                    modelsTestsCmd = modelsTestsCmd.replace('LFS_PATH', "${util.SOURCE_DIR}/${LFSProjects[0]}/models")
+                    util.runTestCommand(modelsTestsCmd, modelsTestsEnv, params.stopOnFirstTestFailure, '', false)
+                 }
+            }
+        }
+    }
+    post{
+        always {
+            script {
+                junit allowEmptyResults: true, testResults: '*.xml'
+            }
+        }
+        cleanup {
+            script {
+            	util.teardownWorkSpace()
+                util.printDmesg()
+                util.rebootStuckJslave()
+                util.printHugePages()
+                if (useKubeVirt) {
+                    node('launcher') {
+                        deleteKubeVirtBuilder(
+                            hlctlV2: hlctlV2,
+                            jenkinsNode: builder
+                        )
+                    }
+                }
+            }
+        }
+    }
+}

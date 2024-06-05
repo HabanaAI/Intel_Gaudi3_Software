@@ -1,0 +1,49 @@
+{
+	// memory pool size is not aligned to 2MB
+	"version" :
+	{
+		"major" : 1,
+		"minor" : 0,
+		"revision" : 0
+	},
+
+	"binary_search_path": ["~/builds/engines_fw_release_build"],  // optional - used if the image is not found in HABANA_SCAL_BIN_PATH.
+	"binary_search_debug_path": ["~/builds/engines_fw_debug_build"],  // optional - used if the image is not found in HABANA_SCAL_DEBUG_BIN_PATH.
+
+	"memory" : 
+	{
+		"tpc_barrier_in_sram" : true,
+		"control_cores_memory_pools" :
+		[
+			{
+				"name" : "global_hbm",
+				"size" : 1024, // hbm pool size in MBs - (1 GBs)
+				"type" : "HBM",
+				"region_base" : 0 // not addressable by the cores
+			},
+			{
+				"name" : "host_shared",
+				"size" : 257, // in MB
+				"type" : "HOST",
+				"region_base" : 9
+			},
+			{
+				"name" : "hbm_shared",
+				"size" : 64, // in MB
+				"type" : "HBM",
+				"region_base" : 5
+			}			
+		],
+		"memory_groups" :
+		[
+			{
+				"name" : "all_cores",
+				"pools" : ["host_shared", "hbm_shared"],
+				"configuration_pool" : "host_shared"
+			}
+		],
+		"binary_pool" : "global_hbm",    // pool for binaries
+		"global_pool" : "global_hbm"     // optional - pool for global memory. otherwise the "binary_pool" is used
+	}
+
+}

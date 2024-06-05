@@ -1,0 +1,11 @@
+setenv GCC_VER gcc-5.4.0
+
+setenv CC /tools/src/${GCC_VER}/bin/gcc
+setenv CXX /tools/src/${GCC_VER}/bin/g++
+setenv LD_LIBRARY_PATH /tools/src/${GCC_VER}/lib64/:${LD_LIBRARY_PATH}
+setenv PATH /tools/src/${GCC_VER}/bin:${PATH}
+
+setenv HABANA_SOFTWARE_STACK $ENV_NAME
+setenv SPECS_ROOT ${HABANA_SOFTWARE_STACK}/specs
+setenv SPECS_EXT_ROOT ${HABANA_SOFTWARE_STACK}/specs_external
+setenv SPDLOG_ROOT "${HABANA_SOFTWARE_STACK}/3rd-parties/spdlog/include"

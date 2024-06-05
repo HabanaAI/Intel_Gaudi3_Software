@@ -1,0 +1,26 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["fp8"]},
+    {"inTypeFloat":["fp8_152", "fp8_143"]},
+    {"in2TypeFloat":["fp8_152", "fp8_143"]},
+    {"outTypeFloat":["fp8_152", "fp8_143"]},
+    {"operation":["ab"]},
+    {"xSizes":["128", "256", "1", "1", "1"]},
+    {"ySizes":["256", "256", "1", "1", "1"]},
+    {"wSizes":["256", "128", "1", "1", "1"]},
+    {"geometry":["4xh"]},
+    {"dedwPattern":["random"]},
+    {"fp8BiasIn": ["random"]},
+    {"fp8BiasIn2": ["random"]},
+    {"fp8BiasOut": ["random"]},
+    {"clippingEn":["true"]},
+    {"clipInfIn":["true"]},
+    {"infNanModeA":["fullInfNan", "noInfNan", "minInfNan"]},
+    {"infNanModeB":["fullInfNan", "noInfNan", "minInfNan"]},
+    {"infNanModeOut":["fullInfNan", "noInfNan", "minInfNan"]},
+    {"flushDenormals":["true"]},
+    {"stochasticFlush":["true"]},
+    {"conversionRoundingMode":["rn"]},
+    {"accRoundingMode":["rn"]}]
+  ]
+}

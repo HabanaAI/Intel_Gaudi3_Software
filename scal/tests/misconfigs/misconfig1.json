@@ -1,0 +1,13 @@
+{
+	// missing binary fw search path
+	"version" :
+	{
+		"major" : 1,
+		"minor" : 0,
+		"revision" : 0
+	}
+
+	//"binary_search_path": ["~/builds/engines_fw_release_build"],  // optional - used if the image is not found in HABANA_SCAL_BIN_PATH.
+	//"binary_search_debug_path": ["~/builds/engines_fw_debug_build"],  // optional - used if the image is not found in HABANA_SCAL_DEBUG_BIN_PATH.
+
+}

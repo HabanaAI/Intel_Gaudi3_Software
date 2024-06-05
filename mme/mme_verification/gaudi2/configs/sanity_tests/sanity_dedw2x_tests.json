@@ -1,0 +1,66 @@
+{
+  "programInSram":"true",
+  "tests":[
+
+    [{"testName":["unroll2 4x"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["fp16"]},
+      {"operation":["dedw"]},
+      {"decMode":["false"]},
+      {"lowerEn":["true"]},
+      {"unrollEn":["false"]},
+      {"dedw2x":["true"]},
+      {"sbReuse":["false"]},
+      {"xSizes":["3", "20", "20", "4", "1"]},
+      {"ySizes":["2", "10", "10", "4", "1"]},
+      {"wSizes":["2", "3", "7", "7", "1"]},
+      {"dilation":["1", "1", "1"]},
+      {"strides":["2", "2", "1"]},
+      {"padding":["3", "3", "0"]},
+      {"convPattern":["skf"]},
+      {"dedwPattern":["kfc"]},
+      {"geometry":["2xh"]}
+    ],
+    
+    [{"testName":["unroll2 8x"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["fp16"]},
+      {"operation":["dedw"]},
+      {"decMode":["false"]},
+      {"lowerEn":["true"]},
+      {"unrollEn":["false"]},
+      {"dedw2x":["true"]},
+      {"sbReuse":["true"]},
+      {"xSizes":["3", "84", "74", "4", "1"]},
+      {"ySizes":["4", "42", "37", "4", "1"]},
+      {"wSizes":["4", "3", "7", "7", "1"]},
+      {"dilation":["1", "1", "1"]},
+      {"strides":["2", "2", "1"]},
+      {"padding":["3", "3", "0"]},
+      {"convPattern":["skf"]},
+      {"dedwPattern":["kfc"]},
+      {"geometry":["2xh"]}
+   ],
+    
+    [{"testName":["dedw_4x4Hybrid_14x"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["dedw"]},
+    {"decMode":["false"]},
+    {"lowerEn":["true"]},
+    {"unrollEn":["false"]},
+    {"dedw2x":["true"]},
+    {"sbReuse":["false"]},
+    {"xSizes":["16", "26", "26", "4", "1"]},
+    {"ySizes":["8", "26", "26", "4", "1"]},
+    {"wSizes":["8", "16", "3", "4", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"convPattern":["skf"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["4xh"]}
+   ]
+
+  ]
+}

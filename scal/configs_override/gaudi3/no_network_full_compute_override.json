@@ -1,0 +1,7 @@
+[
+    // must be in descending order
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/4" }, // 4 is rotator
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/3" }, // 3 is network_edma_slaves
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/2" }, // 2 is network_edma_0
+    { "op": "remove",  "path" : "/gaudi3/cores/nic_clusters" }
+]

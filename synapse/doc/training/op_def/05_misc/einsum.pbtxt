@@ -1,0 +1,29 @@
+op {
+  name: "Einsum"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16)"
+    description: "A 1D, 2D, 3D, 4D, 5D tensor with the elements of type specified in the definition."
+  }
+  input {
+    name: "Input tensors"
+    type: "T"
+    description: "The input tensors the einsum algorithm will run on. can be 1 input or two"
+  }
+  output {
+    name: "output Tensor"
+    type: "T"
+    description: "result of Einsum equation"
+  }
+  c_structure: "synEinsumParams"
+  attr {
+    name: "equation"
+    type: "const char*"
+    description: "Equation for the einsum algorithm."
+  }
+  summary: "Performs Einsum operation."
+  constraints: ["Equations without -> are not supported.",
+                "Input and output tensor dimensions must not be higher than 5D."]
+  description: "Performs an einsum equation on the given inputs, involves in some cases batch gemm, reduce sum, reshape and transpose according to equation."
+  guid: "einsum"
+}

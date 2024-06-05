@@ -1,0 +1,13 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["big atb"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["atb"]},
+      {"xSizes":["3121", "357", "1", "1", "1"]},
+      {"ySizes":["3223", "3121", "1", "1", "1"]},
+      {"wSizes":["3223", "357", "1", "1", "1"]},
+      {"dedwPattern":["fkc", "fck"]},
+      {"geometry":["4xw", "2xw","2xh", "4xh"]}]
+  ]
+}

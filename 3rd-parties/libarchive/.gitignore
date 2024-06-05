@@ -1,0 +1,8 @@
+*.cmake
+!build/cmake/*.cmake
+Makefile
+CMakeCache.txt
+CMakeFiles/
+libarchive/CMakeFiles/
+.DS_Store
+config.h

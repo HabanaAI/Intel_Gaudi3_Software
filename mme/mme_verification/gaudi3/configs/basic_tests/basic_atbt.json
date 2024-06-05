@@ -1,0 +1,12 @@
+{ "programInSram":"true",
+  "tests":[[{"testName":["hardcoded desc"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["atbt"]},
+    {"xSizes":["300", "77", "1", "1", "1"]},
+    {"ySizes":["1024", "300", "1", "1", "1"]},
+    {"wSizes":["77", "1024", "1", "1", "1"]},
+    {"dedwPattern":["fkc"]},
+    {"geometry":["2xw"]}]
+  ]
+}

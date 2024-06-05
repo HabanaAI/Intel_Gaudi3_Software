@@ -1,0 +1,26 @@
+#pragma once
+
+typedef enum
+{
+    // Common devices
+    DEVICE_MME,
+    DEVICE_TPC,
+    DEVICE_DMA_HOST_DEVICE,
+    DEVICE_DMA_DEVICE_HOST,
+    DEVICE_DMA_DRAM_HOST,
+    DEVICE_DMA_SRAM_DRAM,
+    DEVICE_COMPLETION_QUEUE,
+    DEVICE_DMA_DRAM_SRAM,
+    DEVICE_DMA_DRAM_SRAM_BIDIRECTIONAL,
+    DEVICE_EDMA = DEVICE_DMA_DRAM_SRAM_BIDIRECTIONAL,  // shorthand, EDMA is commonly used name for internal DMA engines
+    DEVICE_ROTATOR,
+    DEVICE_CME,
+
+    // Goya1-specific devices
+    DEVICE_DMA_PREFETCH_STATIC_TENSORS,
+    DEVICE_DMA_PREFETCH_ACTIVATIONS,
+    DEVICE_DMA_SRAM_HOST,
+
+    // last entry marker
+    LAST_HABANA_DEVICE
+} HabanaDeviceType;

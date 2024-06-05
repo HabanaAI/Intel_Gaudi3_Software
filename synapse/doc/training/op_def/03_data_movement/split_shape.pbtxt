@@ -1,0 +1,42 @@
+op {
+  name: "Split Shape"
+   type {
+    name: "T"
+    definition: "shape tensor(uint32)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+   c_structure: "struct synSplitParams;"
+  attr {
+    name: "axis"
+    type: "unsigned"
+    description: "The split dim."
+  }
+
+  input {
+    name: "The tensor to split"
+    type: "T"
+    description: "Input Tensor of type ``T``"
+  }
+  output {
+    name: "out_0"
+    type: "T"
+    description: "The first part of the input with the same dimensionality as input tensor"
+  }
+  output {
+    name: "out_1"
+    type: "T"
+    description: "The second part of the input with the same dimensionality as input tensor"
+  }
+  output {
+    name: "out_n"
+    type: "T"
+    description: "The last part of the input with the same dimensionality as input tensor"
+  }
+  summary: "Splits a shape tensor into a list of shape tensors."
+  description: "The split is done along the specified 'axis'. Lengths of the parts are specified"
+               "in the sizes of the output parts."
+  constraints: ["Input and output tensors must be shape tensors."
+                "Aggregate size along aggregate dimension must match input tensor size in that dimension."
+                "Shape of output tensors in all dimensions except the split dimension. "]
+  guid: "split_shape"
+}

@@ -1,0 +1,22 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["bf16_basic"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["fwd"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["false"]},
+    {"signalMode":["desc"]},
+    {"xSizes":["64", "112", "112", "1", "2"]},
+    {"ySizes":["512", "56", "56", "1", "2"]},
+    {"wSizes":["512", "64", "3", "3", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["2", "2", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"convPattern":["skf"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["2xh"]},
+    {"conversionRoundingMode":["rn"]}
+    ]]
+}

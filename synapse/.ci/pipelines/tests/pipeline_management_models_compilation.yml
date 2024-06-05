@@ -1,0 +1,46 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: mpm-test-data
+    - repository: synapse
+  dependencies:
+    - COMPLEX_GUID
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_PROFILER
+    - SYNAPSE_UTILS
+    - TPC_FUSER
+    - TPC_KERNELS
+    - TPC_LLVM
+    - TPCSIM
+    - RDMA_CORE
+  config:
+    testCommand: models_tests_job --test-type compilation --models-stats-required --models-folder ${MPM_TEST_DATA_ROOT}/models
+    loadLKD: false
+    startSim: false
+    releaseFlag: false
+  preTestStages:
+    Fetch LFS data:
+      runOutsideDocker: true
+      command: "fetch_git_lfs mpm-test-data ${MPM_TEST_DATA_ROOT}"
+  envVars:
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi3_sim_pipeline_management_models_compilation:
+    config:
+      lkdSimHealtcheckParams:
+        #lkdParam: 'timeout_locked=5000'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run model compilation tests Gaudi3:
+        filter: --test-name g3_$(date +"%Y%m%d-%H%M%S") --chip-type gaudi3
+        envVars:
+          ENABLE_EXPERIMENTAL_FLAGS: 1
+          ENABLE_LAYERED_PIPELINE_BRAIN: 0
+          SCAL_TIMEOUT_VALUE_SECONDS: 5000
+          ENABLE_CONSOLE: false
+          LOG_LEVEL_ALL: 4

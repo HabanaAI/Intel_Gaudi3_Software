@@ -1,0 +1,120 @@
+op {
+  name: "Convolution"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(float8), tensor(float16), tensor(tf32)"
+    description: "A 4D tensor of layout *NHWC* with the elements of type specified in the definition."
+  }
+  type {
+    name: "S"
+    definition: "tensor(float32), tensor(bfloat16), tensor(float8), tensor(float16), tensor(tf32)"
+    description: "A 4D tensor of layout *RSCK* with the elements of type specified in the definition."
+  }
+  input {
+    name: "Input_feature_map"
+    type: "T"
+    description: "Input Tensor of type ``T`` and dimensions [N, H, W, C]."
+  }
+  input {
+    name: "Weights"
+    type: "S"
+    description: "Input Tensor of type ``S`` and dimensions [kH, kW, C, K]."
+  }
+  output {
+    name: "Output_feature_map"
+    type: "T"
+    description: "Resultant tensor is the output of the *Convolution* operation and dimensions [N, H', W', K]."
+  }
+  attr {
+    name: "padL"
+    type: "int"
+    description: "Number of pad elements added at the beginning along W axis"
+    default{ i: 0 }
+  }
+  attr {
+    name: "padR"
+    type: "int"
+    description: "Number of pad elements added at the end along W axis"
+    default{ i: 0 }
+  }
+  attr {
+    name: "padT"
+    type: "int"
+    description: "Number of pad elements added at the beginning along H axis"
+    default{ i: 0 }
+  }
+  attr {
+    name: "padB"
+    type: "int"
+    description: "Number of pad elements added at the end along H axis"
+    default{ i: 0 }
+  }
+  attr {
+    name: "kW"
+    type: "unsigned int"
+    description: "Size of the kernel along W axis. The valid range is [1,255]."
+    default{ i: 1 }
+  }
+  attr {
+    name: "kH"
+    type: "unsigned int"
+    description: "Size of the kernel along H axis. The valid range is [1,255]."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dW"
+    type: "unsigned int"
+    description: "Size of the stride along W axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dH"
+    type: "unsigned int"
+    description: "Size of the stride along H axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dilW"
+    type: "unsigned int"
+    description: "Size of the dilation along W axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "dilH"
+    type: "unsigned int"
+    description: "Size of the dilation along H axis."
+    default{ i: 1 }
+  }
+  attr {
+    name: "nGroups"
+    type: "unsigned int"
+    description: "Number of convolution groups, 1 means regular convolution."
+    default{ i: 1 }
+  }
+  formula {
+      equation: "W' = \\frac{W-(kW+(kW-1)(dilW-1))+padL+padR}{dW}+1"
+      label: "wtag"
+  }
+  formula {
+      equation: "H' = \\frac{H-(kH+(kH-1)(dilH-1))+padT+padB}{dH}+1"
+      label: "htag"
+  }
+  summary: "The K * 3D filters are applied over spatial dimension [Height, Width]"
+           " of the image(Input_feature_map)."
+  description: "This kernel applies K filters of shape 3D over Input_feature_map"
+               " of shape 4D. The 3D filter is applied over spatial dimension"
+               " [Height, Width] of the image and has a separate filter for "
+               "each channel hence the shape 3D. In addition, the same filter is applied"
+               " for all batches of the image. Filter is moved across the input"
+               " image with a particular stride value along the two spatial "
+               "dimensions, resulting in different output sizes along spatial dimension:"
+               "\math{wtag} \math{htag}"
+  constraints: ["Gaudi supports only float32 and bfloat16 datatypes.",
+               "All Inputs must be of the same datatype.\n",
+               "Number of batches in input and output tensors are the same.\n",
+               "$**Stride** - Number of pixels by which kernel is shifted along the spatial axis of Ifm.\n",
+               "$**Padding** - Number of pixels added at the beginning and end of spatial axis of Ifm.\n",
+               "$**Dilation** - Controls spacing between kernel points. If set to dilation k > 1, there will be k-1 skipped cells between each filter element on that dimension.\n"]
+  guid: "spatial_convolution"
+  c_structure: "struct synConvolutionParams;"
+}

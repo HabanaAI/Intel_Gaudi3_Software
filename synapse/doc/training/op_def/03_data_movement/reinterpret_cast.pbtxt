@@ -1,0 +1,28 @@
+op {
+  name: "Reinterpret Cast"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(uint32), tensor(int8), tensor(uint8)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  type {
+    name: "S"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(uint32), tensor(int8), tensor(uint8)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  input {
+    name: "The tensor to cast"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+  output {
+    name: "The casted tensor"
+    type: "S"
+    description: "Output Tensor of type ``S``."
+  }
+  summary: "Cast between types without actually change the data (also known as BitCast)."
+  description: "Given a tensor with type ``T``, this operation returns a tensor with type ``S`` that has the same buffer data."
+  constraints: "All sizes in the input and output must be same, except the size of the contiguous dimension "
+               "which must satisfy the folowing rule: (input size * input element size) = (output size * output element size).",
+  guid: "reinterpret_cast"
+}

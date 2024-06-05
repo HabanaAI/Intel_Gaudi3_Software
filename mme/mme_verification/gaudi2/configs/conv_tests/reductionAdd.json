@@ -1,0 +1,108 @@
+{
+  "programInSram":"true",
+  "tests":[
+
+   [{"testName":["ReductionAdd with P=1, N=1"]},
+    {"inTypeFloat":["fp32"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["1", "1"]},
+    {"wSizes":["10", "20", "4", "2", "3"]},
+    {"ySizes":["10", "20", "4", "2", "3"]},
+    {"geometry":["2xh"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["1"]}
+   ],
+
+   [{"testName":["ReductionAdd with P=1, N=2"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["2", "1"]},
+    {"wSizes":["10", "20", "4", "2", "6"]},
+    {"ySizes":["10", "20", "4", "2", "3"]},
+    {"geometry":["4xh"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["1"]},
+    {"reductionLevel":["2"]}
+   ],
+
+   [{"testName":["ReductionAdd with P=1, N=3"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["3", "1"]},
+    {"wSizes":["10", "20", "4", "2", "9"]},
+    {"ySizes":["10", "20", "4", "2", "3"]},
+    {"geometry":["2xw"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["1"]},
+    {"reductionLevel":["3"]}
+   ],
+
+   [{"testName":["ReductionAdd with P=1, N=4"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["4", "1"]},
+    {"wSizes":["10", "20", "4", "2", "12"]},
+    {"ySizes":["10", "20", "4", "2", "3"]},
+    {"geometry":["2xh"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["1"]},
+    {"reductionLevel":["4"]}
+   ],
+
+   [{"testName":["ReductionAdd with P=n4 (3), N=4"]},
+    {"inTypeFloat":["fp32"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["12", "3"]},
+    {"wSizes":["10", "20", "4", "2", "12"]},
+    {"ySizes":["10", "20", "4", "2", "3"]},
+    {"geometry":["2xh"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["3"]},
+    {"reductionLevel":["4"]}
+   ],
+
+   [{"testName":["ReductionAdd with P=n4*n3 (6), N=4"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["24", "6"]},
+    {"wSizes":["10", "20", "4", "2", "12"]},
+    {"ySizes":["10", "20", "4", "2", "3"]},
+    {"geometry":["2xh"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["6"]},
+    {"reductionLevel":["4"]}
+   ],
+
+   [{"testName":["ReductionAdd with P=n4*n3*n2 (24), N=4"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["96", "24"]},
+    {"wSizes":["10", "20", "4", "2", "12"]},
+    {"ySizes":["10", "20", "4", "2", "3"]},
+    {"geometry":["2xw"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["24"]},
+    {"reductionLevel":["4"]}
+   ],
+
+   [{"testName":["ReductionAdd with P=n4*n3*n2 (30), N=4, large tensors"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["reductionAdd"]},
+    {"xSizes":["120", "30"]},
+    {"wSizes":["555", "230", "2", "5", "12"]},
+    {"ySizes":["555", "230", "2", "5", "3"]},
+    {"geometry":["2xh"]},
+    {"dedwPattern":["kfc"]},
+    {"packingFactor":["30"]},
+    {"reductionLevel":["4"]}
+   ]
+  ]
+}

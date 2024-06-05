@@ -1,0 +1,40 @@
+{ "programInSram":"true",
+  "tests":[
+
+  [{"testName":["sbReuse A no spatial movement"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["dedw"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["true"]},
+    {"signalMode":["desc"]},
+    {"xSizes": ["550","40","40","1","1"]},
+    {"wSizes": ["1200","550","1","1","1"]},
+    {"ySizes": ["1200","20","20","1","1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"dedwPattern":["kcf", "kfc", "fkc", "ckf", "cfk", "fck"]},
+    {"geometry":["4xh"]}
+    ],
+
+  [{"testName":["sbReuse A with spatial movement"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["dedw"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["true"]},
+    {"signalMode":["desc"]},
+    {"xSizes": ["550","40","40","1","1"]},
+    {"wSizes": ["1200","550","2","2","2"]},
+    {"ySizes": ["1200","20","20","1","1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"dedwPattern":["cfk", "fck"]},
+    {"geometry":["4xw"]}
+    ]
+  ]
+}

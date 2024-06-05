@@ -1,0 +1,21 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["all_geometries_ksf"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["fwd"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["false"]},
+    {"xSizes":["128", "2048", "1", "1", "1"]},
+    {"ySizes":["2048", "2048", "1", "1", "1"]},
+    {"wSizes":["2048", "128", "1", "1", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"convPattern":["ksf"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["4xh", "2xh", "2xw", "4xw"]}
+
+    ]]
+}

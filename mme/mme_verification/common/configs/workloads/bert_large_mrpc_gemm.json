@@ -1,0 +1,762 @@
+{
+"programInSram": "false",
+"tests":
+    [
+        [
+        {"testName": ["gemm bert_large_mrpc:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["2", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["2", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["1024", "2", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["2", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["1024", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["4096", "1024", "1", "1", "1"]},
+        {"ySizes": ["4096", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["4096", "8192", "1", "1", "1"]},
+        {"ySizes": ["4096", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["4096", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:5"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "4096", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:5"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["1024", "4096", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:5"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "4096", "1", "1", "1"]},
+        {"ySizes": ["4096", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:6"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:6"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "64", "1", "1", "1"]},
+        {"ySizes": ["1024", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:6"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:7"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["2", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:7"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["64", "2", "1", "1", "1"]},
+        {"ySizes": ["2", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:7"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["2", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:8"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["2", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:8"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["2", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "64", "1", "1", "1"]},
+        {"ySizes": ["1024", "2", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:8"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["2", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:9"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["2", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "64", "1", "1", "1"]},
+        {"ySizes": ["1024", "2", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:9"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["2", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:9"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["2", "1024", "1", "1", "1"]},
+        {"wSizes": ["1024", "64", "1", "1", "1"]},
+        {"ySizes": ["64", "2", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:10"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:10"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["64", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:10"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:11"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "64", "1", "1", "1"]},
+        {"ySizes": ["1024", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:11"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "64", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "64", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:11"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "1024", "1", "1", "1"]},
+        {"wSizes": ["1024", "64", "1", "1", "1"]},
+        {"ySizes": ["64", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:12"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "4096", "1", "1", "1"]},
+        {"ySizes": ["4096", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:12"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["8192", "4096", "1", "1", "1"]},
+        {"ySizes": ["4096", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:12"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "4096", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:13"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["1024", "4096", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:13"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "4096", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:13"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["4096", "1024", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["8192", "4096", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:14"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["4096", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:14"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["4096", "8192", "1", "1", "1"]},
+        {"wSizes": ["8192", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "4096", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:14"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["4096", "1024", "1", "1", "1"]},
+        {"ySizes": ["4096", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:15"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["4096", "8192", "1", "1", "1"]},
+        {"ySizes": ["4096", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:15"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["4096", "1024", "1", "1", "1"]},
+        {"ySizes": ["4096", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:15"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "4096", "1", "1", "1"]},
+        {"wSizes": ["4096", "8192", "1", "1", "1"]},
+        {"ySizes": ["8192", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:16"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:16"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["8192", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:16"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:17"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["1024", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:17"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "1024", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:17"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "1024", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["8192", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:18"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["2", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:18"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["1024", "8192", "1", "1", "1"]},
+        {"wSizes": ["8192", "2", "1", "1", "1"]},
+        {"ySizes": ["2", "1024", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:18"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["2", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm bert_large_mrpc:19"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["2", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["1024", "2", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedw bert_large_mrpc:19"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["2", "8192", "1", "1", "1"]},
+        {"wSizes": ["1024", "2", "1", "1", "1"]},
+        {"ySizes": ["1024", "8192", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["gemm_dedx bert_large_mrpc:19"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["2", "1024", "1", "1", "1"]},
+        {"wSizes": ["1024", "8192", "1", "1", "1"]},
+        {"ySizes": ["8192", "2", "1", "1", "1"]},
+        {"sbReuse": ["true"]},
+        {"signalMode": ["desc"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ]
+
+    ]
+}

@@ -1,0 +1,95 @@
+{ "programInSram":"true",
+  "tests":[
+
+    [{"testName":["bgemm-ab"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["ab"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["256", "64", "4", "3", "2"]},
+    {"wSizes":["128", "256", "4", "3", "2"]},
+    {"ySizes":["128", "64", "4", "3", "2"]},
+    {"convPattern":["random"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["2xh"]}
+    ],
+
+    [{"testName":["bgemm-abt"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["abt"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["256", "64", "4", "3", "2"]},
+    {"wSizes":["256", "128", "4", "3", "2"]},
+    {"ySizes":["128", "64", "4", "3", "2"]},
+    {"convPattern":["random"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["2xh"]}
+    ],
+
+    [{"testName":["bgemm-atb"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["64", "256", "4", "3", "2"]},
+    {"wSizes":["128", "256", "4", "3", "2"]},
+    {"ySizes":["128", "64", "4", "3", "2"]},
+    {"convPattern":["random"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["2xh"]}
+    ],
+
+    [{"testName":["gemm-atb - gemm uses dedw flow"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atb"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["64", "256", "1", "1", "1"]},
+    {"wSizes":["128", "256", "1", "1", "1"]},
+    {"ySizes":["128", "64", "1", "1", "1"]},
+    {"convPattern":["random"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["2xh"]}
+    ],
+
+    [{"testName":["bgemm-atbt"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["atbt"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["64", "256", "4", "3", "2"]},
+    {"wSizes":["256", "128", "4", "3", "2"]},
+    {"ySizes":["128", "64", "4", "3", "2"]},
+    {"convPattern":["random"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["2xh"]}
+    ],
+
+    [{"testName":["bgemm-ab split on FCD"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["ab"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["4", "4", "1", "1", "300"]},
+    {"wSizes":["4", "4", "1", "1", "300"]},
+    {"ySizes":["4", "4", "1", "1", "300"]},
+    {"convPattern":["random"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["2xh"]}
+    ],
+
+    [{"testName":["partial - bgemm - raster=False, reuse=B, FCD=2, SP=1, BATCH=4, partials=2, repeats=16, activations=8"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["ab"]},
+    {"sbReuse":["true"]},
+    {"xSizes":["2816", "256", "2", "1", "1"]},
+    {"wSizes":["1152", "2816", "2", "1", "1"]},
+    {"ySizes":["1152", "256", "2", "1", "1"]},
+    {"geometry":["4xw"]},
+    {"convPattern":["random"]},
+    {"dedwPattern":["kfc"]}
+    ]
+
+]}

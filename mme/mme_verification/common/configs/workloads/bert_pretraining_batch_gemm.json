@@ -1,0 +1,123 @@
+{
+"programInSram": "false",
+"tests":
+    [
+        [
+        {"testName": ["batch_gemm bert_pretraining:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["64", "128", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["128", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedw bert_pretraining:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["64", "128", "16", "64", "1"]},
+        {"wSizes": ["128", "128", "16", "64", "1"]},
+        {"ySizes": ["128", "64", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedx bert_pretraining:2"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["128", "128", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["64", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm bert_pretraining:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["128", "128", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["64", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedw bert_pretraining:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["128", "128", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["64", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedx bert_pretraining:3"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["abt"]},
+        {"xSizes": ["64", "128", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["128", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm bert_pretraining:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atb"]},
+        {"xSizes": ["128", "128", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["64", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedw bert_pretraining:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["ab"]},
+        {"xSizes": ["128", "128", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["64", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ],
+
+        [
+        {"testName": ["batch_gemm_dedx bert_pretraining:4"]},
+        {"inTypeFloat": ["fp32"]},
+        {"outTypeFloat": ["fp32"]},
+        {"operation": ["atbt"]},
+        {"xSizes": ["128", "64", "16", "64", "1"]},
+        {"wSizes": ["64", "128", "16", "64", "1"]},
+        {"ySizes": ["128", "128", "16", "64", "1"]},
+        {"sbReuse": ["true"]},
+        {"dedwPattern": ["random"]},
+        {"geometry": ["random"]}
+        ]
+
+    ]
+}

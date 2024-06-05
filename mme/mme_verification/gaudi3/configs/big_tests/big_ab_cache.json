@@ -1,0 +1,98 @@
+{ "cacheMode" : "true",
+  "programInSram" : "false",
+    "tests":[
+    [{"testName":["big ab - no allocation"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["ab"]},
+    {"xSizes":["357", "3121", "1", "1", "1"]},
+    {"ySizes":["3223", "3121", "1", "1", "1"]},
+    {"wSizes":["3223", "357", "1", "1", "1"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xh"]},
+    {"cacheDirectiveA":["noAlloc"]},
+    {"cacheDirectiveB":["noAlloc"]},
+    {"cacheDirectiveOut":["noAlloc"]},
+    {"cacheClassA":["random"]},
+    {"cacheClassB":["random"]},
+    {"cacheClassOut":["random"]}
+
+	
+    ],
+    [{"testName":["big ab - all in dcore allocation"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["ab"]},
+    {"xSizes":["357", "3121", "1", "1", "1"]},
+    {"ySizes":["3223", "3121", "1", "1", "1"]},
+    {"wSizes":["3223", "357", "1", "1", "1"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xh"]},
+    {"cacheDirectiveA":["dcoreAlloc"]},
+    {"cacheDirectiveB":["dcoreAlloc"]},
+    {"cacheDirectiveOut":["dcoreAlloc"]},
+    {"cacheClassA":["random"]},
+    {"cacheClassB":["random"]},
+    {"cacheClassOut":["random"]}
+
+	
+    ],
+    [{"testName":["big ab - all in home allocation"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["ab"]},
+    {"xSizes":["357", "3121", "1", "1", "1"]},
+    {"ySizes":["3223", "3121", "1", "1", "1"]},
+    {"wSizes":["3223", "357", "1", "1", "1"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xh"]},
+    {"cacheDirectiveA":["homeAlloc"]},
+    {"cacheDirectiveB":["homeAlloc"]},
+    {"cacheDirectiveOut":["homeAlloc"]},
+    {"cacheClassA":["random"]},
+    {"cacheClassB":["random"]},
+    {"cacheClassOut":["random"]}
+	
+    ],
+    [{"testName":["big ab - A in dcore B in Home"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["ab"]},
+    {"xSizes":["357", "3121", "1", "1", "1"]},
+    {"ySizes":["3223", "3121", "1", "1", "1"]},
+    {"wSizes":["3223", "357", "1", "1", "1"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xh"]},
+    {"cacheDirectiveA":["dcoreAlloc"]},
+    {"cacheDirectiveB":["homeAlloc"]},
+    {"cacheDirectiveOut":["dcoreAlloc"]},
+    {"cacheClassA":["random"]},
+    {"cacheClassB":["random"]},
+    {"cacheClassOut":["random"]}
+	
+    ],
+    [{"testName":["big ab - no allocation with reduction"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["ab"]},
+    {"xSizes":["357", "3121", "1", "1", "1"]},
+    {"ySizes":["3223", "3121", "1", "1", "1"]},
+    {"wSizes":["3223", "357", "1", "1", "1"]},
+    {"dedwPattern":["fck"]},
+    {"geometry":["2xh"]},
+    {"cacheDirectiveA":["noAlloc"]},
+    {"cacheDirectiveB":["noAlloc"]},
+    {"cacheDirectiveOut":["noAlloc"]},
+    {"cacheClassA":["random"]},
+    {"cacheClassB":["random"]},
+    {"cacheClassOut":["random"]},
+    {"reductionOp":["add", "sub", "max", "min"]},
+    {"reductionRm":["random"]}
+	
+    ]
+
+
+
+
+  ]
+}

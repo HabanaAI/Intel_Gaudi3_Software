@@ -1,0 +1,15 @@
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+option(ENABLE_IPO "Enable Inter-Procedural-Optimization" OFF)
+if(ENABLE_IPO)
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT supported OUTPUT error)
+
+    if(supported)
+        message(STATUS "Global Settings: IPO / LTO enabled")
+        #set_property(TARGET example PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+    else()
+        message(WARNING "IPO / LTO not supported: <${error}>")
+    endif()
+endif()

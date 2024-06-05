@@ -1,0 +1,42 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_PROFILER
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - RDMA_CORE
+    - COMPLEX_GUID
+    - TPC_FUSER
+  config:
+    testCommand: "run_gemm_benchmarks_test"
+    requirementsFile: requirements-synapse-tests.txt
+    loadLKD: true
+    #testXMLOutputKey: -x
+    releaseFlag: false
+  envVars:
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi_hls_asic_ci_perf_gemm:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    preTestStages:
+      Check power limit:
+        runOutsideDocker: true
+        command: echo "gaudi product name is $(sudo /usr/bin/hl-smi -L | grep -m 1 'Product Name' | sed 's/.*:.//g')"; echo "gaudi powerlimit is $(sudo /usr/bin/hl-smi -L | grep -m 1 'Power Limit' | sed 's/.*:.//g')"
+    stages:
+      Run Performance Tests:
+        filter: "--verbose --all --junit-xml=run_gemm_benchmarks_test.xml"
+        envVars:
+          ENABLE_CONSOLE: false

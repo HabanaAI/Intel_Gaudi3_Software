@@ -1,0 +1,123 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["2x input acceleration"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["32", "64", "1", "1", "1"]},
+      {"ySizes":["64", "32", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["2x output acceleration"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["64", "32", "1", "1", "1"]},
+      {"ySizes":["32", "64", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["8x input acceleration"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["4", "64", "1", "1", "1"]},
+      {"ySizes":["64", "4", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["8x output acceleration"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["48", "4", "1", "1", "1"]},
+      {"ySizes":["4", "48", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["odd input acceleration"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["7", "501", "1", "1", "1"]},
+      {"ySizes":["501", "7", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["odd output acceleration"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["501", "7", "1", "1", "1"]},
+      {"ySizes":["7", "501", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["8x input acceleration with full steps"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["4", "1024", "1", "1", "1"]},
+      {"ySizes":["1024", "4", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["8x output acceleration with full steps"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["1024", "4", "1", "1", "1"]},
+      {"ySizes":["4", "1024", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["8x input acceleration with reminder"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["4", "1184", "1", "1", "1"]},
+      {"ySizes":["1184", "4", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["8x output acceleration with reminder"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["1184", "4", "1", "1", "1"]},
+      {"ySizes":["4", "1184", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+     ],
+
+    [{"testName":["8x input acceleration with recipe splits"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["4", "393216", "1", "1", "1"]},
+      {"ySizes":["393216", "4", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ],
+
+    [{"testName":["8x output acceleration  recipe splits"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["transpose"]},
+      {"teAccel":["true"]},
+      {"xSizes":["393216", "4", "1", "1", "1"]},
+      {"ySizes":["4", "393216", "1", "1", "1"]},
+      {"geometry":["4xw", "4xh"]}
+    ]
+  ]
+}

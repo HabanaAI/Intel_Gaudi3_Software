@@ -1,0 +1,6 @@
+[
+    // must be in descending order
+    { "op": "remove", "path" : "/gaudi2/cores/engine_clusters/9" }, // 9 is rotator
+    { "op": "remove", "path" : "/gaudi2/cores/engine_clusters/8" }, // 8 is nic_scaleout
+    { "op": "remove", "path" : "/gaudi2/cores/engine_clusters/7" }  // 7 is nic_scaleup
+]

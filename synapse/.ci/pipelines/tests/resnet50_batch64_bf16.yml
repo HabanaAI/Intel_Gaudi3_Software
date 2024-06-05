@@ -1,0 +1,42 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - TPCSIM
+    - RDMA_CORE
+    - COMPLEX_GUID
+    - TPC_FUSER
+  config:
+    testCommand: run_synapse_gc_test
+    loadLKD: true
+    testXMLOutputKey: --xml
+    releaseFlag: true
+    lkdSimHealtcheckParams:
+      lkdParam: 'timeout_locked=4000'
+      startNetworkIfs: false
+      rebootOnFailure: true
+      checkDmesg: true
+  envVars:
+    ENABLE_EXPERIMENTAL_FLAGS: true
+    SCAL_TIMEOUT_VALUE_SECONDS: "6000"
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi3_sim_resnet50_batch64_bf16:
+    stages:
+      Run resnet50 bf16 tests:
+        filter: -c gaudi3 -s *resnet50_full_fwd_bwd_bf16_ASIC*
+        envVars:
+          ENABLE_EXPERIMENTAL_FLAGS: true
+          SCAL_TIMEOUT_VALUE: 6000000000
+          INIT_HCCL_ON_ACQUIRE: 0

@@ -1,0 +1,21 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["resnet50_layer_2.0_conv2"]},
+    {"inTypeFloat":["bf16", "fp8_152"]},
+    {"outTypeFloat":["fp32", "fp8_152"]},
+    {"operation":["dedx"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["false"]},
+    {"signalMode":["desc"]},
+    {"repeats":["1"]},
+    {"ySizes":["128", "28", "28", "1", "1"]},
+    {"wSizes":["128", "128", "3", "3", "1"]},
+    {"xSizes":["128", "56", "56", "1", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["2", "2", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"convPattern":["skf", "ksf"]},
+    {"geometry":["2xh", "2xw", "4xw", "4xh"]}
+  ]]
+}

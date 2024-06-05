@@ -1,0 +1,13 @@
+diff --git a/scripts/syn_infra.py b/scripts/syn_infra.py
+index 419535c169..70028e8f82 100644
+--- a/scripts/syn_infra.py
++++ b/scripts/syn_infra.py
+@@ -11,7 +11,7 @@ import signal
+ SOFTWARE_LFS_DATA = os.environ.get("SOFTWARE_LFS_DATA")
+ if SOFTWARE_LFS_DATA is None:
+     raise RuntimeError("SOFTWARE_LFS_DATA EV is not set")
+-CHIP_TYPES = {"greco": 1, "goya2": 1, "gaudi": 2, "gaudiM": 3, "gaudi2": 4, "gaudi3": 5}
++CHIP_TYPES = {"greco": 1, "goya2": 1, "gaudi": 2, "gaudiM": 3, "gaudi2": 4, "gaudi3": 5 }
+
+
+ def create_folder(folder):

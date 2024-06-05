@@ -1,0 +1,47 @@
+{
+  "tests": [
+
+    [{"testName":["curFitLength equals to m_sbSpan"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["dedx"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"memsetVoidPixels":["true"]},
+    {"ySizes":["256", "64", "64", "1", "1"]},
+    {"wSizes":["256", "256", "3", "3", "1"]},
+    {"xSizes":["256", "66", "66", "1", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"convPattern":["skf"]},
+    {"geometry":["2xh"]},
+    {"sbReuse":["true"]},
+    {"sbSizeInCLs":["256"]},
+    {"recipeTest": {"spSplits": "3", "cdSplits": "9"}}
+    ],
+
+    [{"testName": ["partial reuse - at least one dim included, with empty dims 2"]},
+    {"mmeLimit": ["2"]},
+    {"inTypeFloat": ["bf16"]},
+    {"outTypeFloat": ["bf16"]},
+    {"operation": ["fwd"]},
+    {"useBrain": ["false"]},
+    {"lowerEn": ["true"]},
+    {"sbReuse": ["true"]},
+    {"dedw2x":["true"]},
+    {"recurringMisalignmentOptEn": ["true"]},
+    {"alignedAddresses":["true"]},
+    {"partialsToMemoryEn":["false"]},
+    {"xSizes": ["32","60","40","1","1"]},
+    {"wSizes": ["10","32","4","1","1"]},
+    {"ySizes": ["10","15","20","1","1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["4", "2", "1"]},
+    {"padding":["1", "0", "0"]},
+    {"convPattern":["ksf"]},
+    {"geometry":["4xw"]}
+    ]
+
+  ]
+}

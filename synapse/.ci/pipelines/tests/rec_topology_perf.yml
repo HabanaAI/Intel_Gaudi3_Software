@@ -1,0 +1,76 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: mpm-test-data
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - COMPLEX_GUID
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - RDMA_CORE
+    - SWTOOLS_SDK
+    - SYNAPSE_PROFILER
+    - SYNAPSE_UTILS
+    - TPC_FUSER
+    - TPC_KERNELS
+    - TPC_LLVM
+    - TPCSIM
+  config:
+    testCommand: models_tests_job --test-type perf --test-name $PATCHSET_REVISION --database promotion --job promotion --models-stats-required --models-folder "${MPM_TEST_DATA_ROOT}/models"
+    loadLKD: true
+    releaseFlag: false
+    saveToFileBeatMount: false
+  envVars:
+    ENABLE_CONSOLE : false
+    LOG_LEVEL_ALL : 4
+    SCAL_TIMEOUT_VALUE_SECONDS : 1000
+    PATCHSET_REVISION: '${GERRIT_PATCHSET_REVISION:-$(git -C ${SYNAPSE_ROOT} rev-parse HEAD)}'
+    DATABASE_BRANCH : '${GERRIT_BRANCH/_next/}'
+  preTestStages:
+    Fetch LFS data:
+      runOutsideDocker: true
+      command: "fetch_git_lfs mpm-test-data ${MPM_TEST_DATA_ROOT}"
+  postTestStages:
+    copy results xml:
+     command: "cp ${HABANA_LOGS}/**/*.xml .; cp ${HABANA_LOGS}/**/*.xml /root/ || true"
+testsMap:
+  Test_synapse_gaudi_hls_asic_rec_topology_perf:
+    stages:
+      Run model tests on K8S container:
+        filter: --chip-type gaudi --branch $DATABASE_BRANCH --max-mem-limit 40000000000
+  Test_synapse_gaudi2_asic_rec_topology_perf:
+    stages:
+      Run model tests on K8S container:
+        filter: --chip-type gaudi2 --branch $DATABASE_BRANCH --max-mem-limit 50000000000
+    envVars:
+      LOG_LEVEL_PARSER: 2
+  Test_synapse_gaudi3_asic_rec_topology_perf:
+    stages:
+      Run model tests on K8S container:
+        filter: --chip-type gaudi3 --branch $DATABASE_BRANCH --max-mem-limit 50000000000
+    envVars:
+      LOG_LEVEL_PARSER: 2
+      HCL_MAC_INFO_FILE: none
+  Test_synapse_gaudi3_sim_rec_topology_perf:
+    config:
+      loadLKD: true
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=40000'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: true
+        simParams: "-r -C gaudi3 -D 32 -f --gear 5"
+    envVars:
+      # PATCHSET_REVISION: '${GERRIT_PATCHSET_REVISION:-$(git -C ${SYNAPSE_ROOT} rev-parse HEAD)}'
+      LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+      ENABLE_EXPERIMENTAL_FLAGS: true
+      TERMINATE_SYNAPSE_UPON_DFA: 0
+      SCAL_DISABLE_TIMEOUT: 1
+    stages:
+      Run models perf tests test:
+        filter: --chip-type gaudi3 --branch master --max-mem-limit 50000000000

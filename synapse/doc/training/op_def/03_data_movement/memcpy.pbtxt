@@ -1,0 +1,21 @@
+op {
+  name: "Mem Copy"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int64), tensor(uint64)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  input {
+    name: "The source tensor"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+  output {
+    name: "The destination tensor"
+    type: "T"
+    description: "Output tensor with the same size as input."
+  }
+  summary: "Copies source tensor to destination tensor."
+  description: ""
+  guid: "memcpy"
+}

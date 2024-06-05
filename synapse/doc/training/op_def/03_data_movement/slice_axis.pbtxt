@@ -1,0 +1,37 @@
+op {
+  name: "Slice Axis"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+  input {
+    name: "Real tensor"
+    type: "T"
+    description: "The input tensor to be sliced along a specific axis."
+  }
+  output {
+    name: "Sliced tensor"
+    type: "T"
+    description: "Slice result."
+  }
+  c_structure: "synSliceAxisParamsV2"
+  attr {
+    name: "axis"
+    type: "unsigned int"
+    description: "Axis along which to be sliced."
+  }
+  attr {
+    name: "begin"
+    type: "unsigned long int"
+    description: "The beginning index along the axis to be sliced."
+  }
+  attr {
+    name: "end"
+    type: "unsigned long int"
+    description: "The ending index along the axis to be sliced."
+  }
+  summary: "Slices along a given axis."
+  description: "Returns a slice of the input tensor along a given axis starting from the begin index to the end index.\n(https://mxnet.apache.org/versions/1.5.0/api/python/symbol/symbol.html#mxnet.symbol.slice_axis)"
+  guid: "slice_axis"
+}

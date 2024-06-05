@@ -1,0 +1,44 @@
+op {
+  name: "Concat"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int8), tensor(uint8)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  type {
+    name: "S"
+    definition: "Tensor Shape Type"
+    description: "A shape tensor"
+  }
+  input {
+    name: "in_0"
+    type: "T"
+    description: "Input Tensor of type ``T`` with the same dimensionality as output tensor"
+  }
+  input {
+    name: "in_1"
+    type: "T"
+    description: "Input Tensor of type ``T`` with the same dimensionality as output tensor."
+  }
+  input {
+    name: "in_n"
+    type: "T"
+    description: "Input Tensor of type ``T`` with the same dimensionality as output tensor."
+  }
+  input {
+    name: "OutputShape"
+    type: "S"
+    description: "Input shape tensor. Optional (for dynamic shape usage).\nIf used, overrides the normal output shape calculation."
+  }
+  output {
+    name: "Concatenated tensor"
+    type: "T"
+    description: "Output tensor with the same type as input."
+  }
+
+  summary: "Concatenates tensors along one dimension."
+  description: "Concatenate a list of tensors into a single tensor."
+  constraints: ["All input and output tensors (including the optional shape tensor) are expected to have the same number of dimensions and the"
+                "same shape except on the given concatenation dimension."]
+  guid: "concat"
+}

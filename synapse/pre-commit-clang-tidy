@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git diff-index -p -U0 HEAD | clang-tidy-diff.py -path $SYNAPSE_DEBUG_BUILD -p1 -j8 -extra-arg=-w -checks=-*,hicpp-avoid-goto -quiet

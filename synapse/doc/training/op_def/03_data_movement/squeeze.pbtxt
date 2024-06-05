@@ -1,0 +1,31 @@
+op {
+  name: "Squeeze"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int64), tensor(uint64)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  c_structure: "(optional) struct synSqueezeParams;"
+  attr {
+    name: "axis"
+    type: "unsigned"
+    description: "The squeeze axis."
+  }
+
+  input {
+    name: "The tensor to squeeze"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+  output {
+    name: "The squeezed tensor"
+    type: "T"
+    description: "Output Tensor with the same type of the input."
+  }
+  summary: "Performs squeeze on the shape of the input tensor."
+  description: "If no axis is given, the squeeze will remove all dimensions which are equal to 1."
+               "If an axis is given, this dimension will be removed in case it is equal to 1."
+  constraints: ["Input and output tensors must have the same data type."
+                "Number of elements in output tensor must be equal to the input tensor."]
+  guid: "squeeze"
+}

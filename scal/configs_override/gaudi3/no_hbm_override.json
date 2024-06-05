@@ -1,0 +1,48 @@
+[
+    { "op": "replace",
+            "path" : "/gaudi3/memory",
+            "value":
+            {
+                    "tpc_barrier_in_sram" : true,
+                    "control_cores_memory_pools" :
+                    [
+                            { "name" : "global_hbm",
+                                    "size" : 4000, // not using all the HBM
+                                    "type" : "HOST",
+                                    "region_base" : 0 // not addressable by the cores
+                            },
+                            { "name" : "host_shared",
+                                    "size" : 128, // in MB
+                                    "type" : "HOST",
+                                    "region_base" : 9,
+                                    "fill_region" : true
+                            },
+                            { "name" : "hbm_shared",
+                                    "size" : 128, // in MB
+                                    "type" : "HOST",
+                                    "region_base" : 5
+                            },
+                            { "name" : "hbm_binary",
+                                    "size" : 32, // in MB
+                                    "type" : "HOST",
+                                    "region_base" : 0
+                            },
+                            { "name" : "hbm_pdma",
+                                    "size" : 72, // in MB
+                                    "type" : "HOST",
+                                    "region_base" : 6
+                            }
+                    ],
+                    "memory_groups" :
+                    [
+                            { "name" : "all_cores",
+                                    "pools" : ["host_shared", "hbm_shared", "hbm_pdma"],
+                                    "configuration_pool" : "host_shared"
+                            }
+                    ],
+                    "binary_pool"       : "hbm_binary",
+                    "global_pool"       : "global_hbm",
+                    "pdma_pool"         : "hbm_pdma"
+            }
+    }
+]

@@ -1,0 +1,10 @@
+// This file contains definitions for messages that are not chip-specific, but are also not non chip-specific
+// Basically here we will use the "oneof" protobuf-option for aggregating Chip related messages into a single message
+// This is the connection file between the common.proto and the chip-specific proto files
+
+
+syntax = "proto2";
+
+package gc_recipe;
+
+message generic_packets_container{}

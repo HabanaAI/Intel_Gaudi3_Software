@@ -1,0 +1,13 @@
+#include <string>
+
+extern const char* SYNAPSE_SHA1_VERSION;
+const char* SYNAPSE_SHA1_VERSION = "@SYNAPSE_SHA1_VERSION@";
+
+extern const char* HCL_SHA1_VERSION;
+const char* HCL_SHA1_VERSION = "@HCL_SHA1_VERSION@";
+
+extern const char* MME_SHA1_VERSION;
+const char* MME_SHA1_VERSION = "@MME_SHA1_VERSION@";
+
+extern const char* SCAL_SHA1_VERSION;
+const char* SCAL_SHA1_VERSION = "@SCAL_SHA1_VERSION@";

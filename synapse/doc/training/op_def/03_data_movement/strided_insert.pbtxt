@@ -1,0 +1,50 @@
+op {
+  name: "Strided Insert"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  type {
+    name: "H"
+    definition: "Host to Device Tensor Type"
+    description: "A host to device tensor"
+  }
+  input {
+    name: "Original tensor"
+    type: "T"
+    description: "The input tensor to insert new data in."
+  }
+  input {
+    name: "Insert tensor"
+    type: "T"
+    description: "The input tensor to be inserted into the original tensor"
+  }
+  input {
+    name: "Dynamic strides and offset"
+    type: "H"
+    description: "Dynamic strides and offset information. Contains synDynamicStridedDmaH2dTensor structure. Optional (for dynamic shapes usage)."
+  }
+  output {
+    name: "Output tensor"
+    type: "T"
+    description: "Strided Insert result."
+  }
+  c_structure: "synStridedOpParams"
+  attr {
+    name: "baseOffset"
+    type: "unsigned long int"
+    description: "base offset (in elements) from the beginning of tensor `Real Tensor`"
+  }
+  attr {
+    name: "strides[rank(Insert tensor)]"
+    type: "unsigned long int"
+    description: "1-D array of strides for performing the insert operation."
+  }
+  summary: "Performs the strided insert operation."
+  description: "produces the input (Original) tensor after the strided insert.\n(https://pytorch.org/docs/stable/generated/torch.as_strided.html)"
+  "the node has 2 flavors:"
+  "- static: use synStridedOpParams to define strides and base offset."
+  "- dynamic: use optional strides and offset host to device tensor to define strides and base offset. in this case the node params can be null."
+  guid: "strided_insert"
+}

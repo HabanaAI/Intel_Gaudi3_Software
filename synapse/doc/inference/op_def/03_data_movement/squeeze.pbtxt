@@ -1,0 +1,42 @@
+op {
+  name: "Squeeze"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+   c_structure: "(optional) struct synAxisParams;"
+  attr {
+    name: "axis"
+    type: "T"
+    description: "A synAxisParams struct containing the squeeze axis."
+  }
+  attr {
+    name: "begin"
+    type: "unsigned"
+    description: "The index of the first element along the axis."
+  }
+  attr {
+    name: "end"
+    type: "unsigned"
+    description: "The index of the last element along the axis."
+  }
+
+  input {
+    name: "The tensor to squeeze"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  output {
+    name: "The squeezed tensor"
+    type: "T"
+    description: "Output Tensor with the same type of the input"
+  }
+  summary: "Performs squeeze on the shape of the input tensor"
+  description: "If no axis is given, the squeeze will remove all dimensions which are equal to 1."
+               "If an axis is given, this dimension will be removed in case it is equal to 1."
+  constraints: ["Input and out tensors must have the same data type."
+                "Number of elements in output tensor must be equal to input tensor"
+                "int4 supported platform: Greco"]
+  guid: "squeeze"
+}

@@ -1,0 +1,1926 @@
+launchers:
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_engines_fw_test_0
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_engines_fw_test_1
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_engines_fw_test
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi3/).)*$'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_scal_test
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi3/).)*$'
+  - repository: engines-arc
+- testToLaunch: hcl/Tests/Test_hcl_gaudi_sim_hcl_tests_8
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_hls_asic_ci_perf_gemm
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/requirements/requirements-synapse-tests.txt'
+      - 'tests/benchmarks_tests/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_asic_synapse_presubmit_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/runtime_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_asic_synapse_gc_presubmit_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: coral_sim/Tests/Test_coral_sim_gaudi2_sim_external_test
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/scal_tests/**'
+      - 'tests/runtime_tests/**'
+      - 'tests/synapse/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_mme_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_8cards_multi_device
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/runtime_unit_tests/**'
+      - 'tests/runtime_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'devops/canary_build'
+      - 'tests/utils/**'
+- testToLaunch: hcl/Tests/Test_hcl_gaudi2_sim_HCL_Loopback_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi3/).)*$'
+  - repository: engines-arc
+- testToLaunch: hcl/Tests/Test_hcl_gaudi3_sim_HCL_Loopback_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+  - repository: engines-arc
+- testToLaunch: hcl/Tests/Test_hcl_gaudi2_sim_rank_8
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'devops/canary_build'
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi3/).)*$'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_mme_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'mme_verification/gaudi2/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_arc_mode3_gc_test_group_0
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_arc_mode3_gc_test_group_1
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_arc_mode3_gc_test_group_2
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_arc_mode3_gc_test_group_3
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_arc_mode3_gc_test_group_4
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_arc_mode3_gc_test_group_5
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_arc_mode3_test_group_0
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/runtime_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi3/).)*$'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_mme_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - .ci/scripts/synapse.sh
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'mme_verification/gaudi3/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_cpu_graph_optimizer_tests
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/gc_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'mme_reference/**'
+      - 'src/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_models_compilation
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_models_compilation
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_models_compilation
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_pipeline_management_models_compilation
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_models_compilation_consistency
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_models_compilation_consistency
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_models_compilation_consistency
+  silentMode: true
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_hls_asic_rec_topology_perf
+  gerritTriggerMap:
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_asic_rec_topology_perf
+  gerritTriggerMap:
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_asic_rec_topology_perf
+  gerritTriggerMap:
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_cpu_runtime_unit_tests
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/hpp/**'
+      - 'tests/runtime_unit_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'devops/canary_build'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_scal_test
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+  - repository: engines-arc
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synapse_tests_group_0
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/protobuf/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/runtime_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synapse_gc_tests_group_0
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/protobuf/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synapse_gc_tests_group_1
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/protobuf/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synapse_gc_tests_group_2
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/protobuf/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synapse_gc_tests_group_3
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/protobuf/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synapse_gc_tests_group_4
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/protobuf/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synapse_gc_tests_group_5
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/protobuf/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi1/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/utils/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'include/**'
+      - 'src/gaudi/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+      - 'src/mme_common/**'
+      - 'mme_verification/gaudi/**'
+      - 'mme_verification/common/**'
+      - 'mme_reference/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_synapse_gc_tests_group_6
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/eager/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi3/).)*$'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_gc_tests_group_6
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/eager/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+- testToLaunch: synapse/Tests/Test_synapse_cpu_build_docs
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'doc/**'
+      - 'devops/canary_build'
+  - repository: jenkins_files
+    isStable: true
+    files:
+      - 'Synapse_build_docs-ub20.jenkinsfile'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_asic_check_lkd
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/**'
+      - '.ci/scripts/device_failure_tester.py'
+      - 'tests/runtime_tests/**'
+      - 'tests/utils/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_asic_check_lkd
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'src/runtime/common/**'
+      - 'src/runtime/scal/**'
+      - '.ci/scripts/device_failure_tester.py'
+      - 'tests/runtime_tests/**'
+      - 'tests/utils/**'
+- testToLaunch: hcl/Tests/Test_hcl_gaudi3_sim_rank_8
+  silentMode: false
+  gerritTriggerMap:
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_asic_engines_fw_test
+  silentMode: false
+  gerritTriggerMap:
+  - repository: engines-arc
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi3/).)*$'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_tests_group_0
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/runtime_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_gc_tests_group_0
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_gc_tests_group_1
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_gc_tests_group_2
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_gc_tests_group_3
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_gc_tests_group_4
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_synapse_gc_tests_group_5
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: engines-arc
+- testToLaunch: synapse_profiler/Tests/Test_synapse_profiler_cpu_qman_parser
+  gerritTriggerMap:
+  - repository: engines-arc
+  - repository: scal
+- testToLaunch: synapse/Tests/Test_synapse_cpu_nda_patch_test
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.cd/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'scripts/*'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_hls_asic_rec_topology_accuracy
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/include/**'
+      - 'src/data_serialize/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'devops/canary_build'
+      - '.ci/pipelines/tests/k8s_templates/default_template.yaml'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_asic_rec_topology_accuracy
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/include/**'
+      - 'src/data_serialize/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_rec_topology_accuracy
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - 'devops/canary_build'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'include/**'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/include/**'
+      - 'src/data_serialize/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi3/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi3/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: scal
+    regex:
+      - '^[^/]+(/)*((?!gaudi2/).)*$'
+  - repository: engines-arc
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_asic_synapse_gc_presubmit_tests
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/qman/common/**'
+      - 'src/runtime/qman/gaudi2/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/eager/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gaudi_tests/**'
+      - 'tests/gaudi2_tests/**'
+      - 'tests/gc_tests/platform_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_asic_synapse_tests
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/infra/**'
+      - 'src/runtime/common/**'
+      - 'src/runtime/scal/common/**'
+      - 'src/runtime/scal/gaudi2/**'
+      - 'src/runtime/scripts/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/runtime_tests/**'
+      - 'tests/utils/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_rec_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi2_sim_rec_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi2/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi2/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi3_sim_rec_tests
+  silentMode: false
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - 'src/common/**'
+      - 'src/platform/common/**'
+      - 'src/platform/gaudi3/**'
+      - 'src/graph_compiler/**'
+      - 'src/infra/**'
+      - 'src/CMakeLists.txt'
+      - 'src/version.cpp.in'
+      - 'src/include/**'
+      - 'tests/gc_tests/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/infra_tests/**'
+      - 'tests/mme_tests/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'gc_sim_api/**'
+      - 'include/**'
+      - 'mme_runner/**'
+      - 'docs/**'
+      - 'devops/canary_build'
+  - repository: mme
+    files:
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'include/**'
+      - 'src/mme_common/**'
+      - 'mme_reference/**'
+      - 'src/gaudi3/**'
+      - 'src/sync/**'
+      - 'src/utils/**'
+  - repository: mpm-test-data
+    files:
+      - 'models/**'
+- testToLaunch: synapse/Tests/Test_synapse_gaudi_sim_synrec
+  gerritTriggerMap:
+  - repository: synapse
+    files:
+      - '.ci/scripts/synapse.sh'
+      - '.ci/requirements/requirements-synapse-tests.txt'
+      - 'scripts/synrec.py'
+      - 'src/gc_shim/**'
+      - 'src/graph_serialize/**'
+      - 'src/graph_compiler/graph_serializers/**'
+      - 'tests/utils/**'
+      - 'tests/json_tests/**'
+      - 'tests/hpp/**'
+      - 'tests/record_playback_tests/**'

@@ -1,0 +1,38 @@
+{ "programInSram":"true",
+  "addNullDescriptors": "true",
+  "nullDescBeforeTest": "true",
+  "tests":[
+    [{"testName":["compute nullDesc"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["atb"]},
+      {"xSizes":["120", "16", "1", "1", "1"]},
+      {"ySizes":["250", "120", "1", "1", "1"]},
+      {"wSizes":["250", "16", "1", "1", "1"]},
+      {"dedwPattern":["fkc"]},
+      {"testHasNullDesc":["true"]},
+      {"geometry":["2xw"]}],
+
+    [{"testName":["dma nullDesc"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["memcpy"]},
+      {"xSizes":["120", "16", "1", "1", "1"]},
+      {"ySizes":["120", "16", "1", "1", "1"]},
+      {"convPattern":["ksf"]},
+      {"testHasNullDesc":["true"]},
+      {"geometry":["2xw"]}],
+
+    [{"testName":["dual nullDesc"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["fwd", "memcpy"]},
+      {"xSizes":["128", "128", "1", "1", "1"]},
+      {"wSizes":["128", "128", "1", "1", "1"]},
+      {"ySizes":["128", "128", "1", "1", "1"]},
+      {"convPattern":["ksf"]},
+      {"testHasNullDesc":["true"]},
+      {"dualNullDesc":["true"]},
+      {"geometry":["2xw"]}]
+  ]
+}

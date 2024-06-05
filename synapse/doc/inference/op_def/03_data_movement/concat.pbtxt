@@ -1,0 +1,35 @@
+op {
+  name: "Concat"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+  input {
+    name: "in_0"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  input {
+    name: "in_1"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  input {
+    name: "in_n"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  output {
+    name: "Concatenated tensor"
+    type: "T"
+    description: "Output tensor with the same type as input"
+  }
+
+  summary: "Concatenates tensors along one dimension."
+  description: "Concatenate a list of tensors into a single tensor "
+  constraints: ["All input and output tensors are expected to have the same number of dimensions and the have the"
+                "same shape except on the given concatenation dimension."
+                "int4 supported platform: Greco"]
+  guid: "concat"
+}

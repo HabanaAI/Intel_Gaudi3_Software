@@ -1,0 +1,5 @@
+hl_logger {
+    local: *ansicolor_stdout_sink*;
+           *spdlog*;
+           *boost*;
+};

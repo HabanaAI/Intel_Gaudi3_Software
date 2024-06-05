@@ -1,0 +1,21 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["test1111"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp16", "bf16", "fp32"]},
+    {"operation":["fwd"]},
+    {"xSizes":["16", "112", "112", "1", "2"]},
+    {"ySizes":["32", "56", "56", "1", "2"]},
+    {"wSizes":["32", "16", "3", "3", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["2", "2", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"convPattern":["skf"]},
+    {"geometry":["2xh"]},
+    {"yInSram":["random"]},
+    {"secondaryOutput": ["false"]},
+    {"memsetOutput":["false"]},
+    {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+    {"reductionRm":["random"]}
+    ]]
+}

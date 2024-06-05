@@ -1,0 +1,312 @@
+[
+    { "op": "replace", "path" : "/gaudi3/pdma_channel_config/pdma_channel", "value" : "PDMA_1_0" },
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters",
+		"value":
+		[
+			{ "name" : "pdma_rx",
+				"engines" :
+				[
+					"PDMA_2"
+				],
+				"channels" :
+				[
+					{
+						"index" : 3,
+						"priority" : 7,
+						"scheduler" :
+						{
+							"name": "compute_media_scheduler",
+							"group" : "PDMA_RX_GROUP"
+						}
+					}
+				]
+			},
+			{ "name" : "pdma_rx_debug",
+				"engines" :
+				[
+					"PDMA_2"
+				],
+				"channels" :
+				[
+					{
+						"index" : 4,
+						"priority" : 7,
+						"scheduler" :
+						{
+							"name": "compute_media_scheduler",
+							"group" : "PDMA_RX_DEBUG_GROUP"
+						}
+					}
+				]
+			},
+			{ "name" : "pdma_dev2dev_debug",
+				"engines" :
+				[
+					"PDMA_1"
+				],
+				"channels" :
+				[
+					{
+						"index" : 2,
+						"priority" : 7,
+						"scheduler" :
+						{
+							"name": "compute_media_scheduler",
+							"group" : "PDMA_DEV2DEV_DEBUG_GROUP"
+						}
+					}
+				]
+			},
+			{ "name" : "pdma_tx",
+				"engines" :
+				[
+					"PDMA_1"
+				],
+				"channels" :
+				[
+					{
+						"index" : 0,
+						"priority" : 7,
+						"scheduler" :
+						{
+							"name": "compute_media_scheduler",
+							"group" : "PDMA_TX_DATA_GROUP"
+						}
+					},
+					{
+						"index" : 1,
+						"priority" : 0,
+						"scheduler" :
+						{
+							"name": "compute_media_scheduler",
+							"group" : "PDMA_TX_CMD_GROUP"
+						}
+					}
+				]
+			}
+		]
+    },
+	{ "op": "replace", "path" : "/gaudi3/streams_sets",
+		"value" :
+		[
+			{ "name_prefix" : "compute",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 0,
+				"streams_nr" : 3,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "pdma_rx",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 3,
+				"streams_nr" : 3,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "pdma_tx",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 6,
+				"streams_nr" : 3,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "pdma_tx_commands",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 9,
+				"streams_nr" : 3,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "pdma_device2device",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 12,
+				"streams_nr" : 3,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "network_garbage_collector_and_reduction",
+				"scheduler" : "network_garbage_collector_and_reduction",
+				"base_idx" : 0,
+				"streams_nr" : 32,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleup_receive",
+				"scheduler" : "scaleup_receive",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleup_send",
+				"scheduler" : "scaleup_send",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleout_receive",
+				"scheduler" : "scaleout_receive",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleout_send",
+				"scheduler" : "scaleout_send",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			}
+		]
+	},
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/3/sos_pools", // sync_managers/3 is actually sync_manager's index 4
+    	"value":
+		[
+			{ "name": "long_sos", // 64 X 2 long sos - only the even ones are used (4 sos used, 4 sos alignment)
+				"base_index": 0,
+				"align" : 8,
+				"size": 512
+			},
+			{ "name": "host_fence_counters_sos",
+				"base_index": 512,
+				"size": 12 // 1 so per fence counter X 4 fence counters per stream X 3 streams
+			},
+			{ "name": "pdma_rx_completion_queue_tdr_sos",
+				"base_index": 635,
+				"size": 3
+			},
+			{ "name": "pdma_tx_completion_queue_tdr_sos",
+				"base_index": 638,
+				"size": 3
+			},
+			{ "name": "pdma_tx_commands_completion_queue_tdr_sos",
+				"base_index": 641,
+				"size": 3
+			},
+			{ "name": "pdma_device2device_completion_queue_tdr_sos",
+				"base_index": 644,
+				"size": 3
+			},
+			{ "name": "pdma_tx_queues_sos",
+				"base_index": 6144,
+				"size": 12 // 3 streams * depth 4
+			},
+			{ "name": "pdma_tx_commands_queues_sos",
+				"base_index": 6156,
+				"size": 12 // 3 streams * depth 4
+			},
+			{ "name": "pdma_rx_queues_sos",
+				"base_index": 6168,
+				"size": 12 // 3 streams  * depth 4
+			},
+			{ "name": "pdma_device2device_queues_sos",
+				"base_index": 6196,
+				"size": 12 // 3 streams * depth 4
+			}
+		]
+    },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/3/monitors_pools", // sync_managers/3 is actually sync_manager's index 4
+    	"value":
+		[
+			{ "name": "compute_gp_monitors", // track long sos, 1 long monitor per stream 68*4 (compute=12(3+3+3+3) network=56(32+12+12) must be on the same SM as completion_queues_long_so_pool
+				"base_index": 0,
+				"align" : 4,
+				"size": 272
+			},
+			{ "name": "network_long_monitors_0", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+				"base_index": 272,
+				"align" : 4,
+				"size": 128
+			},
+			{ "name": "network_long_monitors_1", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+				"base_index": 400,
+				"align" : 4,
+				"size": 128
+			},
+			{ "name": "network_long_monitors_2", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+				"base_index": 528,
+				"align" : 4,
+				"size": 128
+			},
+			{ "name": "network_long_monitors_3", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+				"base_index": 656,
+				"align" : 4,
+				"size": 128
+			},
+			{ "name": "host_fence_counters_monitors", // 3 monitors per frnce counter X 4 fence counters per stream X 3 streams
+				"base_index": 784,
+				"size": 36
+			},
+			{ "name": "pdma_tx_queue_monitors", // 3 cqs * 2 sets of 4 monitors
+				"base_index": 832,
+				"size": 24
+			},
+			{ "name": "pdma_tx_commands_queue_monitors", // 3 cqs * 2 sets of 4 monitors
+				"base_index": 856,
+				"size": 24
+			},
+			{ "name": "pdma_rx_queue_monitors", // 3 cqs * 2 sets of 4 monitors
+				"base_index": 880,
+				"size": 24
+			},
+			{ "name": "pdma_device2device_queue_monitors", // 3 cq * 2 sets of 4 monitors
+				"base_index": 904,
+				"size": 24
+			},
+			{ "name": "pdma_rx_completion_queue_tdr_monitors", // pdma_rx CQs (3) sets of 3 monitors - must be in the same SM as the CQ
+				"base_index": 928,
+				"size": 9
+			},
+			{ "name": "pdma_tx_completion_queue_tdr_monitors", // pdma_tx CQs (3) sets of 3 monitors - must be in the same SM as the CQ
+				"base_index": 937,
+				"size": 9
+			},
+			{ "name": "pdma_tx_commands_completion_queue_tdr_monitors", // pdma_tx commands CQs (3) sets of 3 monitors - must be in the same SM as the CQ
+				"base_index": 946,
+				"size": 9
+			},
+			{ "name": "pdma_device2device_completion_queue_tdr_monitors", // pdma_device2device CQs (3) sets of 3 monitors - must be in the same SM as the CQ
+				"base_index": 955,
+				"size": 9
+			}
+		]
+    },
+    { "op": "add", "path" : "/gaudi3/sync/sync_managers/3/completion_queues", // sync_managers/3 is actually sync_manager's index 4
+    	"value":
+		[
+			{ "name_prefix" : "pdma_rx_completion_queue",
+				"schedulers": ["compute_media_scheduler"],
+				"force_order": true,
+				"number_of_instances": 3,
+				"sos_pool": "pdma_rx_queues_sos",
+				"sos_depth": 4,
+				"monitors_pool": "pdma_rx_queue_monitors",
+				"monitors_depth": 2,
+				"tdr" : true
+			},
+			{ "name_prefix" : "pdma_tx_completion_queue",
+				"schedulers": ["compute_media_scheduler"],
+				"force_order": true,
+				"number_of_instances": 3,
+				"sos_pool": "pdma_tx_queues_sos",
+				"sos_depth": 4,
+				"monitors_pool": "pdma_tx_queue_monitors",
+				"monitors_depth": 2,
+				"tdr" : true
+			},
+			{ "name_prefix" : "pdma_tx_commands_completion_queue",
+				"schedulers": ["compute_media_scheduler"],
+				"force_order": true,
+				"number_of_instances": 3,
+				"sos_pool": "pdma_tx_commands_queues_sos",
+				"sos_depth": 4,
+				"monitors_pool": "pdma_tx_commands_queue_monitors",
+				"monitors_depth": 2,
+				"tdr" : true
+			},
+			{ "name_prefix" : "pdma_device2device_completion_queue",
+				"schedulers": ["compute_media_scheduler"],
+				"force_order": true,
+				"number_of_instances": 3,
+				"sos_pool": "pdma_device2device_queues_sos",
+				"sos_depth": 4,
+				"monitors_pool": "pdma_device2device_queue_monitors",
+				"monitors_depth": 2,
+				"tdr" : true
+			}
+		]
+    },
+    { "op": "remove", "path" : "/gaudi3/sync/direct_mode_pdma_channels_long_sos" }
+]

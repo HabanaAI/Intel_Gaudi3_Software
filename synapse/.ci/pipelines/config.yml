@@ -1,0 +1,28 @@
+config:
+  jobTimeout: '120'
+  sharedCCacheEnabled: true
+  gerritTriggerMap:
+  - repository: engines-arc
+  - repository: mme
+  - repository: irtsim
+  - repository: scal
+  - repository: synapse
+  - repository: mpm-test-data
+# SW-97555: To verify changes in 'templates/gerrit_patchset.xml'
+  - repository: software-repo
+    isStable: true
+    files:
+      - 'templates/gerrit_patchset.xml'
+  osBuild:
+    debian10.10: 'on'
+    tencentos3.1: 'on'
+  dependantComponents:
+    - component: hcl
+    - component: synapse_profiler
+    - component: synapse_utils
+    - component: pytorch_modules
+    - component: codec
+    - component: media
+    - component: SiVal
+    - component: SiVal2
+    - component: qual

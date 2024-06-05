@@ -1,0 +1,7 @@
+[
+    // TEMP WA for [H9-5532] On PLDM !
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/2/is_isr_enabled", "value": false}, // pdma_rx
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/3/is_isr_enabled", "value": false}, // pdma_tx
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/4/is_isr_enabled", "value": false}, // pdma_tx_commands
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/5/is_isr_enabled", "value": false}  // pdma_device2device
+]

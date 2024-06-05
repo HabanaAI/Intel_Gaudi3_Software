@@ -1,0 +1,17 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["resnet50_layer_2.0_conv2"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["dedx"]},
+    {"memsetVoidPixels":["true"]},
+    {"ySizes":["128", "28", "28", "1", "1"]},
+    {"wSizes":["128", "128", "3", "1", "1"]},
+    {"xSizes":["128", "140", "28", "1", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["5", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"convPattern":["skf"]},
+    {"geometry":["2xh"]}
+  ]]
+}

@@ -1,0 +1,28 @@
+op {
+  name: "Reshape"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+  input {
+    name: "The tensor to reshape"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  input {
+    name: "Shape tensor describing output"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  output {
+    name: "The reshaped tensor"
+    type: "T"
+    description: "Output tensor with the same type as input"
+  }
+  summary: "Reshapes the input tensor"
+  description: " This operation returns a new tensor that has the same values as input tensor in the same order, except with a new shape given by shape tensor."
+  constraints: ["The number of elements in the input and output tensor must be equal"
+                "int4 supported platform: Greco"]
+  guid: "reshape"
+}

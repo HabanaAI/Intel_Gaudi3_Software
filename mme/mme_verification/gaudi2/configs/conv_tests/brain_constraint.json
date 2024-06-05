@@ -1,0 +1,117 @@
+{
+  "programInSram":"true",
+  "tests":
+  [
+    [{"testName":["prefer 2xW geometry by default due to port constraint"]},
+      {"inTypeFloat":["bf16", "fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["256", "64", "8", "1", "1"]},
+      {"ySizes":["256", "64", "8", "1", "1"]},
+      {"wSizes":["256", "256", "8", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "2"}}
+    ],
+
+    [{"testName":["both operands non transposed, full constraint"]},
+      {"inTypeFloat":["bf16", "fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["atb"]},
+      {"xSizes":["1", "512", "8", "1", "1"]},
+      {"ySizes":["256", "1", "8", "1", "1"]},
+      {"wSizes":["256", "512", "8", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "2"}}
+    ],
+
+    [{"testName":["fp8 with non transposed A, doesnt support MME concurrency"]},
+      {"inTypeFloat":["fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["atb"]},
+      {"xSizes":["1", "512", "8", "1", "1"]},
+      {"ySizes":["256", "1", "8", "1", "1"]},
+      {"wSizes":["256", "512", "8", "1", "1"]},
+      {"geometry": ["4xw"]},
+      {"dedwPattern":["kfc"]},
+      {"optimizationTest": {"batchConcurrency": "2"}}
+    ],
+
+    [{"testName":["fp8 with non transposed B, doesnt support MME concurrency"]},
+      {"inTypeFloat":["fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["256", "256", "8", "1", "1"]},
+      {"ySizes":["20", "256", "8", "1", "1"]},
+      {"wSizes":["20", "256", "8", "1", "1"]},
+      {"geometry": ["4xh"]},
+      {"dedwPattern":["kfc"]},
+      {"optimizationTest": {"batchConcurrency": "2"}}
+    ],
+
+    [{"testName":["CD very small, no actual port constraint"]},
+      {"inTypeFloat":["bf16", "fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["20", "64", "8", "1", "1"]},
+      {"ySizes":["256", "64", "8", "1", "1"]},
+      {"wSizes":["256", "20", "8", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "4"}}
+    ],
+
+    [{"testName":["small spatial size, effectively no constraint"]},
+      {"inTypeFloat":["bf16", "fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["512", "1", "8", "1", "1"]},
+      {"ySizes":["256", "1", "8", "1", "1"]},
+      {"wSizes":["256", "512", "8", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "4"}}
+    ],
+
+    [{"testName":["small spatial size, effectively no constraint"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["abt"]},
+      {"xSizes":["256", "256", "8", "1", "1"]},
+      {"ySizes":["1", "256", "8", "1", "1"]},
+      {"wSizes":["256", "1", "8", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "4"}}
+    ],
+
+    [{"testName":["2 constrained steps vs 3 regular steps, constraint penalty higher than 50%"]},
+      {"inTypeFloat":["bf16", "fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["512", "40", "6", "1", "1"]},
+      {"ySizes":["256", "40", "6", "1", "1"]},
+      {"wSizes":["256", "512", "6", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "2"}}
+    ],
+
+    [{"testName":["2 constrained steps vs 3 regular steps, constraint penalty lower than 50%"]},
+      {"inTypeFloat":["bf16", "fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["512", "20", "6", "1", "1"]},
+      {"ySizes":["256", "20", "6", "1", "1"]},
+      {"wSizes":["256", "512", "6", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "4"}}
+    ],
+
+    [{"testName":["slightly reduced constraint"]},
+      {"inTypeFloat":["bf16", "fp8_152"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["512", "63", "8", "1", "1"]},
+      {"ySizes":["256", "63", "8", "1", "1"]},
+      {"wSizes":["256", "512", "8", "1", "1"]},
+      {"useBrain":["true"]},
+      {"optimizationTest": {"batchConcurrency": "4"}}
+    ]
+  ]
+}

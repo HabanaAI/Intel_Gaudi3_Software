@@ -1,0 +1,10 @@
+As we scale to further processors it becomes necessary to separate the project to common
+layer that has shared logic between chips, and Chip specification layer suppose to contain
+logic that is chip-specific.
+
+Each chip-specific logic must be accessed through its name space. For example:
+
+namespace eager_mode::gaudi2_spec_info
+{
+    . . .
+}

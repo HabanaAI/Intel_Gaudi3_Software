@@ -1,0 +1,22 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["conv_dedx_reduction"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16", "bf16", "fp32"]},
+    {"operation":["dedx"]},
+    {"ySizes":["128", "28", "28", "1", "1"]},
+    {"wSizes":["128", "128", "3", "3", "1"]},
+    {"xSizes":["128", "56", "56", "1", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"convPattern":["random"]},
+    {"geometry":["2xh"]},
+    {"yInSram":["random"]},
+    {"secondaryOutput": ["false"]},
+    {"memsetVoidPixels":["true"]},
+    {"memsetOutput":["false"]},
+    {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+    {"reductionRm":["random"]}
+  ]]
+}

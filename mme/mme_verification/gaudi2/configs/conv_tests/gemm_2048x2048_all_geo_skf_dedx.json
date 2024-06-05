@@ -1,0 +1,20 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["all_geometries_skf"]},
+    {"inTypeFloat":["fp16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["dedx"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["false"]},
+    {"xSizes":["512", "2048", "1", "1", "1"]},
+    {"wSizes":["2048", "512", "1", "1", "1"]},
+    {"ySizes":["2048", "2048", "1", "1", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"convPattern":["skf"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["4xh", "2xh", "2xw", "4xw"]}
+    ]]
+}

@@ -1,0 +1,23 @@
+op {
+  name: "Broadcast"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  input {
+    name: "The tensor to broadcast"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+  output {
+    name: "The broadcast tensor"
+    type: "T"
+    description: "Output tensor with the same type as input."
+  }
+  summary: "Makes input and output tensors have compatible shapes for arithmetic operations."
+  description: "Performs broadcasting in input, based on the broadcasting rules outlined in the ONNX spec: https://github.com/onnx/onnx/blob/rel-1.9.0/docs/Broadcasting.md"
+  constraints: ["All input/output tensors must be of the same datatype and they must have the same dimensionality except in broadcast support where the dimensionality can be different.",
+  "This operator is agnostic to the data layout."]
+  guid: "broadcast"
+}

@@ -1,0 +1,98 @@
+def stableBranch = GERRIT_BRANCH - '_next'
+def isPromote = env.IS_PROMOTE.toBoolean() || env.TRIGGER_BUILD.startsWith("Promote")
+src = library("pipeline-library@$stableBranch")
+
+def preBuildStages = [
+    'Run check_syn_singleton_interface': { util ->
+        if (env.GERRIT_PROJECT == 'synapse') {
+            util.runShellCommand('check_syn_singleton_interface')
+        } else {
+            println "Skipping check_syn_singleton_interface for non synapse project"
+        }
+    }
+]
+
+def buildCommands = [
+    'SCAL': 'build_scal',
+    'Engines FW': [
+        'command': 'build_engines_fw -noasic',
+        'overrideBuildFlags': '-r'],
+    'MME': 'build_mme',
+    'Synapse': 'build_synapse',
+]
+
+if (env.OS=='tencentos3.1') { // quick fix to cyclic dependency issue, TODO: remove after first promotion of hcl
+    buildCommands = [
+    'SCAL': 'build_scal',
+    'HCL': 'build_hcl -l',
+    'Engines FW': [
+        'command': 'build_engines_fw -noasic',
+        'overrideBuildFlags': '-r'],
+    'MME': 'build_mme',
+    'Synapse': 'build_synapse',
+    ]
+}
+
+def postBuildCommands =[
+    'Engines FW all bin': [
+        'command': 'build_engines_fw -c -r'
+    ]
+]
+
+def forcedPostBuildStages = [
+    'Build HCL': { util -> // SW-151610
+        if(env.GERRIT_PROJECT == 'engines-arc' && !isPromote) {
+            util.runBuildShell(
+                command: 'build_hcl'
+            )
+        }
+        else {
+            println "skip hcl compilation"
+        }
+    }
+]
+
+def buildDependencies = ['HL_THUNK', 'TPC_KERNELS', 'SWTOOLS_SDK', 'RDMA_CORE', 'HCL']
+if (env.OS=='tencentos3.1') { // quick fix to cyclic dependency issue, TODO: remove after first promotion of hcl {
+    buildDependencies -= 'HCL'
+}
+def testDependencies = ['AEON', 'CORAL_SIM', 'CODEC', 'COMPLEX_GUID', 'HABANA_REGS_CLI', 'HLML', 'TPC_LLVM', 'MEDIA', 'PYTORCH_MODULES', 'SYNAPSE_PROFILER', 'TPCSIM', 'TPC_FUSER', 'SYNAPSE_UTILS', 'SWTOOLS_SDK']
+
+def requiredArtifact = [
+    'AEON': ['shared', 'header'],
+    'CORAL_SIM': ['bin', 'test', 'util', 'shared', 'header', 'bin_nextgen', 'test_nextgen'],
+    'CODEC': ['static', 'shared', 'header'],
+    'COMPLEX_GUID': ['test', 'shared'],
+    'MEDIA': ['test', 'shared'],
+    'FFMPEG_FORK': ['shared'],
+    'HVL_MEDIA': ['shared'],
+    'SYNAPSE_PROFILER': ['bin', 'shared', 'test'],
+    'SWTOOLS_SDK': ['test', 'bin', 'shared'],
+    'SYNAPSE': ['test', 'shared'],
+    'HCL': ['test', 'shared'],
+    'SCAL': ['test', 'shared', 'header'],
+    'HL_THUNK': ['test', 'shared', 'header'],
+    'ENGINES_FW': ['test', 'shared', 'config', 'data'],
+    'ELFTOOLS': ['bin', 'shared'],
+    'TPC_KERNELS': ['test', 'shared', 'header'],
+    'TPCSIM': ['shared', 'header'],
+    'TPC_FUSER': ['bin', 'shared'],
+    'TPC_LLVM': ['bin', 'shared', 'header'],
+    'HABANA_REGS_CLI': ['bin'],
+    'PYTORCH': ['data', 'test', 'header'],
+    'OPEN_MPI': ['all'],
+    'SYNAPSE_UTILS' : ['bin', 'shared'],
+    'RDMA_CORE': ['test'],
+]
+
+genericBuilder(
+    src: src,
+    requiredArtifact: requiredArtifact,
+    preBuildStages: preBuildStages,
+    buildDependencies: buildDependencies,
+    buildCommands: buildCommands,
+    postBuildCommands: postBuildCommands,
+    forcedPostBuildStages: forcedPostBuildStages,
+    testDependencies: testDependencies,
+    manifest: manifest
+)

@@ -1,0 +1,22 @@
+{
+  "programInSram":"true",
+  "tests":[
+    [{"testName":["basic fwd with dilation & padding & strides"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["fwd"]},
+      {"lowerEn":["true"]},
+      {"xSizes":["65", "86", "10", "26", "1"]},
+      {"wSizes":["256", "65", "2", "1", "6"]},
+      {"ySizes":["256", "84", "10", "16", "1"]},
+      {"xStrides":["1", "66", "5676", "56760", "1475760"]},
+      {"wStrides":["1", "257", "16705", "33410", "33410"]},
+      {"yStrides":["1", "257", "21588", "215880", "3454080"]},
+      {"dilation":["2", "1", "2"]},
+      {"strides":["1", "1", "1"]},
+      {"padding":["1", "0", "0"]},
+      {"convPattern":["random"]},
+      {"geometry":["random"]}
+    ]
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "programInSram": "true",
+  "tests": [[{"testName": ["test conv"]},
+    {"inTypeFloat": ["fp8_152"]},
+    {"outTypeFloat": ["bf16"]},
+    {"fp8BiasIn": ["15"]},
+    {"fp8BiasOut": ["7"]},
+    {"operation": ["dedx"]},
+    {"signalMode": ["desc"]},
+    {"convPattern": ["skf"]},
+    {"dedwPattern": ["cfk"]},
+    {"geometry": ["4xh"]},
+    {"conversionRoundingMode": ["rhaz"]},
+    {"reluEn": ["false"]},
+    {"lowerEn": ["false"]},
+    {"unrollEn": ["false"]},
+    {"sbReuse": ["false"]},
+    {"xSizes": ["83","62","46","23","2"]},
+    {"wSizes": ["127","83","3","1","2"]},
+    {"ySizes": ["127","28","28","1","2"]},
+    {"strides": ["5","5","2"]},
+    {"dilation": ["7","6","1"]},
+    {"padding": ["1","5","2"]}
+  ]
+  ]
+}

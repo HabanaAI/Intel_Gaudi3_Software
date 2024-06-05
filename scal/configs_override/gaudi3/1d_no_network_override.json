@@ -1,0 +1,91 @@
+[
+    // change the pdma config to use 1 die config
+    { "op": "replace", "path" : "/gaudi3/pdma_channel_config/pdma_channel","value":"PDMA_1_2"},
+
+    // change the direct pdma channels to use 1 die config
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/0/engines", "value":["PDMA_1"]},            // 0 is pdma_rx_debug
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/0/channels/0/index","value": 5},            // set it on PDMA_1_5
+
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/1/channels/0/index","value": 2},            // 1 is pdma_dev2dev_debug, set it on PDMA_1_2
+
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/2/streams/0/engines","value":["PDMA_1_3"]}, // pdma_clusters 2 is pdma_rx
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/2/streams/1/engines","value":["PDMA_1_4"]}, // pdma_clusters 2 is pdma_rx
+    { "op": "remove",  "path" : "/gaudi3/pdma_clusters/2/streams/2" },                             // pdma_clusters 2 is pdma_rx
+
+    { "op": "remove",  "path" : "/gaudi3/pdma_clusters/3/streams/2" },                             // pdma_clusters 3 is pdma_tx, PDMA_1_0, PDMA_1_1
+
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/4/streams/0/engines","value":["PDMA_0_1"]}, // pdma_clusters 4 is pdma_tx_commands
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/4/streams/1/engines","value":["PDMA_0_2"]}, // pdma_clusters 4 is pdma_tx_commands
+    { "op": "remove",  "path" : "/gaudi3/pdma_clusters/4/streams/2" },                             // pdma_clusters 4 is pdma_tx_commands
+
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/5/streams/0/engines","value":["PDMA_0_4"]}, // pdma_clusters 5 is pdma_device2device
+    { "op": "replace", "path" : "/gaudi3/pdma_clusters/5/streams/1/engines","value":["PDMA_0_5"]}, // pdma_clusters 5 is pdma_device2device
+    { "op": "remove",  "path" : "/gaudi3/pdma_clusters/5/streams/2" },                             // pdma_clusters 5 is pdma_device2device
+
+    // change the engine clusters to use 1 die config
+    { "op": "replace",  "path" : "/gaudi3/cores/engine_clusters/4/engines",                        // 4 is rotator
+        "value":
+        [
+            "ROT_1_0",
+            "ROT_1_1",
+            "ROT_3_0"
+        ]
+    },
+    { "op": "remove",  "path" : "/gaudi3/cores/engine_clusters/3" },                               // 3 is network_edma_slave
+    { "op": "remove",  "path" : "/gaudi3/cores/engine_clusters/2" },                               // 2 is network_edma_0
+    { "op": "replace", "path" : "/gaudi3/cores/engine_clusters/1/engines",                         // 1 is mme
+        "value":
+        [
+            "MME_0",
+            "MME_1",
+            "MME_2",
+            "MME_3"
+        ]
+    },
+    { "op": "replace", "path" : "/gaudi3/cores/engine_clusters/0/engines",                         // 0 is compute_tpc
+        "value":
+        [
+            "TPC_0_0",
+            "TPC_2_0",
+            "TPC_1_0",
+            "TPC_3_0",
+            "TPC_0_1",
+            "TPC_2_1",
+            "TPC_1_1",
+            "TPC_3_1",
+            "TPC_0_2",
+            "TPC_2_2",
+            "TPC_1_2",
+            "TPC_3_2",
+            "TPC_0_3",
+            "TPC_2_3",
+            "TPC_1_3",
+            "TPC_3_3",
+            "TPC_0_4",
+            "TPC_2_4",
+            "TPC_1_4",
+            "TPC_3_4",
+            "TPC_0_5",
+            "TPC_2_5",
+            "TPC_1_5",
+            "TPC_3_5",
+            "TPC_0_6",
+            "TPC_2_6",
+            "TPC_1_6",
+            "TPC_3_6",
+            "TPC_0_7",
+            "TPC_2_7",
+            "TPC_1_7",
+            "TPC_3_7"
+        ]
+    },
+
+    // remove nic clusters since HCL not support single die mode
+    { "op": "remove", "path" : "/gaudi3/cores/nic_clusters" },
+
+    // change the sync managers to use 1 die config
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/10" },
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/9"  },
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/8"  },
+    { "op": "remove", "path" : "/gaudi3/sync/sync_managers/7"  }
+]

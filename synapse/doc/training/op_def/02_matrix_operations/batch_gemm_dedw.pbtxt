@@ -1,0 +1,63 @@
+op {
+  name: "Batch Gemm Dedw"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(float8), tensor(float16), tensor(tf32)"
+    description: "A 3D,4D or 5D tensor with elements of type specified in the definition. The first 2 dimensions are spatial, and the rest are batch."
+  }
+  type {
+    name: "S"
+    definition: "tensor(float32), tensor(bfloat16), tensor(float8), tensor(float16), tensor(tf32)"
+    description: "A 1D tensor with elements of type specified in the definition"
+  }
+  c_structure: "struct synGEMMParams;"
+  input {
+    name: "C_grad"
+    type: "T"
+    description: "The gradient output matrix."
+  }
+  input {
+    name: "A"
+    type: "T"
+    description: "First input matrix of the original GEMM."
+  }
+  input {
+    name: "bias"
+    type: "S"
+    description: "The bias to the operation. Optional and can be null."
+  }
+  output {
+    name: " B_grad"
+    type: "T"
+    description: "The gradient input matrix."
+  }
+  attr {
+    name: "transpose_a"
+    type: "bool"
+    description: "Transpose the first matrix."
+  }
+  attr {
+    name: "transpose_b"
+    type: "bool"
+    description: "Transpose the second matrix."
+  }
+  summary: "Performs a GEMM operation to compute the gradient of input B."
+  description: "This operation computes the derivative of the GEMM operation with respect to B (the second input in the original gemm operation) and performs: \n \math{eq1}\n\n "
+               "The first two dimensions are the gemm dimensions and the rest are the batch dimensions."
+               " For each batch dimension, the multiplied matrices are matched between the 2 inputs according to the batch dimension size: "
+               " In case the batch dimension size is equal between the inputs, the matrices are matched 1 to 1."
+               " In case one input batch dimension size is 1, and the other is N, the first input is broadcast N times to match the other input."
+  formula{
+     equation : "B_{grad} = (A^T x C_{grad}) + bias"
+     label : "eq1"
+  }
+  constraints: ["Gaudi supports only float32 and bfloat16 datatypes.",
+               "Attributes: if params is nullptr - default to transpose_a = true, transpose_b = false",
+               "if params are given - operands will be transposed according to params",
+               "All input tensors must be of the same datatype.",
+               "The output tensor must match the input data type (int / float), but may have different precision (8/16/32).",
+               "The input matrices spatial dimensions should have a common dimension with equal sizes, according to their transpose parameter.",
+               "The batch dimensions of the input matrices should either be equal to each other, or one of them should be 1, for each dimension.",
+               "The output batch dimensions must be equal to the max batch size of the inputs, for each dimension."]
+  guid: "batch_gemm_dedw"
+}

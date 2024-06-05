@@ -1,0 +1,33 @@
+op {
+  name: "Flatten"
+type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 2D, 3D, 4D, or 5D tensor with the elements of type specified in the definition."
+}
+type {
+    name: "U"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 1D, 2D, 3D, or 4D tensor with the elements of type specified in the definition."
+}
+
+input {
+    name: "Input_Tensor"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+output {
+    name: "Output_Tensor"
+    type: "U"
+    description: "Output_Tensor tensor is the output of the *Flatten* operation."
+}
+c_structure: "struct synFlattenParams;"
+attr {
+    name: "axis"
+    type: "unsigned int"
+    description: "The axis after which other dimensions are flattened"
+  }
+  summary: "This node creates a tensor of size *axis+1* from a tensor of size *D* by multipling dimensions after axis parameter, and making them a single dimension.\n"
+           "Example- input of sizes [128,256,12] flattened with *axis=0* expects output of sizes [128,3072]"
+  guid: "flatten"
+}

@@ -1,0 +1,24 @@
+{
+  "programInSram":"true",
+  "tests":[
+
+    [{"testName":["worker_0_conv1_dedw plain"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp32"]},
+    {"operation":["dedw"]},
+    {"lowerEn":["true"]},
+    {"unrollEn":["false"]},
+    {"dedw2x":["true"]},
+    {"sbReuse":["true"]},
+    {"signalMode":["once"]},
+    {"xSizes":["3", "224", "224", "64", "1"]},
+    {"ySizes":["64", "112", "112", "64", "1"]},
+    {"wSizes":["64", "3", "7", "7", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["2", "2", "1"]},
+    {"padding":["3", "3", "0"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["2xh"]}
+    ]
+  ]
+}

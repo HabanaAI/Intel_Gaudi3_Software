@@ -1,0 +1,62 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+    - repository: mme
+    - repository: 3rd-parties
+    - repository: swtools_sdk
+    - repository: specs
+    - repository: specs_h9
+  dependencies:
+    - CORAL_SIM
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - TPCSIM
+  config:
+    testCommand: run_mme_test
+    loadLKD: false
+    testXMLOutputKey: -x
+    releaseFlag: true
+testsMap:
+  Test_synapse_gaudi_sim_mme_tests:
+    preTestStages:
+      Build mme:
+        command:  build_mme -m -c -C gaudi -r
+    stages:
+      Run mme gaudi sim tests:
+        filter:  -c gaudi --seed 1 --regression
+  Test_synapse_gaudi2_sim_mme_tests:
+    builder: hcl-generic
+    preTestStages:
+      Build mme:
+        command:  build_mme -m -c -C gaudi2 -r
+    stages:
+      Run mme gaudi2 sim tests:
+        filter:  -c gaudi2 --regression --seed 1
+  Test_synapse_gaudi3_sim_mme_tests:
+    preTestStages:
+      Build mme:
+        command:  build_mme -m -c -C gaudi3 -r
+    stages:
+      Run mme gaudi3 sim tests:
+        filter:  -c gaudi3 --regression --seed 1
+  Test_synapse_gaudi2_sim_mme_sanity_tests:
+    preTestStages:
+      Build mme:
+        command:  build_mme -m -c -C gaudi2 -r
+    stages:
+      Run mme gaudi2 sim sanity tests:
+        filter:  -c gaudi2 --sanity --seed 1
+  Test_synapse_gaudi3_sim_mme_sanity_tests:
+    preTestStages:
+      Build mme:
+        command:  build_mme -m -c -C gaudi3 -r
+    stages:
+      Run mme gaudi3 sim sanity tests:
+        filter:  -c gaudi3 --sanity --seed 1

@@ -1,0 +1,5 @@
+SYNAPSE {
+    local: *protobuf*;
+           *archive_*;
+};
+

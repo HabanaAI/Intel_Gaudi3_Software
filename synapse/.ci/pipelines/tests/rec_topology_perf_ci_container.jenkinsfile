@@ -1,0 +1,207 @@
+/*
+ * This pipeline will run the Synapse perf job in the K8s container mode using CI Docker.
+
+*/
+
+STABLE_VERSION = "${GERRIT_BRANCH}" -"_next"
+src = library("pipeline-library@$STABLE_VERSION")
+
+def habanalabsConstants = src.ai.habanalabs.jenkins.Constants.new()  // constants shared library
+def habanalabsGerrit = src.ai.habanalabs.jenkins.Gerrit.new()  // gerrit shared library
+def manifestTools = src.ai.habanalabs.jenkins.ManifestTools.new() // manifest tools shared library
+
+Boolean isStaging = JOB_BASE_NAME.contains('staging_') ? true : false
+String stableBranch = STABLE_VERSION
+Boolean skipStaging = JOB_NAME.contains('staging_') ? true : false
+
+Integer testStatus = 0
+String hlctlExecutable = ""
+String timeStamp = new Date().format('HHmmssSSS')
+String podNamePrefix = "ci-tester"
+String podName = "${podNamePrefix}-${BUILD_ID}-${timeStamp}"
+String remoteLogPath = "/qa/logs_${JOB_BASE_NAME}"
+String logPath = "${remoteLogPath}/${BUILD_NUMBER}"
+String mpmDataPath = "/root/repos/mpm-test-data"
+String modelsTestsCmd = "models_tests_ci GERRIT_PATCHSET_REVISION OFF promotion ${GERRIT_BRANCH} ${env.DEVICE} ${mpmDataPath} PROMOTION"
+
+pipeline {
+    agent {
+        label 'launcher'
+    }
+    options {
+        timeout(time:JobTimeout, unit: 'MINUTES')
+        timestamps()
+        ansiColor('xterm')
+    }
+    environment {
+        // Below environment values will be used for the K8S yaml generation
+        jobName = "${JOB_BASE_NAME}"
+        logPath = "${logPath}"
+    }
+    stages {
+        stage('Initialize the workspace') {
+            steps {
+                script {
+                    deleteDir()
+                    artifactsFolder = "${WORKSPACE}/artifacts"
+                    sh "mkdir --parents ${logPath} ${artifactsFolder}"
+
+                    //Checkout infra code
+                    habanalabsGerrit.checkoutProject('jenkins_files', stableBranch)
+                    util = load 'jenkins_files/src/main/lib-functions.groovy'
+                    util.setBuildName(env.OS)
+                    if(isStaging) {
+                        env.GERRIT_BRANCH = stableBranch
+                        env.TRIGGER_BUILD = env.PROMOTE_BUILD_NAME
+                        env.TRIGGER_BUILD_NUMBER = getDependencyBuild(
+                            util: util,
+                            promoteBuildName: env.PROMOTE_BUILD_NAME
+                        )
+                    }
+                }
+            }
+        }
+        stage("Get the SHA IDs, Create K8s Yaml and Run model tests on K8S container") {
+            steps {
+                script {
+                    // Get the manifest file of the docker
+                    def manifestFile = getFileFromArtifactoryTarball(
+                        artServerUrl: "${habanalabsConstants.ARTIFACTORY_SERVER}",
+                        artRepoPath: "${habanalabsConstants.PRECOMMIT_ARTIFACTORY_REPO_PATH}/${TRIGGER_BUILD}",
+                        tarName: "${TRIGGER_BUILD}-${TRIGGER_BUILD_NUMBER}.tar.gz",
+                        fileName: "${TRIGGER_BUILD}-${TRIGGER_BUILD_NUMBER}.xml",
+                        targetDir: "${WORKSPACE}",
+                    )
+                    String data = readFile(manifestFile)
+                    Map projectsDetails = manifestTools.getProjects(data)
+
+                    // Get the SHA IDs of required components from the manifest
+                    env.driverRevision = projectsDetails['habanalabs'].revision
+                    env.automationRevision = projectsDetails['automation'].revision
+                    env.synapseRevision = projectsDetails['synapse'].revision
+                    env.nicKmdRevision = projectsDetails['nic_kmd'].revision
+
+                    // test timeout to be used the template file
+                    env.testTimeout = JobTimeout + 'm'
+
+                    // Get the K8S YAML template from Synapse Repo
+                    def templateYaml = "${WORKSPACE}/test.yaml"
+                    String yamlRev = synapseRevision
+                    if(isStaging) {
+                        yamlRev = GERRIT_PATCHSET_REVISION
+                    }
+                    def refYaml = habanalabsGerrit.getFileWithGitArchive(
+                        projectName: "synapse",
+                        branchName: "${yamlRev}",
+                        filePath: ".ci/pipelines/tests/k8s_templates/rec_topology_perf_CI_container_template.yaml"
+                    )
+                    writeFile file: templateYaml, text: refYaml
+
+                    // Replace the GERRIT_PATCHSET_REVISION with the correct revision in the test command
+                    modelsTestsCmd = modelsTestsCmd.replace('GERRIT_PATCHSET_REVISION', env.synapseRevision)
+                    String tarballUrl = "https://${habanalabsConstants.ARTIFACTORY_SERVER}/artifactory/${habanalabsConstants.PRECOMMIT_ARTIFACTORY_REPO_PATH}/${TRIGGER_BUILD}/${TRIGGER_BUILD}-${TRIGGER_BUILD_NUMBER}.tar.gz"
+
+                    env.testArgs = """
+                        apt update && apt install git-lfs chrpath -y;
+                        cd ${mpmDataPath} && git lfs pull && cd -;
+                        source \${WORKSPACE}/repos/jenkins_files/src/env/habana_ci_env \${WORKSPACE} \${WORKSPACE}/repos \${WORKSPACE}/builds;
+                        env bash \${WORKSPACE}/repos/jenkins_files/docker_ci_test/scripts/download_and_install_bins.sh --tarball_url "${tarballUrl}";
+                        ${modelsTestsCmd};
+                        cp \${WORKSPACE}/habana_logs/**/*.xml ${logPath}/;
+                    """.trim()
+
+                    // Generate the random number and use in the pod name for uniqueness
+                    randomNumber = sh(returnStdout: true, script: 'bash -c "echo \\$((RANDOM%9999+99))"').trim()
+                    podName = "${podName}-${randomNumber}"
+                    println("K8s pod name to be created is: ${podName}")
+                    def templateData = readYaml file: templateYaml
+                    podKind = templateData.kind.toLowerCase()
+
+                    def k8sYamlCreationStatus = sh (returnStatus: true, script: """
+                        python -c 'import os, yaml;yaml.dump(yaml.safe_load(os.path.expandvars(open("${templateYaml}").read())), open("${templateYaml}","w"))'
+                    """)
+
+                    if (k8sYamlCreationStatus == 0) {
+                        sh """
+                            set +x
+                            cp --recursive ${templateYaml} ${artifactsFolder}/
+                            echo '############################# Generated Yaml file ###############################'
+                            cat ${templateYaml}
+                        """
+                    } else {
+                        error "yaml generation failed"
+                    }
+
+                    // Download the hlctl executable
+                    int counter = 0
+                    int hlctlDownloadRetryCount = 5
+                    retry(hlctlDownloadRetryCount) {
+                        counter += 1
+                        try {
+                            println("Starting the hlctl download from the artifactory")
+                            sh(returnStdout: true, script:
+                            """#!/bin/bash -l
+                                set -x
+                                curl --silent --show-error https://artifactory-kfs.habana-labs.com:443/artifactory/k8s-infra-generic-dev-local/hlctl/download-latest.sh | bash
+                            """)
+                            sleep(time: 2, unit: "SECONDS")
+                        } catch (exp) {
+                            sleep(time: (counter * 10), unit: "SECONDS")
+                            error "${exp.toString()} !!!"
+                        }
+                    }
+                    hlctlExecutable = "${WORKSPACE}/hlctl"
+
+                    // Get the flavor map
+                    def deviceFlavor = habanalabsConstants.KV_DEVICE_CARDS_FLAVOR[env.DEVICE, env.CARDS_NUMBER.toInteger()]
+
+                    // Final hlctl trigger command
+                    def testCmd = "${hlctlExecutable} create containers -f ${templateYaml} --watch --flavor ${deviceFlavor} --namespace devops --name ${podName} --retry --priority high-automation"
+
+                    // Run the test and capture the exit status
+                    testStatus = sh (returnStatus: true, script:
+                    """#!/bin/bash -l
+                        set -ex
+                        echo "############################# Test execution started ###############################"
+                        ${testCmd}
+                    """)
+                    if (testStatus != 0) {
+                        currentBuild.result = habanalabsConstants.JENKINS_STATUS_UNSTABLE
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                // Copy and archive the test results and logs
+                sh (returnStatus: true, script: """#!/bin/bash
+                        cp --recursive ${logPath}/** ${artifactsFolder}/ || echo 'Nothing is found, hence copy result ignored'
+                    """)
+                dir(artifactsFolder) {
+                    archiveArtifacts artifacts: "**/*", fingerprint: true, allowEmptyArchive: true
+                    junit allowEmptyResults: true, testResults: '*.xml'
+                }
+                // Add k8s artifacts link in the test jobs
+                k8s_artifacts_path = "/sw-sg/k8s_artifacts/containers/${podName}-${podKind}/"
+                currentBuild.description = """
+                    <html>
+                        <body>
+                            <a href="https://logs-browser.k8s-infra.habana-labs.com/files/${podName}-${podKind}/" class="external-link" rel="nofollow">K8S Artifacts</a>
+                        </body>
+                    </html>
+                """
+                // Remove the pod
+                def cmd = "${hlctlExecutable} remove ${podName}-${podKind}"
+                sh (label:'Removing pod', returnStatus: true, script:
+                    """#!/bin/bash -l
+                        set -x
+                        ${cmd}
+                    """)
+                // clean the work space
+                cleanWs()
+            }
+        }
+    }
+}

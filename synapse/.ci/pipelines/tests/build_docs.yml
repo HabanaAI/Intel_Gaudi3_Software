@@ -1,0 +1,20 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: synapse
+  dependencies:
+  config:
+    testCommand: build_synapse
+    loadLKD: false
+    startSim: false
+    releaseFlag: true
+testsMap:
+  Test_synapse_cpu_build_docs:
+    config:
+    preTestStages:
+      Install Python dependencies:
+        command: |
+          pip install -r repos/synapse/doc/common/requirements.txt
+    stages:
+      Validate synapse docs:
+        filter: --doc pdf

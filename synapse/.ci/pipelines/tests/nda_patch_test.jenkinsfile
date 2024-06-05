@@ -1,0 +1,143 @@
+@Library('pipeline-library')
+import ai.habanalabs.jenkins.Gerrit
+import ai.habanalabs.jenkins.Constants
+
+def habanalabsGerrit = new Gerrit()  // gerrit shared library
+def habanalabsConstants = new Constants()  // constants shared library
+def healthTimeout = '60'
+def isStaging = JOB_BASE_NAME.contains('staging_') ? true : false
+def stableBranch = GERRIT_BRANCH - '_next'
+def skipStaging = JOB_NAME.contains('staging_') ? true : false
+def manifestName = "manifest_frozen_code.xml"
+def dependencies = ['RDMA_CORE']
+
+pipeline {
+    agent {
+        label 'build-generic'
+    }
+
+    options {
+        skipDefaultCheckout(true)
+        timeout(time:params.jobTimeout, unit: 'MINUTES')
+        ansiColor('xterm')
+        timestamps()
+    }
+
+    environment{
+        runInDocker = "false"
+    }
+
+    stages {
+        stage('checkout infra code') {
+            steps {
+                script {
+                    habanalabsGerrit.checkoutProject('automation', stableBranch)
+                    habanalabsGerrit.checkoutProject('jenkins_files', stableBranch)
+                    util = load 'jenkins_files/src/main/lib-functions.groovy'
+                }
+            }
+        }
+        stage('Init workspace') {
+            environment {
+                GIT_PRINT_SHA1_ELLIPSIS = 'yes'
+            }
+            steps {
+                script {
+                    util.setBuildName(env.OS)
+                    util.initWorkSpace()
+                    util.cleanBeforeCheckout(params.isResetBefore)
+                }
+            }
+        }
+        stage('Print Habana data') {
+            steps {
+                script {
+                    util.printHugePages()
+                    util.printHabanaRules()
+                }
+            }
+        }
+        stage('Download and Install build binaries and repo manifest'){
+            steps {
+                script {
+                    def extraPropertiesMap = ['OS':env.OS]
+                    gitVars()
+                    if(isStaging){
+                        env.GERRIT_BRANCH = stableBranch
+                        env.TRIGGER_BUILD = env.PROMOTE_BUILD_NAME
+                        env.TRIGGER_BUILD_NUMBER = getDependencyBuild(
+                            util: util,
+                            promoteBuildName: env.PROMOTE_BUILD_NAME
+                        )
+                    }
+                    if (env.TRIGGER_BUILD == "crossRepoBuild" || env.TRIGGER_BUILD.contains("Build_npu_stack_")) {  // backward compatibility
+                        util.installBuildDependecyWrapper(
+                            extraPropertiesMap: extraPropertiesMap,
+                            skipStaging:isStaging
+                        )
+                    } else {
+                        def tarballName = generateTarballName(
+                            'jobName': env.TRIGGER_BUILD,
+                            'buildNumber': env.TRIGGER_BUILD_NUMBER,
+                            'gitSHA': isStaging? null : env.GIT_REVISION
+                        )
+                        tarballName = "light_${tarballName}"
+                        util.installBuildDependecy(
+                            'GerritPatchSet',
+                            tarballName,
+                            "habanalabs-bin-local-precommit/${env.TRIGGER_BUILD}/",
+                            false,
+                            extraPropertiesMap
+                        )
+                        dependencies = readTestConfigyaml.adjustDependencies(dependencies)
+                    }
+                }
+            }
+        }
+        stage('Clean & Get repo') {
+            environment {
+                GIT_PRINT_SHA1_ELLIPSIS = 'yes'
+            }
+            steps {
+                script {
+                    util.checkoutRepoWrapper(params.isResetBefore, null, skipStaging, manifestName)
+                }
+            }
+        }
+        stage('Download test dependencies') {
+            steps {
+                script {
+                    if (dependencies && env.TRIGGER_BUILD != "crossRepoBuild" && !env.TRIGGER_BUILD.contains("Build_npu_stack_")) {
+                        getDependenciesArtifacts(
+                            utils: util,
+                            manifestName: manifestName,
+                            dependencies: dependencies,
+                            destinationDir: util.ARTIFACT_DOWNLOAD_DIR
+                        )
+                    }
+                }
+            }
+        }
+        stage('Apply patch') {
+            steps {
+                script {
+                    try {
+                        util.runShellCommand("cd ${util.SOURCE_DIR}/synapse && .cd/scripts/apply_external_graph_patch.sh ${util.SOURCE_DIR}")
+                    } catch(e) {
+                        unstable "Failed Apply NDA patch"
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                archiveArtifacts allowEmptyArchive: true, artifacts: "repos/synapse/*.rej"
+                util.printDmesg()
+                util.rebootStuckJslave()
+                util.printHugePages()
+            }
+        }
+    }
+}

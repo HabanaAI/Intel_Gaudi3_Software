@@ -1,0 +1,398 @@
+#!/bin/bash
+#
+# Copyright (C) 2016 HabanaLabs, Ltd.
+# All Rights Reserved.
+#
+# Unauthorized copying of this file, via any medium is strictly prohibited.
+# Proprietary and confidential.
+# Author: Oded Gabbay <ogabbay@gaudilabs.com>
+#
+
+_WORK="$1"
+_STACK="$2"
+_BUILD="$3"
+
+# In zsh shifting more parameters than provided results in an error
+if [[ "$#" > 3 ]]; then
+    shift 3
+else
+    shift $#
+fi
+if [ -n "$SET_ABSOLUTE_HABANA_ENV" ]
+then
+    export WORK_ROOT=$_WORK
+    export HABANA_SOFTWARE_STACK=$_STACK
+    export BUILD_ROOT=$_BUILD
+else
+    if [ -z "$_WORK" ] || [ -z "$_STACK" ] || [ -z "$_BUILD" ]
+    then
+        export WORK_ROOT=$HOME/trees
+        export HABANA_SOFTWARE_STACK=$WORK_ROOT/npu-stack
+        export BUILD_ROOT=$HOME/builds
+    else
+        export WORK_ROOT=$HOME/$_WORK
+        export HABANA_SOFTWARE_STACK=$WORK_ROOT/$_STACK
+        export BUILD_ROOT=$HOME/$_BUILD
+    fi
+fi
+
+export SUPPORTED_MPI_VERSION='4.1.2'
+export MPI_ROOT=/usr/local/share/openmpi
+export SOFTWARE_LFS_DATA=/git_lfs/data
+export SOFTWARE_DATA=/software/data
+export SOFTWARE_UTILS=/software/utils
+export HABANA_LOGS=$HOME/.habana_logs
+export THIRD_PARTIES_ROOT=$HABANA_SOFTWARE_STACK/3rd-parties
+export TPC_LLVM_ROOT=$HABANA_SOFTWARE_STACK/tpc_llvm10/llvm
+export TPC_LLVM10_ROOT=$HABANA_SOFTWARE_STACK/tpc_llvm10/llvm
+export TPC_LLVM10_RT_ROOT=$HABANA_SOFTWARE_STACK/tpc_llvm10/clang/test/RC99/tpc_llvm_tests/lit-test-rt
+export TPC_TOOLS_ROOT=$HABANA_SOFTWARE_STACK/tpc_llvm10/tpc_tools
+export TPC_KERNELS_ROOT=$HABANA_SOFTWARE_STACK/tpc_kernels
+export TPC_SHARED_LAYER_ROOT=$TPC_KERNELS_ROOT/shared_layer
+export TPC_SCALAR_KERNELS_ROOT=$HABANA_SOFTWARE_STACK/tpc_scalar_kernels
+export TPC_FUSER_ROOT=$HABANA_SOFTWARE_STACK/tpc_fuser
+export TPC_MLIR_ROOT=$HABANA_SOFTWARE_STACK/tpc_mlir
+export TPC_SCALAR_ROOT=$HABANA_SOFTWARE_STACK/tpc_scalar
+export CMAKE_ROOT=$HABANA_SOFTWARE_STACK/3rd-parties/cmake
+export EMBEDDED_ROOT=$HABANA_SOFTWARE_STACK/embedded
+export BUILDROOT_ROOT=$EMBEDDED_ROOT/buildroot-external
+export MPM_TEST_DATA_ROOT=$HABANA_SOFTWARE_STACK/mpm-test-data
+export SYNAPSE_ROOT=$HABANA_SOFTWARE_STACK/synapse
+export SYNAPSE_MLIR_ROOT=$HABANA_SOFTWARE_STACK/synapse_mlir
+export SYNAPSE_PROFILER_ROOT=$HABANA_SOFTWARE_STACK/synapse_profiler
+export SYNAPSE_UTILS_ROOT=$HABANA_SOFTWARE_STACK/synapse_utils
+export SYNREC_ROOT=$HABANA_SOFTWARE_STACK/synrec
+export MME_ROOT=$HABANA_SOFTWARE_STACK/mme
+export HCL_ROOT=$HABANA_SOFTWARE_STACK/hcl
+export OFI_WRAPPER_ROOT=$HABANA_SOFTWARE_STACK/hcl/hccl_ofi_wrapper
+export HCL_TESTS_ROOT=$HCL_ROOT/tests
+export SPDLOG_ROOT=$THIRD_PARTIES_ROOT/spdlog/include
+export SPDLOG_1_10_0_ROOT=$THIRD_PARTIES_ROOT/spdlog-1.10.0/include
+export HABANALABS_ROOT=$HABANA_SOFTWARE_STACK/habanalabs
+export NIC_KMD_ROOT=$HABANA_SOFTWARE_STACK/nic_kmd
+export HLTHUNK_ROOT=$HABANA_SOFTWARE_STACK/hl-thunk
+export SIVAL_ROOT=$HABANA_SOFTWARE_STACK/sival/host
+export SIVAL2_ROOT=$HABANA_SOFTWARE_STACK/sival/host2
+export HABANA_REGS_CLI_ROOT=$HABANA_SOFTWARE_STACK/habana_regs_cli
+export ARMCP_REGS_CLI_ROOT=$EMBEDDED_ROOT/armcp_regs_cli
+export ARMCP_ROOT=$EMBEDDED_ROOT/armcp
+export HABANA_PY_ROOT=$HABANA_SOFTWARE_STACK/habana_py
+export GC_TOOLS_ROOT=$HABANA_SOFTWARE_STACK/gc_tools
+export HCL_TOOLS_ROOT=$GC_TOOLS_ROOT/hcl
+export TFTF_TOOLS_ROOT=$GC_TOOLS_ROOT/tftf
+export HABANA_PY_QA_ROOT=$HABANA_SOFTWARE_STACK/habanaqa
+export HABANA_QA_INFERENCE_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_inference/
+export HABANAQA_CORE_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_core
+export EXAMPLES_ROOT=$HABANA_SOFTWARE_STACK/examples
+export HABANA_QA_SYNAPSE_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_synapse
+export HABANA_QA_HCCL_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_hccl
+export HABANA_QA_UTILS_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_utils
+export SYNAPSE_GC_TPC_TESTS_ROOT=$HABANA_SOFTWARE_STACK/synapse-gc-tpc-tests
+export PYTORCH_TESTS_ROOT=$HABANA_SOFTWARE_STACK/pytorch-training-tests
+export PYTORCH_FEATURE_VAL_ROOT=$PYTORCH_TESTS_ROOT/tests/torch_feature_val
+export HABANA_PYTORCH_QA_ROOT=$PYTORCH_TESTS_ROOT/tests/torch_training_tests/
+export SPECS_ROOT=$HABANA_SOFTWARE_STACK/specs
+export SPECS_ROOT_H9=$HABANA_SOFTWARE_STACK/specs_h9
+export SPECS_ROOT_H15=$HABANA_SOFTWARE_STACK/specs_h15
+export SPECS_EXT_ROOT=$HABANA_SOFTWARE_STACK/specs_external
+export SPECS_EMBEDDED_ROOT=$EMBEDDED_ROOT/specs
+export UBOOT_ROOT=$EMBEDDED_ROOT/u-boot
+export HL_LINUX_ROOT=$EMBEDDED_ROOT/linux
+export ZEPHYR_ROOT=$EMBEDDED_ROOT/zephyr
+export ZEPHYR_PLUGINS=$EMBEDDED_ROOT/zephyr-plugins
+export ZEPHYR_MODULES_ROOT=$EMBEDDED_ROOT/zephyr-modules
+export HABANA_FW_LOC=/lib/firmware/habanalabs
+export HABANA_LIBS_LOC=/usr/lib/habanalabs
+export HABANA_HEADERS_LOC=/usr/include/habanalabs
+export FUNC_SIM5_ROOT=$HABANA_SOFTWARE_STACK/func-sim5
+export FUNC_SIM6_ROOT=$HABANA_SOFTWARE_STACK/func-sim6
+export CORAL_SIM_ROOT=$HABANA_SOFTWARE_STACK/coral-sim
+export SPARTA_ROOT=$HABANA_SOFTWARE_STACK/sparta
+export SPARTA_CONDA_PATH=/opt/anaconda3
+export QMAN_FW_ROOT=$HABANA_SOFTWARE_STACK/qman_fw
+export ENGINES_FW_ROOT=$HABANA_SOFTWARE_STACK/qman_fw/engines-arc
+export ENGINES_FW_HLTHUNK_ROOT=$HLTHUNK_ROOT/tests/engines-arc
+export TPCSIM_ROOT=$HABANA_SOFTWARE_STACK/func-sim/agents/tpc
+export MMESIM_ROOT=$HABANA_SOFTWARE_STACK/func-sim/agents/mme
+export SOFTWARE_ROOT=$HABANA_SOFTWARE_STACK/software
+export GPIO_MDIO_ROOT=$EMBEDDED_ROOT/mdio_kernel_driver.rpi
+export WEIGHT_LIB_ROOT=$HABANA_SOFTWARE_STACK/weight_compression
+export TF_MODULES_ROOT=$HABANA_SOFTWARE_STACK/tensorflow-training
+export TF_TESTS_ROOT=$HABANA_SOFTWARE_STACK/tensorflow-training-tests
+export TF_ONNX_ROOT=$HABANA_SOFTWARE_STACK/tensorflow-onnx
+export QUAL_ROOT=$HABANA_SOFTWARE_STACK/qual
+export DEMOS_ROOT=$HABANA_SOFTWARE_STACK/demos
+export HABANA_TFRT_ROOT=$HABANA_SOFTWARE_STACK/tensorflow-runtime/habanaop
+export BUILD_ROOT_DEBUG=$BUILD_ROOT/debug
+export BUILD_ROOT_RELEASE=$BUILD_ROOT/release
+export BUILD_ROOT_LATEST=$BUILD_ROOT/latest
+export SYNAPSE_RELEASE_BUILD=$BUILD_ROOT/synapse_release_build
+export SYNAPSE_DEBUG_BUILD=$BUILD_ROOT/synapse_debug_build
+export SYNAPSE_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/synapse_debug_sanitizer_build
+export SYNAPSE_MLIR_RELEASE_BUILD=$BUILD_ROOT/synapse_mlir_release_build
+export SYNAPSE_MLIR_DEBUG_BUILD=$BUILD_ROOT/synapse_mlir_debug_build
+export SYNAPSE_PROFILER_RELEASE_BUILD=$BUILD_ROOT/synapse_profiler_release_build
+export SYNAPSE_PROFILER_DEBUG_BUILD=$BUILD_ROOT/synapse_profiler_debug_build
+export SYNAPSE_UTILS_RELEASE_BUILD=$BUILD_ROOT/synapse_utils_release_build
+export SYNAPSE_UTILS_DEBUG_BUILD=$BUILD_ROOT/synapse_utils_debug_build
+export SYNAPSE_UTILS_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/synapse_utils_debug_sanitizer_build
+export HABANA_PLUGINS_LIB_PATH=$BUILD_ROOT/habana_plugins
+export MME_RELEASE_BUILD=$BUILD_ROOT/mme_release_build
+export MME_DEBUG_BUILD=$BUILD_ROOT/mme_debug_build
+export MME_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/mme_debug_sanitizer_build
+export HCL_RELEASE_BUILD=$BUILD_ROOT/hcl_release_build
+export HCL_DEBUG_BUILD=$BUILD_ROOT/hcl_debug_build
+export HCL_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/hcl_debug_sanitizer_build
+export OFI_WRAPPER_RELEASE_BUILD=$BUILD_ROOT/ofi_wrapper_release_build
+export OFI_WRAPPER_DEBUG_BUILD=$BUILD_ROOT/ofi_wrapper_debug_build
+export AEON_ROOT=$HABANA_SOFTWARE_STACK/aeon
+export AEON_RELEASE_BUILD=$BUILD_ROOT/aeon_release_build
+export AEON_DEBUG_BUILD=$BUILD_ROOT/aeon_debug_build
+export DATA_LOADER_AEON_LIB_PATH=$AEON_RELEASE_BUILD/lib/libaeon.so
+export TPCSIM_RELEASE_BUILD=$BUILD_ROOT/tpcsim_release_build
+export TPCSIM_DEBUG_BUILD=$BUILD_ROOT/tpcsim_debug_build
+export FW_DOC_BUILD=$BUILD_ROOT/framework_integration_docs
+export FW_DOC_ROOT=$TF_MODULES_ROOT/docs
+export FUNC_SIM_BOOST_BUILD=$BUILD_ROOT/func_sim_boost_build
+export FUNC_SIM5_RELEASE_BUILD=$BUILD_ROOT/func_sim5_release_build
+export FUNC_SIM5_DEBUG_BUILD=$BUILD_ROOT/func_sim5_debug_build
+export FUNC_SIM6_RELEASE_BUILD=$BUILD_ROOT/func_sim6_release_build
+export FUNC_SIM6_DEBUG_BUILD=$BUILD_ROOT/func_sim6_debug_build
+export CORAL_SIM_RELEASE_BUILD=$BUILD_ROOT/coral_sim_release_build
+export CORAL_SIM_DEBUG_BUILD=$BUILD_ROOT/coral_sim_debug_build
+export CORAL_SIM_COMMON_BUILD=$BUILD_ROOT/coral_sim_common_build
+export ENGINES_FW_RELEASE_BUILD=$BUILD_ROOT/engines_fw_release_build
+export ENGINES_FW_DEBUG_BUILD=$BUILD_ROOT/engines_fw_debug_build
+export TPC_LLVM_INSTALL_BUILD=$BUILD_ROOT/tpc_llvm_install
+export TPC_LLVM_RELEASE_BUILD=$BUILD_ROOT/tpc_llvm_release_build
+export TPC_LLVM_DEBUG_BUILD=$BUILD_ROOT/tpc_llvm_debug_build
+export TPC_LLVM10_RELEASE_BUILD=$BUILD_ROOT/tpc_llvm_release_build
+export TPC_LLVM10_DEBUG_BUILD=$BUILD_ROOT/tpc_llvm_debug_build
+export TPC_TOOLS_RELEASE_BUILD=$BUILD_ROOT/tpc_tools_release_build
+export TPC_TOOLS_DEBUG_BUILD=$BUILD_ROOT/tpc_tools_debug_build
+export TPC_KERNELS_RELEASE_BUILD=$BUILD_ROOT/tpc_kernels_release_build
+export TPC_SHARED_LAYER_RELEASE_BUILD=$TPC_KERNELS_RELEASE_BUILD/shared_layer_release_build
+export TPC_KERNELS_DEBUG_BUILD=$BUILD_ROOT/tpc_kernels_debug_build
+export TPC_SHARED_LAYER_DEBUG_BUILD=$TPC_KERNELS_DEBUG_BUILD/shared_layer_debug_build
+export TPC_SCALAR_KERNELS_RELEASE_BUILD=$BUILD_ROOT/tpc_scalar_kernels_release_build
+export TPC_SCALAR_KERNELS_DEBUG_BUILD=$BUILD_ROOT/tpc_scalar_kernels_debug_build
+export TPC_FUSER_RELEASE_BUILD=$BUILD_ROOT/tpc_fuser_release_build
+export TPC_FUSER_DEBUG_BUILD=$BUILD_ROOT/tpc_fuser_debug_build
+export TPC_FUSER_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/tpc_fuser_debug_sanitizer_build
+export TPC_MLIR_RELEASE_BUILD=$BUILD_ROOT/tpc_mlir_release_build
+export TPC_MLIR_DEBUG_BUILD=$BUILD_ROOT/tpc_mlir_debug_build
+export TPC_SCALAR_RELEASE_BUILD=$BUILD_ROOT/tpc_scalar_release_build
+export TPC_SCALAR_DEBUG_BUILD=$BUILD_ROOT/tpc_scalar_debug_build
+export TPC_MLIR_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/tpc_mlir_debug_sanitizer_build
+export WEIGHT_LIB_DEBUG_BUILD=$BUILD_ROOT/weight_compression_debug_build
+export WEIGHT_LIB_RELEASE_BUILD=$BUILD_ROOT/weight_compression_release_build
+export ARMCP_RELEASE_BUILD=$BUILD_ROOT/armcp_release_build
+export ARMCP_DEBUG_BUILD=$BUILD_ROOT/armcp_debug_build
+export GPIO_BUILD=$BUILD_ROOT/gpio_build
+export HABANALABS_BUILD=$BUILD_ROOT/habanalabs_build
+export NIC_KMD_BUILD=$BUILD_ROOT/nic_kmd_build
+export HLTHUNK_RELEASE_BUILD=$BUILD_ROOT/hlthunk_release_build
+export HLTHUNK_DEBUG_BUILD=$BUILD_ROOT/hlthunk_debug_build
+export HLTHUNK_RELEASE_BIN=$HLTHUNK_RELEASE_BUILD/bin
+export HLTHUNK_DEBUG_BIN=$HLTHUNK_DEBUG_BUILD/bin
+export HLTHUNK_RELEASE_LIB=$HLTHUNK_RELEASE_BUILD/lib
+export HLTHUNK_DEBUG_LIB=$HLTHUNK_DEBUG_BUILD/lib
+export RDMA_CORE_ROOT=$HABANA_SOFTWARE_STACK/rdma-core
+export RDMA_CORE_BIN=$RDMA_CORE_ROOT/build/bin
+export RDMA_CORE_LIB=$RDMA_CORE_ROOT/build/lib
+export SIVAL_RELEASE_BUILD=$BUILD_ROOT/sival_release_build
+export SIVAL_DEBUG_BUILD=$BUILD_ROOT/sival_debug_build
+export SIVAL2_RELEASE_BUILD=$BUILD_ROOT/sival2_release_build
+export SIVAL2_DEBUG_BUILD=$BUILD_ROOT/sival2_debug_build
+export HABANA_REGS_CLI_BUILD=$BUILD_ROOT/habana_regs_cli_build
+export ARMCP_REGS_CLI_BUILD=$BUILD_ROOT/armcp_regs_cli_build
+export EMBEDDED_TOOLS_RELEASE_BUILD=$BUILD_ROOT/embedded_tools_release_build
+export EMBEDDED_TOOLS_DEBUG_BUILD=$BUILD_ROOT/embedded_tools_debug_build
+export HABANA_FW_CLEANUP_BUILD=$BUILD_ROOT/habana_fw
+export TF_MODULES_RELEASE_BUILD=$BUILD_ROOT/tf_modules_release_build
+export TF_MODULES_DEBUG_BUILD=$BUILD_ROOT/tf_modules_debug_build
+export HOROVOD_BUILD=$BUILD_ROOT/horovod_build
+export HOROVOD_ROOT=$HABANA_SOFTWARE_STACK/horovod-fork
+export HABANA_TFRT_DEBUG_BUILD=$BUILD_ROOT/habana_tfrt_debug_build
+export HABANA_TFRT_RELEASE_BUILD=$BUILD_ROOT/habana_tfrt_release_build
+export AUTOMATION_ROOT=$HABANA_SOFTWARE_STACK/automation
+export HABANA_SCRIPTS_FOLDER=$AUTOMATION_ROOT/habana_scripts
+export TPC_COMPILER_PATH=$TPC_LLVM_RELEASE_BUILD/bin
+export TPC_COMPILER_OPTS=-O2
+export GOPATH=$THIRD_PARTIES_ROOT/gowork
+export SYNAPSE_TESTS_PATH=${SYNAPSE_RELEASE_BUILD}/bin/synapse_tests
+export RESNET_DATA_PATH=$SOFTWARE_LFS_DATA/synapse/tests/inference/resnet50_data
+export GC_KERNEL_ROOT=$TPC_KERNELS_RELEASE_BUILD/src
+export GC_KERNEL_PATH_FOR_FUSER_TEST=$GC_KERNEL_ROOT/libtpc_kernels.so
+export GC_KERNEL_PATH=$GC_KERNEL_ROOT/libtpc_kernels.so
+export MODEL_GARDEN_ROOT=$HABANA_SOFTWARE_STACK/model_garden
+export MODEL_GARDEN_ROOT_INTERNAL=$HABANA_SOFTWARE_STACK/model_garden/internal
+export MODEL_GARDEN_PYTORCH_PATH=$MODEL_GARDEN_ROOT/PyTorch
+export LIBFABRIC_ROOT=$HOME/.libfabric
+export LIBFABRIC_BUILD=$BUILD_ROOT/libfabric_build
+export MODEL_GARDEN_TENSORFLOW_PATH=$MODEL_GARDEN_ROOT/TensorFlow
+export MODELS_ORANGE_ROOT=$HABANA_SOFTWARE_STACK/models-orange
+export MLPERF_INFERENCE_ROOT=$HABANA_SOFTWARE_STACK/mlperf_inference
+export EVENT_TESTS_PLUGIN_ROOT=$HABANA_SOFTWARE_STACK/event_tests_plugin
+export PYTHONPATH=$HABANA_SOFTWARE_STACK:$HABANA_QA_UTILS_ROOT:$EVENT_TESTS_PLUGIN_ROOT:$HABANA_PY_ROOT/habana:$HABANA_PY_QA_ROOT:$TPC_FUSER_ROOT/python/:$TF_MODULES_ROOT:$TF_MODULES_ROOT/python/:$HOROVOD_BUILD:$HABANA_REGS_CLI_ROOT:$SYNAPSE_PROFILER_ROOT/profiler_py:$MODEL_GARDEN_ROOT:$MODEL_GARDEN_ROOT_INTERNAL:$MODELS_ORANGE_ROOT:$GC_TOOLS_ROOT:$TF_TESTS_ROOT:${TPC_SCALAR_RELEASE_BUILD}/llvm/python:$TPC_SCALAR_KERNELS_ROOT/kernels/common:$TPC_SCALAR_KERNELS_ROOT/tests/scalar_test_core:$BUILD_ROOT_LATEST:$PYTHONPATH
+export LD_LIBRARY_PATH=$LIBFABRIC_ROOT/lib:$MPI_ROOT/lib:$HOME/.local/lib:$BUILD_ROOT_LATEST${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+export PATH=$HOROVOD_BUILD/scripts/:$MPI_ROOT/bin/:$HOME/.local/bin/:$BUILD_ROOT_LATEST:$LIBFABRIC_ROOT/bin/:$PATH
+export TPC_KERNELS_TEST_DATA=$SOFTWARE_DATA/tpc_kernels
+export HABANA_PY_OP_PLUGINS=$HABANA_PY_ROOT/plugins
+export DEBUG_TOOLS=$HABANA_PY_ROOT/debug_tools
+export TOPOLOGY_DEBUGGER=$GC_TOOLS_ROOT/topology_debugger
+export TOPOLOGY_DEBUGGER_PROTO=$TOPOLOGY_DEBUGGER/protobuf
+export HABANA_REPO_URL=ssh://gerrit:29418/software-repo
+export NPU_SDK_ROOT=$HABANA_SOFTWARE_STACK/npu-sdk
+export ABSEIL_CPP_INCLUDE_DIR=$THIRD_PARTIES_ROOT/abseil-cpp
+export QUAL_RELEASE_BUILD_GOYA=$BUILD_ROOT/qual_release_build/goya
+export QUAL_DEBUG_BUILD_GOYA=$BUILD_ROOT/qual_debug_build/goya
+export QUAL_RELEASE_BUILD_GAUDI=$BUILD_ROOT/qual_release_build/gaudi
+export QUAL_DEBUG_BUILD_GAUDI=$BUILD_ROOT/qual_debug_build/gaudi
+export QUAL_RELEASE_BUILD_GAUDI2=$BUILD_ROOT/qual_release_build/gaudi2
+export QUAL_DEBUG_BUILD_GAUDI2=$BUILD_ROOT/qual_debug_build/gaudi2
+export QUAL_RELEASE_BUILD_GAUDI3=$BUILD_ROOT/qual_release_build/gaudi3
+export QUAL_DEBUG_BUILD_GAUDI3=$BUILD_ROOT/qual_debug_build/gaudi3
+export QUAL_RELEASE_BUILD_GRECO=$BUILD_ROOT/qual_release_build/greco
+export QUAL_DEBUG_BUILD_GRECO=$BUILD_ROOT/qual_debug_build/greco
+export HABANA_IR_DEBUG_BUILD=$BUILD_ROOT/habana_ir_debug_build
+export HABANA_IR_RELEASE_BUILD=$BUILD_ROOT/habana_ir_release_build
+export HABANA_IR_ROOT=$HABANA_SOFTWARE_STACK/habana_ir
+export RESNET_RELEASE_BUILD_GAUDI=$BUILD_ROOT/gaudi_demo_release_build
+export RESNET_DEBUG_BUILD_GAUDI=$BUILD_ROOT/gaudi_demo_debug_build
+export HABANA_PY_FILES=$BUILD_ROOT/habana_py_files
+export HABANA_PY_DYN_RANGE_FILES=$HABANA_PY_FILES/tests_dyn_range
+export HABANA_PY_TESTS=$HABANA_PY_ROOT/habana/tests
+export MEDIA_ROOT=$HABANA_SOFTWARE_STACK/media
+export MEDIA_RELEASE_BUILD=$BUILD_ROOT/media_release_build
+export MEDIA_DEBUG_BUILD=$BUILD_ROOT/media_debug_build
+export MULTINODE_TESTS_ROOT=$HABANA_SOFTWARE_STACK/multinode-tests
+export SCAL_ROOT=$HABANA_SOFTWARE_STACK/scal
+export SCAL_TEST_CFG_DIR_PATH=$SCAL_ROOT/configs
+export SCAL_RELEASE_BUILD=$BUILD_ROOT/scal_release_build
+export SCAL_DEBUG_BUILD=$BUILD_ROOT/scal_debug_build
+export SCAL_COMMON_BUILD=$BUILD_ROOT/scal_common_build
+export SCAL_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/scal_debug_sanitizer_build
+export HABANAQA_FRAMEWORK_FEATURES_TESTS_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_framework_features
+export HABANAQA_MEDIA_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_media
+export HABANAQA_SYNAPSE_FEATURES_ROOT=$HABANA_SOFTWARE_STACK/habanaqa_synapse_features
+export GPU_MIGRATION_ROOT_PATH=$HABANA_SOFTWARE_STACK/huda
+export GPU_MIGRATION_RELEASE_BUILD=$BUILD_ROOT/gpu_migration_release_build
+export PYTORCH_MODULES_ROOT_PATH=$HABANA_SOFTWARE_STACK/pytorch-integration
+export PYTORCH_FORK_ROOT=$HABANA_SOFTWARE_STACK/pytorch-fork
+export PYTORCH_NEXT_ROOT=$HABANA_SOFTWARE_STACK/pytorch-next
+export PYTORCH_LIGHTNING_FORK_ROOT=$HABANA_SOFTWARE_STACK/pytorch-lightning-fork
+export LIGHTNING_HABANA_FORK_ROOT=$HABANA_SOFTWARE_STACK/lightning-habana-fork
+export HABANA_LIGHTNING_PLUGINS_ROOT=$HABANA_SOFTWARE_STACK/Habana-Lightning-Plugins
+export PYTORCH_VISION_FORK_ROOT=$HABANA_SOFTWARE_STACK/pytorch-vision-fork
+export PYTORCH_HMP_ROOT=$HABANA_SOFTWARE_STACK/pytorch-integration/pytorch_helpers/hmp
+export PYTORCH_EXTENSIONS_ROOT=$PYTORCH_MODULES_ROOT_PATH/habana_kernels/pytorch-extensions
+export PYTORCH_MODULES_RELEASE_BUILD=$BUILD_ROOT/pytorch_modules_release_build
+export PYTORCH_MODULES_DEBUG_BUILD=$BUILD_ROOT/pytorch_modules_debug_build
+export PYTORCH_FORK_RELEASE_BUILD=$BUILD_ROOT/pytorch_fork_release_build
+export PYTORCH_FORK_DEBUG_BUILD=$BUILD_ROOT/pytorch_fork_debug_build
+export PYTORCH_LIGHTNING_FORK_BUILD=$BUILD_ROOT/pytorch_lightning_fork_build
+export LIGHTNING_HABANA_FORK_BUILD=$BUILD_ROOT/lightning_habana_fork_build
+export HABANA_LIGHTNING_PLUGINS_BUILD=$BUILD_ROOT/habana_lightning_plugins_build
+export PYTORCH_VISION_FORK_BUILD=$BUILD_ROOT/pytorch_vision_fork_build
+export PYTORCH_DATA_ROOT=$HABANA_SOFTWARE_STACK/pytorch-data
+export PYTORCH_DATA_BUILD=$BUILD_ROOT/pytorch_data_build
+export PYTORCH_TEXT_ROOT=$HABANA_SOFTWARE_STACK/pytorch-text
+export PYTORCH_TEXT_BUILD=$BUILD_ROOT/pytorch_text_build
+export PYTORCH_AUDIO_ROOT=$HABANA_SOFTWARE_STACK/pytorch-audio
+export PYTORCH_AUDIO_BUILD=$BUILD_ROOT/pytorch_audio_build
+export PYTORCH_VISION_ROOT=$HABANA_SOFTWARE_STACK/pytorch-vision
+export PYTORCH_VISION_BUILD=$BUILD_ROOT/pytorch_vision_build
+export DEEPSPEED_EXAMPLES_FORK_ROOT=$HABANA_SOFTWARE_STACK/deepspeed-examples-fork
+export DEEPSPEED_FORK_ROOT=$HABANA_SOFTWARE_STACK/deepspeed-fork
+export DEEPSPEED_FORK_BUILD=$BUILD_ROOT/deepspeed_fork_build
+export HABANA_QUANTIZATION_TOOLKIT_ROOT=$HABANA_SOFTWARE_STACK/quantization_toolkit
+export HABANA_QUANTIZATION_TOOLKIT_BUILD=$BUILD_ROOT/quantization_toolkit_build
+export HABANA_REPO_MANIFEST_PATH="${HABANA_SOFTWARE_STACK}/.repo/manifests/"
+export OPAL_PREFIX=$MPI_ROOT
+export HL_TRACE_VIEWER_ROOT=$HABANA_SOFTWARE_STACK/trace_viewer
+export SYNAPSE_QA_TOOLS=${HABANA_QA_SYNAPSE_ROOT}/utils/utils_cpp
+export CORE_DUMPS=$BUILD_ROOT/core_dumps
+export CORE_DUMP_PREFIX=core
+export PYTORCH_DIST_ROOT_PATH=$PYTORCH_MODULES_ROOT_PATH/distributed
+export PYTORCH_DIST_RELEASE_BUILD=$BUILD_ROOT/pytorch_dist_release_build
+export PYTORCH_DIST_DEBUG_BUILD=$BUILD_ROOT/pytorch_dist_debug_build
+export KINETO_ROOT=$HABANA_SOFTWARE_STACK/third_party/kineto
+export PYTORCH_TB_PLUGIN_BUILD=$BUILD_ROOT/pytorch_tb_plugin_build
+export SBS_ROOT=$HABANA_SOFTWARE_STACK/sbs/gaudi/resnet50_training_sbs
+export SBS_RELEASE_BUILD_GAUDI=$BUILD_ROOT/sbs/release
+export SBS_DEBUG_BUILD_GAUDI=$BUILD_ROOT/sbs/debug
+export CORE_DUMP_SIZE=unlimited
+export CODEC_ROOT=$HABANA_SOFTWARE_STACK/codec
+export CODEC_RELEASE_BUILD=$BUILD_ROOT/codec_release_build
+export CODEC_DEBUG_BUILD=$BUILD_ROOT/codec_debug_build
+export FFMPEG_FORK_ROOT=$HABANA_SOFTWARE_STACK/ffmpeg-fork
+export FFMPEG_FORK_RELEASE_BUILD=$BUILD_ROOT/ffmpeg_fork_release_build
+export FFMPEG_FORK_DEBUG_BUILD=$BUILD_ROOT/ffmpeg_fork_debug_build
+export GSTREAMER_ROOT=$HABANA_SOFTWARE_STACK/gstreamer
+export GSTREAMER_RELEASE_BUILD=$BUILD_ROOT/gstreamer_release_build
+export GSTREAMER_DEBUG_BUILD=$BUILD_ROOT/gstreamer_debug_build
+export CODEC_TESTS_ROOT=$HABANA_SOFTWARE_STACK/codec-tests
+export CODEC_TESTS_RELEASE_BUILD=$BUILD_ROOT/codec_tests_release_build
+export CODEC_TESTS_DEBUG_BUILD=$BUILD_ROOT/codec_tests_debug_build
+export COMPLEX_GUID_LIB_ROOT=$HABANA_SOFTWARE_STACK/complex_guid_lib
+export COMPLEX_GUID_LIB_RELEASE_BUILD=$BUILD_ROOT/complex_guid_lib_release_build
+export COMPLEX_GUID_LIB_DEBUG_BUILD=$BUILD_ROOT/complex_guid_lib_debug_build
+export COMPLEX_GUID_LIB_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/complex_guid_lib_debug_sanitizer_build
+export PYTENET_ROOT=$HABANAQA_SYNAPSE_FEATURES_ROOT/tools/pytenet
+export PYTENET_RELEASE_BUILD=$BUILD_ROOT/pytenet_release_build
+export PYTENET_DEBUG_BUILD=$BUILD_ROOT/pytenet_debug_build
+export CMAKE_BUILD=$BUILD_ROOT/cmake
+export OPENBMC_BUILD_CACHE=$BUILD_ROOT/openbmc_build_cache
+export ROTATOR_ROOT=$HABANA_SOFTWARE_STACK/func-sim/agents/irt
+export ROTATOR_RELEASE_BUILD=$BUILD_ROOT/rotator_release_build
+export ROTATOR_DEBUG_BUILD=$BUILD_ROOT/rotator_debug_build
+export ROTATOR_DEBUG_SANITIZER_BUILD=$BUILD_ROOT/rotator_debug_sanitizer_build
+export SWTOOLS_SDK_ROOT=$HABANA_SOFTWARE_STACK/swtools_sdk
+export SWTOOLS_SDK_RELEASE_BUILD=$BUILD_ROOT/swtools_sdk_release_build
+export SWTOOLS_SDK_DEBUG_BUILD=$BUILD_ROOT/swtools_sdk_debug_build
+export HL_LOGGER_INCLUDE_DIRS="$SWTOOLS_SDK_ROOT/hl_logger/include;$THIRD_PARTIES_ROOT"
+export HL_GCFG_INCLUDE_DIRS="$SWTOOLS_SDK_ROOT/hl_gcfg/include"
+export HABANALABS_INFRASTURCTURE=$HABANA_SOFTWARE_STACK/habanalabs-infrastructure
+export TF_MLIR_ROOT=$HABANA_SOFTWARE_STACK/tensorflow-mlir
+export TF_MLIR_RELEASE_BUILD=$TF_MLIR_ROOT/bazel-bin
+export JAX_ROOT=$HABANA_SOFTWARE_STACK/jax-fork
+export JAX_RELEASE_BUILD=$BUILD_ROOT/jax_fork_release_build
+export HABANA_TOOLS_INTERNAL=1
+export REPRODUCTION_ENV="no"
+export FAIRSEQ_FORK_ROOT=$HABANA_SOFTWARE_STACK/fairseq-fork
+export MEGATRON_DEEPSPEED_ROOT=$HABANA_SOFTWARE_STACK/Megatron-DeepSpeed-fork
+export OPTIMUM_HABANA_FORK_ROOT=$HABANA_SOFTWARE_STACK/optimum-habana-fork
+export OPTIMUM_HABANA_PATH=$HABANA_SOFTWARE_STACK/optimum-habana-fork
+# CPU fallbacks introduce risk that some regression can be hidden
+# by delegating faulting computation to CPU. To eliminate this issue
+# the fallbacks are forbidden by default in our test/dev environment.
+# The fallback-dependent tests should enable it explicitly by setting
+# environment variable TF_CPU_RUNTIME_FALLBACK=allow
+
+export TF_CPU_RUNTIME_FALLBACK=forbid
+
+
+
+###########################################################
+#   Bazel build system variables required by Tensorflow   #
+#               Variable naming convention                #
+#            needed for future upstream of TF             #
+export HABANA_NPU_STACK_PATH=$HABANA_SOFTWARE_STACK
+export HABANA_BUILDS_PATH=$BUILD_ROOT_RELEASE
+###########################################################
+
+
+if [ -z "$CI_ENV" ]; then
+    if [ -f $HABANA_SOFTWARE_STACK/automation/habana_scripts/habana_functions.sh ]; then
+        source $HABANA_SOFTWARE_STACK/automation/habana_scripts/habana_functions.sh
+    else
+        echo
+        echo
+        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+        echo "+ ERROR!!!: habana_functions.sh does not exists!!!"
+        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+        echo
+        echo
+    fi
+fi

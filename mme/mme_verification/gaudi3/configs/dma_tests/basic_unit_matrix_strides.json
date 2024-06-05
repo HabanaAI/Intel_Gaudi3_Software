@@ -1,0 +1,30 @@
+{
+  "programInSram":"true",
+  "tests":[
+    [{"testName":["gemm_transpose with higher sp dims"]},
+      {"inTypeFloat":["bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["1024", "256", "2", "3", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["256", "1024", "2", "3", "1"]},
+      {"xStrides":["1", "1025", "262400", "524800", "1574400"]},
+      {"yStrides":["1", "257", "263168", "526336", "1579008"]},
+      {"dedwPattern":["fck"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["gemm_transpose steps and offsets"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["2048", "2048", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["2048", "2048", "1", "1", "1"]},
+      {"xStrides":["1", "2049", "4196352", "4196352", "4196352"]},
+      {"yStrides":["1", "2049", "4196352", "4196352", "4196352"]},
+      {"dedwPattern":["fck"]},
+      {"geometry": ["4xw", "2xw", "2xh", "4xh"]}
+    ]
+  ]
+}

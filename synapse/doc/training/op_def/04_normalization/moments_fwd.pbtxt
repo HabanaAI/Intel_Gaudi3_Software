@@ -1,0 +1,28 @@
+op {
+  name: "Moments Fwd"
+
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+  input {
+    name: "The data tensor"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  output {
+    name: "mean"
+    type: "T"
+    description: "The mean of the tensor."
+  }
+  output {
+    name: "variance"
+    type: "T"
+    description: "The variance of the tensor."
+  }
+  guid: "moments_fwd"
+  summary: "Calculates the mean and variance of input data tensor."
+  description: "The mean and variance are calculated by aggregating the contents of the data tensor across axes."
+               "If the data tensor is 1-D this is just the mean and variance of a vector."
+}

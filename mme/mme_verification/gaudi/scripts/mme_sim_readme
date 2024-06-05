@@ -1,0 +1,30 @@
+#To compile MME simulator
+#dumps everything in the cuurent directory where you are
+$ENV_NAME/cad/simulation/build_sw_sim_mme.sh
+
+#To compile MME simulator with clean
+$ENV_NAME/cad/simulation/build_sw_sim_mme.sh -c
+
+#the default is it builds the debug version, if you want release version:
+$ENV_NAME/cad/simulation/build_sw_sim_mme.sh -r
+
+#to run MME simulator go to directory where compile was dumped:
+mme_test/mme_test test_type=<TEST_TYPE> out_dir=<PATH_TO_DIR_TO_DUMP_RESULTS> cfg=<PATH_TO_CFG_TO_RUN>
+
+
+#to run MME simulator with specific seed
+mme_test/mme_test test_type=<TEST_TYPE> out_dir=<PATH_TO_DIR_TO_DUMP_RESULTS> cfg=<PATH_TO_CFG_TO_RUN> seed=<SEED_TO_RUN>
+
+
+#test_type options:
+        qman_cluster
+        cluster
+        unit
+        device_sim_sim
+        device_sim_chip
+        device_sim_null
+        device_chip_null
+
+#for example cfg's look in this directory:
+$ENV_NAME/mme_verif/mme_sim/configs/
+

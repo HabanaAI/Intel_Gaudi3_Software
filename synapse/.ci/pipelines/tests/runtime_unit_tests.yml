@@ -1,0 +1,28 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - TPC_KERNELS
+    - RDMA_CORE
+    - COMPLEX_GUID
+    - TPC_FUSER
+  config:
+    testCommand: run_runtime_unit_test
+    loadLKD: false
+    startSim: false
+    releaseFlag: true
+  envVars:
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_cpu_runtime_unit_tests:
+    stages:
+      Run runtime unit tests:
+        filter: -spdlog 3 -i 1 --xml

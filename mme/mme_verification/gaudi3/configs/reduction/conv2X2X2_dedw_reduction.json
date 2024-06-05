@@ -1,0 +1,22 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["conv_dedw_with_reduction"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp16", "bf16", "fp32"]},
+    {"operation":["dedw"]},
+    {"xSizes":["150", "40", "40", "1", "1"]},
+    {"ySizes":["120", "20", "20", "1", "1"]},
+    {"wSizes":["120", "150", "2", "2", "2"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["2", "2", "1"]},
+    {"padding":["1", "1", "1"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["2xw"]},
+    {"yInSram":["true"]},
+    {"oInSram":["true"]},
+    {"secondaryOutput": ["false"]},
+    {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+    {"reductionRm":["random"]}
+
+    ]]
+}

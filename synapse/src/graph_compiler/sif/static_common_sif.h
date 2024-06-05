@@ -1,0 +1,68 @@
+#pragma once
+#include "smf/shape_func_registry.h"
+#include "sif/shape_inference_functions.h"
+
+// Functions listed below will be auto-registered by ShapeFuncRegistry
+
+#define ENTRY(id,func) {id, func, #id}
+
+inline constexpr StaticSifEntry staticSIFs[] = {
+    ENTRY(SIF_DMA_MEMCPY, dmaMemcpyShapeInferenceFunction),
+    ENTRY(SIF_DMA_MEMSET, dmaMemsetShapeInferenceFunction),
+    ENTRY(SIF_CONCATENATE, concatenateShapeInferenceFunction),
+    ENTRY(SIF_FLATTEN, flattenShapeInferenceFunction),
+    ENTRY(SIF_SPLIT, splitShapeInferenceFunction),
+    ENTRY(SIF_EXPAND_DIMS, expandDimsShapeInferenceFunction),
+    ENTRY(SIF_MERGE_SHAPES, mergeShapesInferenceFunction),
+    ENTRY(SIF_SLICE, sliceShapeInferenceFunction),
+    ENTRY(SIF_SLICE_AXIS, sliceAxisShapeInferenceFunction),
+    ENTRY(SIF_SLICE_BACKWARD, sliceBackwardShapeInferenceFunction),
+    ENTRY(SIF_SLICE_INSERT, sliceInsertShapeInferenceFunction),
+    ENTRY(SIF_RESHAPE, reshapeShapeInferenceFunction),
+    ENTRY(SIF_STATIC_RESHAPE, staticReshapeShapeInferenceFunction),
+    ENTRY(SIF_BROADCAST, broadcastShapeInferenceFunction),
+    ENTRY(SIF_IDENTITY, identityShapeInferenceFunction),
+    ENTRY(SIF_REDUCTION, reductionShapeInferenceFunction),
+    ENTRY(SIF_STRIDED_VIEW, stridedViewShapeInferenceFunction),
+    ENTRY(SIF_STRIDED_INSERT, stridedInsertShapeInferenceFunction),
+    ENTRY(SIF_TENSOR_VIEW, tensorViewShapeInferenceFunction),
+    ENTRY(SIF_TRANSPOSE, transposeShapeInferenceFunction),
+    ENTRY(SIF_CONVOLUTION, convolutionShapeInferenceFunction),
+    ENTRY(SIF_CONV_DEDW, convDeDwShapeInferenceFunction),
+    ENTRY(SIF_CONV_DEDX, convDeDxShapeInferenceFunction),
+    ENTRY(SIF_GEMM, gemmShapeInferenceFunction),
+    ENTRY(SIF_GEMM_DEDW, gemmDeDwShapeInferenceFunction),
+    ENTRY(SIF_GEMM_DEDX, gemmDeDxShapeInferenceFunction),
+    ENTRY(SIF_GEMM_FC, gemmFcShapeInferenceFunction),
+    ENTRY(SIF_BATCH_GEMM, batchGemmShapeInferenceFunction),
+    ENTRY(SIF_BATCH_GEMM_DEDW, batchGemmDeDwShapeInferenceFunction),
+    ENTRY(SIF_BATCH_GEMM_DEDX, batchGemmDeDxShapeInferenceFunction),
+    ENTRY(SIF_DMA_PHYS_CONCAT_SPLIT, dmaPhysicalConcatSplitDMAShapeInferenceFunction),
+    ENTRY(SIF_CONTAINER_PHYS_CONCAT, dmaPhysicalConcatContainerShapeInferenceFunction),
+    ENTRY(SIF_SQUEEZE, squeezeShapeInferenceFunction),
+    ENTRY(SIF_FROBENIUS_NORM, frobeniusNormShapeInferenceFunction),
+    ENTRY(SIF_MOMENTS, momentsShapeInferenceFunction),
+    ENTRY(SIF_WAIT, nopShapeInferenceFunction),
+    ENTRY(SIF_DEBUG, nopShapeInferenceFunction),
+    ENTRY(SIF_ROTATE, rotateShapeInferenceFunction),
+    ENTRY(SIF_TF_BATCH_NORM, tfBatchNormShapeInferenceFunction),
+    ENTRY(SIF_NO_SUPPORT, noSupportShapeInferenceFunction),
+    ENTRY(SIF_DYNAMIC_SPLIT, dynamicSplitShapeInferenceFunction),
+    ENTRY(SIF_PHYSICAL_SPLIT, physicalSplitShapeInferenceFunction),
+    ENTRY(SIF_EINSUM, einsumShapeInferenceFunction),
+    ENTRY(SIF_DYNAMIC_RESHAPE, dynamicReshapeShapeInferenceFunction),
+    ENTRY(SIF_SPLIT_FUSED, splitFusedKernelsShapeInferenceFunction),
+    ENTRY(SIF_EINSUM_EXPAND, einsumExpandShapeInferenceFunction),
+    ENTRY(SIF_REINTERPRET_CAST, reinterpretCastShapeInferenceFunction),
+    ENTRY(SIF_INFER_MAX_SHAPE, inferMaxShapeInferenceFunction),
+    ENTRY(SIF_TILE_SHAPE, tileShapeInferenceFunction),
+    ENTRY(SIF_H2D_BATCHSIZE, bnBatchSizeToH2DShapeInferenceFunction),
+    ENTRY(SIF_H2D_DYN_STRIDE_DMA_EXPAND, dynamicStridedDmaExpandH2DShapeInferenceFunction),
+    ENTRY(SIF_H2D_DYN_STRIDE_DMA_REINTERPRET, dynamicStridedDmaReinterpretH2DShapeInferenceFunction),
+    ENTRY(SIF_H2D_DYN_SLICE_DMA, dynamicSliceDmaExpandH2DShapeInferenceFunction),
+    ENTRY(SIF_SHAPE_TO_H2D_STRIDED, stridedOpsConversionShapeInferenceFunction),
+    ENTRY(SIF_SHAPE_TO_H2D_SLICE, sliceConversionShapeInferenceFunction),
+    ENTRY(SIF_H2D_TRANSPOSE_SLICE, transposeSliceH2DShapeInferenceFunction),
+    ENTRY(SHAPE_FUNC_MAX_ID, nullptr)};
+
+#undef ENTRY

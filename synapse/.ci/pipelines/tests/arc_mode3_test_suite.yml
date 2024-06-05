@@ -1,0 +1,101 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - RDMA_CORE
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_FUSER
+    - TPC_KERNELS
+    - TPCSIM
+    - COMPLEX_GUID
+    - TPC_FUSER
+  config:
+    testCommand: run_synapse_test
+    loadLKD: true
+    testXMLOutputKey: -x
+    releaseFlag: true
+  envVars:
+    SCAL_TIMEOUT_VALUE_SECONDS: 5000
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi2_sim_arc_mode3_test_group_0:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi2 -m sim --test-group-id 0
+  Test_synapse_gaudi2_sim_arc_mode3_test_group_1:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi2 -m sim --test-group-id 1
+  Test_synapse_gaudi2_sim_arc_mode3_test_group_2:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi2 -m sim --test-group-id 2
+  Test_synapse_gaudi2_sim_arc_mode3_test_group_3:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi2 -m sim --test-group-id 3
+  Test_synapse_gaudi2_sim_arc_mode3_test_group_4:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi2 -m sim --test-group-id 4
+  Test_synapse_gaudi2_sim_arc_mode3_test_group_5:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi2 -m sim --test-group-id 5
+  Test_synapse_gaudi2_sim_arc_mode3_test_group_6:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi2 -m sim --test-group-id 6
+  Test_synapse_gaudi3_sim_arc_mode3_test_group_6:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse tests in ARC mode:
+        filter: -spdlog 3 -shuffle -c gaudi3 -m sim --test-group-id 6

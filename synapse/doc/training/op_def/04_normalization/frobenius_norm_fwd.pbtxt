@@ -1,0 +1,31 @@
+op {
+  name: "Lpnorm Frobenius Forward"
+  type{
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16)"
+    description: "A 2D-4D Tensor with *NHWC* layout with elements of type as specified above."
+  }
+  type{
+    name: "T1"
+    definition: "tensor(float32), tensor(bfloat16)"
+    description: "A 1D Tensor with *1* layout with elements of type as specified above."
+  }
+  input {
+    name: "Input_feature_map"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 2D-4D and layout *NHWC*."
+  }
+  output {
+    name: "Output_feature_map"
+    type: "T1"
+    description: "The resultant tensor of type ``T`` with dimensionality 1D is the output of the calculation of the lp norm Frobenius of the input tensor."
+  }
+  summary: "Returns the Frobenius Norm (distance) of the input feature map."
+  description: "**Lpnorm Frobenius** returns the Lp norm Frobenius according to the following formula: \n"
+    "\math{eq1}"
+    formula {
+      equation: "\|| x \||_{p}=\sqrt{(\sum_{i=1}^{n} | x_{i} |^2)}"
+      label: "eq1"
+    }
+  guid: "frobenius_norm_fwd"
+}

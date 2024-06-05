@@ -1,0 +1,65 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: mpm-test-data
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - COMPLEX_GUID
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - RDMA_CORE
+    - SWTOOLS_SDK
+    - SYNAPSE_PROFILER
+    - SYNAPSE_UTILS
+    - TPC_FUSER
+    - TPC_KERNELS
+    - TPC_LLVM
+    - TPCSIM
+  config:
+    testCommand: models_tests_job --test-type accuracy --models-folder ${MPM_TEST_DATA_ROOT}/models --job accuracy
+    loadLKD: true
+    releaseFlag: false
+    saveToFileBeatMount: false
+  envVars:
+    ENABLE_CONSOLE : false
+    LOG_LEVEL_ALL : 4
+    SCAL_TIMEOUT_VALUE_SECONDS : 1000
+    # PATCHSET_REVISION: '${GERRIT_PATCHSET_REVISION:-$(git -C /root/repos/synapse rev-parse HEAD)}'
+    # DATABASE_BRANCH : '${GERRIT_BRANCH/_next/}'
+  preTestStages:
+    Fetch LFS data:
+      runOutsideDocker: true
+      command: "fetch_git_lfs mpm-test-data ${MPM_TEST_DATA_ROOT}"
+  postTestStages:
+    copy results xml:
+     command: "cp ${HABANA_LOGS}/**/*.xml .; cp ${HABANA_LOGS}/**/*.xml /root/ || true"
+testsMap:
+  Test_synapse_gaudi_hls_asic_rec_topology_accuracy:
+    stages:
+      Run model tests on K8S container:
+        filter: --test-name g1_$(date +"%Y%m%d-%H%M%S") --chip-type gaudi --max-mem-limit 40000000000
+  Test_synapse_gaudi2_asic_rec_topology_accuracy:
+    stages:
+      Run model tests on K8S container:
+        filter: --test-name g2_$(date +"%Y%m%d-%H%M%S") --chip-type gaudi2 --max-mem-limit 40000000000
+  Test_synapse_gaudi3_sim_rec_topology_accuracy:
+    config:
+      loadLKD: true
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=40000'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: true
+    envVars:
+      LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+      ENABLE_EXPERIMENTAL_FLAGS: true
+      SCAL_TIMEOUT_VALUE_SECONDS: "4000"
+      SCAL_TIMEOUT_VALUE: 4000000000
+    stages:
+      Run model tests accuracy test:
+        filter: --test-name g3_$(date +"%Y%m%d-%H%M%S") --chip-type gaudi3

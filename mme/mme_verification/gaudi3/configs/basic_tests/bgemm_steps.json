@@ -1,0 +1,43 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["full steps"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["abt"]},
+      {"xSizes":["256", "2020", "1", "1", "1"]},
+      {"ySizes":["2040", "2020", "1", "1", "1"]},
+      {"wSizes":["256", "2040", "1", "1", "1"]},
+      {"dedwPattern":["random"]},
+      {"geometry":["random"]}],
+
+    [{"testName":["small steps"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["atb"]},
+      {"xSizes":["600", "128", "3", "1", "1"]},
+      {"ySizes":["1224", "600", "3", "1", "1"]},
+      {"wSizes":["1224", "128", "3", "1", "1"]},
+      {"dedwPattern":["random"]},
+      {"geometry":["random"]}],
+
+    [{"testName":["full steps"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["atb"]},
+      {"xSizes":["2020", "256", "1", "1", "1"]},
+      {"ySizes":["2040", "2020", "1", "1", "1"]},
+      {"wSizes":["2040", "256", "1", "1", "1"]},
+      {"dedwPattern":["random"]},
+      {"geometry":["random"]}],
+
+    [{"testName":["interleaved steps"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["128", "520", "1", "1", "1"]},
+      {"ySizes":["1024", "520", "1", "1", "1"]},
+      {"wSizes":["1024", "128", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry":["2xw"]}]
+  ]
+}

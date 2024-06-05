@@ -1,0 +1,229 @@
+common:
+  testRepos:
+    - repository: synapse
+    - repository: automation
+    - repository: pytorch-training-tests
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: coral-sim
+    - repository: engines-arc
+  dependencies:
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - RDMA_CORE
+    - COMPLEX_GUID
+    - TPC_FUSER
+  config:
+    testCommand: run_synapse_test
+    loadLKD: true
+    testXMLOutputKey: -x
+    releaseFlag: true
+  envVars:
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi2_asic_synapse_tests:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi2 asic tests:
+        filter: -c gaudi2 -spdlog 3 -shuffle -i 1 -m asic
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 1000
+          ENABLE_CONSOLE: false
+          ARC_SUPPORT_MODE: 3
+          ENABLE_EXPERIMENTAL_FLAGS: true
+  Test_synapse_gaudi_asic_synapse_presubmit_tests:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+        lkdParam: 'timeout_locked=1000'
+    stages:
+      Run Synapse Gaudi asic presubmit tests:
+        filter: -spdlog 3 -shuffle -m asic-ci -c gaudi
+        envVars:
+          ENABLE_CONSOLE: false
+  Test_synapse_gaudi_asic_synapse_tests:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+        lkdParam: 'timeout_locked=1000'
+    stages:
+      Run Synapse Gaudi asic tests:
+        filter: -c gaudi -spdlog 3 -shuffle -m asic
+        envVars:
+          ENABLE_CONSOLE: false
+  Test_synapse_gaudi_sim_synapse_tests_group_0:
+    dependencies:
+      - COMPLEX_GUID
+      - CORAL_SIM
+      - TPC_FUSER
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=1000'
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi tests:
+        filter: -spdlog 3 -shuffle -c gaudi -m sim --test-group-id 0
+  Test_synapse_gaudi_sim_synapse_tests_group_1:
+    dependencies:
+      - CORAL_SIM
+      - SYNAPSE_PROFILER
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=1000'
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi tests:
+        filter: -spdlog 3 -shuffle -c gaudi -m sim --test-group-id 1
+  Test_synapse_gaudi_sim_synapse_tests_group_2:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=1000'
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi tests:
+        filter: -spdlog 3 -shuffle -c gaudi -m sim --test-group-id 2
+  Test_synapse_gaudi_sim_synapse_tests_group_3:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=1000'
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi tests:
+        filter: -spdlog 3 -shuffle -c gaudi -m sim --test-group-id 3
+  Test_synapse_gaudi_sim_synapse_tests_group_4:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=1000'
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi tests:
+        filter: -spdlog 3 -shuffle -c gaudi -m sim --test-group-id 4
+  Test_synapse_gaudi_sim_synapse_tests_group_5:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=1000'
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi tests:
+        filter: -spdlog 3 -shuffle -c gaudi -m sim --test-group-id 5
+  Test_synapse_gaudi3_sim_synapse_tests_group_0:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi3 tests:
+        filter: -spdlog 3 -shuffle -i 1 -c gaudi3 -m sim --test-group-id 0
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 3000
+  Test_synapse_gaudi3_sim_synapse_tests_group_1:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi3 tests:
+        filter: -spdlog 3 -shuffle -i 1 -c gaudi3 -m sim --test-group-id 1
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 3000
+  Test_synapse_gaudi3_sim_synapse_tests_group_2:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi3 tests:
+        filter: -spdlog 3 -shuffle -i 1 -c gaudi3 -m sim --test-group-id 2
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 3000
+  Test_synapse_gaudi3_sim_synapse_tests_group_3:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi3 tests:
+        filter: -spdlog 3 -shuffle -i 1 -c gaudi3 -m sim --test-group-id 3
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 3000
+  Test_synapse_gaudi3_sim_synapse_tests_group_4:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi3 tests:
+        filter: -spdlog 3 -shuffle -i 1 -c gaudi3 -m sim --test-group-id 4
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 3000
+  Test_synapse_gaudi3_sim_synapse_tests_group_5:
+    dependencies:
+      - CORAL_SIM
+      - TPCSIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse Gaudi3 tests:
+        filter: -spdlog 3 -shuffle -i 1 -c gaudi3 -m sim --test-group-id 5
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 3000

@@ -1,0 +1,29 @@
+[
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/0/qman", "value": "EDMA_1_0"}, // compute_media_scheduler
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/1/qman", "value": "EDMA_1_1"}, // scaleout_receive
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/2/qman", "value": "EDMA_3_0"}, // scaleout_send
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/3/qman", "value": "EDMA_3_1"}, // network_garbage_collector_and_reduction
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/4/qman", "value": "EDMA_1_0"}, // scaleup_receive
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/5/qman", "value": "EDMA_1_1"},  // scaleup_send
+    // must be in descending order
+    { "op": "remove",  "path" : "/gaudi3/cores/engine_clusters/5" }, // 5 is cme
+    { "op": "replace",  "path" : "/gaudi3/cores/engine_clusters/4/engines" , // 4 is rotator
+        "value":
+        [
+            "ROT_1_0",
+            "ROT_1_1",
+            "ROT_6_0"
+        ]
+    },
+    { "op": "remove",  "path" : "/gaudi3/cores/engine_clusters/1" }, // 1 is mme
+    { "op": "remove",  "path" : "/gaudi3/cores/engine_clusters/0" }, // 0 is compute_tpc
+
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/0/qman", "value": "EDMA_1_0" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/1/qman", "value": "EDMA_1_1" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/1/completion_queues/0/sfg_enabled", "value": false },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/2/qman", "value": "EDMA_1_0" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/3/qman", "value": "EDMA_1_1" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/4/qman", "value": "EDMA_3_0" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/5/qman", "value": "EDMA_3_1" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/6/qman", "value": "EDMA_1_0" }
+]

@@ -1,0 +1,62 @@
+op {
+  name: "Slice"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  type {
+    name: "S"
+    definition: "Tensor Shape Type"
+    description: "A shape tensor"
+  }
+  type {
+    name: "H"
+    definition: "Host to Device Tensor Type"
+    description: "A host to device tensor"
+  }
+  input {
+    name: "Real tensor"
+    type: "T"
+    description: "The input tensor to be sliced."
+  }
+  input {
+    name: "Output shape"
+    type: "S"
+    description: "The output tensor shape information. Optional (for dynamic shapes usage)."
+  }
+  input {
+    name: "Dynamic steps and starts"
+    type: "H"
+    description: "Dynamic steps and starts information. Contains synDynamicSliceDmaH2dTensor structure. Optional (for dynamic shapes usage). Overrides node parameters."
+  }
+  output {
+    name: "Sliced tensor"
+    type: "T"
+    description: "Slice result."
+  }
+  c_structure: "synSliceParamsV2"
+  attr {
+    name: "axes[rank(Real tensor)]"
+    type: "unsigned int"
+    description: "1-D array of axes that `starts` and `ends` apply to. The range must cover [0, r-1] where r = rank(Real tensor)."
+  }
+  attr {
+    name: "starts[rank(Real tensor)]"
+    type: "unsigned long int"
+    description: "1-D array of starting indices of corresponding axis in `axes`."
+  }
+  attr {
+    name: "ends[rank(Real tensor)]"
+    type: "unsigned long int"
+    description: "1-D array of ending indices of corresponding axis in `axes`."
+  }
+  attr {
+    name: "steps[rank(Real tensor)]"
+    type: "unsigned long int"
+    description: "1-D array of slice step of corresponding axis in `axes`. 'steps' cannot be 0."
+  }
+  summary: "Performs the slice operation."
+  description: "Produces a slice of the input tensor along multiple axes.\n(https://github.com/onnx/onnx/blob/master/docs/Operators.md#Slice)"
+  guid: "slice"
+}

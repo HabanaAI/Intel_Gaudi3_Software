@@ -1,0 +1,54 @@
+op {
+  name: "Image Rotate"
+  input {
+    name: "Input tensor"
+    type: "int8"
+    description: "A 4D tensor of layout NCHW and type int8."
+  }
+  attr {
+    name: "Rotation angle"
+    type: "float"
+    description: "The rotation angle, between 0 to 360 degrees."
+  }
+  attr {
+    name: "Input rotation center X"
+    type: "int"
+    description: "The X index of the rotation center location of the input 2d plane."
+  }
+  attr {
+    name: "Input rotation center Y"
+    type: "int"
+    description: "The Y index of the rotation center location of the input 2d plane."
+  }
+  attr {
+    name: "Output rotation center X"
+    type: "int"
+    description: "The X index of the output center location with respect to the rotated plane 2d plane."
+  }
+  attr {
+    name: "Output rotation center Y"
+    type: "int"
+    description: "The Y index of the output center location with respect to the rotated plane 2d plane."
+  }
+  attr {
+    name: "Background pixel"
+    type: "int8"
+    description: "Value which is used for any output pixel which is outside the input plane."
+  }
+  output {
+    name: "Output tensor"
+    type: "int8"
+    description: "A 4D tensor of layout NCHW and type int8."
+  }
+  summary: "2D image rotation operation applied to the 2D spatial planes of the input and output tensors."
+  description: "The Image Rotate operation is applied to the spatial 2d plane of the of the tensor. Each of the 2d planes is rotated by the provided rotation degree and the output plane is extracted from the rotated plane. The same rotation operation is applied to all spatial planes across the tensor.\n"
+               "The rotation operation consists of a center rotation that identifies the point around to the 2d plane is rotated. This rotation center can be inside or outside the 2d input plane. The rotated plane is derived from the input plane and the rotation angle, where every pixel in the rotated plane is calculated by bilinear interpolation based on its back-mapping point in the input image.\n"
+               "The output 2d plane is extracted from the rotated plane based on a output center point and the 2d output statial size which is independent of the 2d size of the input. In the general case, some pixels from the input plane might be mapped outside the output plane, while some pixels in the output plane might have no source in the input image and will be filled in by a default value.\n"
+               "This is being shown in Figures 1 to 3.\n"
+               "\image{image_rotate.png, width=1600px, height=600px, align=center}"
+  constraints: ["The input and output tensors are 4D and layout of NCHW.\n",
+                "N and C dimensions of the output must be the same as the input tensor.\n",
+                "The image format should consists of C planes of size HxW, such as in RGB or YUV444, and not in any interleaved format.\n"
+               ]
+  guid: "image_rotate"
+}

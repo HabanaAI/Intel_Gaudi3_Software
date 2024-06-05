@@ -1,0 +1,55 @@
+op {
+  name: "Gemm"
+  type {
+    name: "T"
+    definition: "tensor(int4), tensor(int8), tensor(int16), tensor(int32), tensor(uint4), tensor(uint8), tensor(uint16), tensor(uint32), tensor(float32), tensor(bfloat16), tensor(float16)"
+    description: "A 2D tensor with elements of type specified in the definition"
+  }
+  type {
+    name: "S"
+    definition: "tensor(int4), tensor(int8), tensor(int16), tensor(int32), tensor(uint4), tensor(uint8), tensor(uint16), tensor(uint32), tensor(float32), tensor(bfloat16), tensor(float16)"
+    description: "A 1D tensor with elements of type specified in the definition"
+  }
+  c_structure: "struct synGEMMParams;"
+  input {
+    name: "A"
+    type: "T"
+    description: "The first input matrix."
+  }
+  input {
+    name: "B"
+    type: "T"
+    description: "The second input matrix."
+  }
+  input {
+    name: "bias"
+    type: "S"
+    description: "The bias to the operation. Optional and can be null."
+  }
+  output {
+    name: "C"
+    type: "T"
+    description: "Result matrix."
+  }
+  attr {
+    name: "transpose_a"
+    type: "bool"
+    description: "Transpose the first matrix"
+  }
+  attr {
+    name: "transpose_b"
+    type: "bool"
+    description: "Transpose the second matrix"
+  }
+  summary: "Performs a GEMM operation."
+  description: "This operation performs matrix multiplication, with an option to add bias to the multiplication result: \n \math{eq1}\n\n"
+  formula{
+     equation : "C = (A x B) + bias"
+     label : "eq1"
+  }
+  constraints: ["All input tensors must be of the same datatype.",
+               "The output tensor must match the input data type (int / float), but may have different precision (8/16/32).",
+               "The input matrices should have a common dimension with equal sizes, according to their transpose parameter.",
+               "The output matrix dimensions must match the input matrices non common dimensions, according to their transpose parameter."]
+  guid: "gemm"
+}

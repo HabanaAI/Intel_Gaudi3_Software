@@ -1,0 +1,490 @@
+testJobConfig:
+  arc_mode3_test_group_0:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_test_group_1:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_test_group_2:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_test_group_3:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_test_group_4:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_test_group_5:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_gc_test_group_0:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_gc_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_gc_test_group_1:
+    jobTimeout: 240
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_gc_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_gc_test_group_2:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_gc_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_gc_test_group_3:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_gc_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_gc_test_group_4:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_gc_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  arc_mode3_gc_test_group_5:
+    customYamlLocation: .ci/pipelines/tests/arc_mode3_gc_test_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  graph_optimizer_tests:
+    devices:
+      cpu:
+  synapse_tests_group_0:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_tests_group_1:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_tests_group_2:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_tests_group_3:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_tests_group_4:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_tests_group_5:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_gc_tests_group_0:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_gc_tests_group_1:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+            jobTimeout: 180
+  synapse_gc_tests_group_2:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_gc_tests_group_3:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_gc_tests_group_4:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_gc_tests_group_5:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+            jobTimeout: 150
+  synapse_gc_tests_group_6:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  scal_test:
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synapse_tests:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    envVars:
+      IS_K8S_CONTAINER_TESTER: 'true'
+    devices:
+      gaudi2:
+        hwType:
+          asic:
+            jobTimeout: 60
+      gaudi:
+        hwType:
+          asic:
+            jobTimeout: 120
+  synapse_gc_tests:
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          asic:
+            jobTimeout: 240
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'false'
+      gaudi2:
+        hwType:
+          asic:
+            jobTimeout: 180
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'true'
+  synapse_presubmit_tests:
+    customYamlLocation: .ci/pipelines/tests/synapse_tests_suite.yml
+    envVars:
+      IS_K8S_CONTAINER_TESTER: 'true'
+    devices:
+      gaudi:
+        hwType:
+          asic:
+            jobTimeout: 60
+  synapse_gc_presubmit_tests:
+    jobTimeout: 180
+    customYamlLocation: .ci/pipelines/tests/synapse_gc_tests_suite.yml
+    devices:
+      gaudi:
+        hwType:
+          asic:
+            jobTimeout: 210
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'false'
+      gaudi2:
+        hwType:
+          asic:
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'true'
+  media_tests:
+    devices:
+  qa_test_suit:
+    devices:
+  mme_sanity:
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+  resnet50_batch64_bf16:
+    devices:
+      gaudi3:
+        hwType:
+          sim:
+            jobTimeout: 180
+  mme_tests:
+    devices:
+      gaudi:
+        hwType:
+          sim:
+            jobTimeout: 150
+      gaudi2:
+        hwType:
+          sim:
+            jobTimeout: 180
+      gaudi3:
+        hwType:
+          sim:
+  mme_sanity_tests:
+    customYamlLocation:  .ci/pipelines/tests/mme_tests.yml
+    devices:
+      gaudi2:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  mme_perf_tests:
+    devices:
+      gaudi3:
+        hwType:
+          sim:
+  engines_fw_test:
+    devices:
+      gaudi3:
+        hwType:
+          sim:
+             jobTimeout: 180
+      gaudi2:
+        hwType:
+          sim:
+             jobTimeout: 180
+          asic:
+  engines_fw_test_0:
+    customYamlLocation:  .ci/pipelines/tests/engines_fw_test.yml
+    devices:
+      gaudi3:
+        hwType:
+          sim:
+             jobTimeout: 180
+  engines_fw_test_1:
+    customYamlLocation:  .ci/pipelines/tests/engines_fw_test.yml
+    devices:
+      gaudi3:
+        hwType:
+          sim:
+             jobTimeout: 180
+  kernels_synapse_tests:
+    devices:
+  engines_fw_full_test:
+    devices:
+      gaudi3:
+        hwType:
+          sim:
+             jobTimeout: 180
+      gaudi2:
+        hwType:
+          sim:
+             jobTimeout: 180
+  fuser_synapse_tests:
+    devices:
+      gaudi:
+        hwType:
+          sim:
+  habanapy_tests:
+    devices:
+  rec_topology_perf:
+    jobTimeout: 450
+    devices:
+      gaudi_hls:
+        hwType:
+          asic:
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'true'
+      gaudi2:
+        hwType:
+          asic:
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'true'
+      gaudi3:
+        hwType:
+          asic:
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'true'
+          sim:
+  models_compilation:
+    jobTimeout: 240
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi2:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  pipeline_management_models_compilation:
+    devices:
+      gaudi3:
+        hwType:
+          sim:
+  models_perf:
+    devices:
+      gaudi2:
+        customJenkinsFile:  .ci/pipelines/tests/rec_topology_perf.jenkinsfile
+        hwType:
+          asic:
+      gaudi:
+        customJenkinsFile:  .ci/pipelines/tests/gaudi_rec_topology_perf.jenkinsfile
+        hwType:
+          asic:
+  multi_device:
+    devices:
+      gaudi:
+        hwType:
+          sim:
+            cards: 8
+  check_lkd:
+    devices:
+      gaudi:
+        hwType:
+          asic:
+      gaudi2:
+        hwType:
+          asic:
+  ci_perf_gemm:
+    envVars:
+      IS_K8S_CONTAINER_TESTER: 'true'
+    devices:
+      gaudi_hls:
+        hwType:
+          asic:
+  resnet50_batch64_float32:
+    devices:
+        gaudi3:
+          hwType:
+            sim:
+  runtime_unit_tests:
+    devices:
+      cpu:
+    jobTimeout: 78
+  resnet50_bf16:
+    customYamlLocation: .ci/pipelines/tests/resnet50_tests.yml
+    jobTimeout: 210
+    devices:
+        gaudi3:
+          hwType:
+            sim:
+  resnet50_float32:
+    customYamlLocation: .ci/pipelines/tests/resnet50_tests.yml
+    jobTimeout: 210
+    devices:
+        gaudi3:
+          hwType:
+            sim:
+  build_docs:
+    devices:
+      cpu:
+  nda_patch_test:
+    customJenkinsFile: .ci/pipelines/tests/nda_patch_test.jenkinsfile
+    devices:
+      cpu:
+  rec_topology_perf_ci_container:
+    devices:
+      gaudi2:
+        customJenkinsFile:  .ci/pipelines/tests/rec_topology_perf_ci_container.jenkinsfile
+        hwType:
+          asic:
+  rec_tests:
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi2:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  synrec:
+    customYamlLocation: .ci/pipelines/tests/synrec.yml
+    devices:
+      gaudi:
+        hwType:
+          sim:
+  models_compilation_consistency:
+    devices:
+      gaudi:
+        hwType:
+          sim:
+      gaudi2:
+        hwType:
+          sim:
+      gaudi3:
+        hwType:
+          sim:
+  rec_topology_accuracy:
+    jobTimeout: 60
+    customYamlLocation: .ci/pipelines/tests/rec_topology_accuracy.yml
+    devices:
+      gaudi_hls:
+        hwType:
+          asic:
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'true'
+      gaudi2:
+        hwType:
+          asic:
+            envVars:
+              IS_K8S_CONTAINER_TESTER: 'true'
+      gaudi3:
+        hwType:
+          sim:

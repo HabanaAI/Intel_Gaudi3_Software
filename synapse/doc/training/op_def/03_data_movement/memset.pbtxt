@@ -1,0 +1,17 @@
+op {
+  name: "Memset"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+
+  output {
+    name: "The destination tensor"
+    type: "T"
+    description: ""
+  }
+  summary: "Initializes the destination tensor to 0."
+  description: ""
+  guid: "memset"
+}

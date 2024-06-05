@@ -1,0 +1,16 @@
+{
+  "programInSram":"true",
+  "tests":[ [{"testName":["random bgemm"]},
+    {"inTypeFloat":["random"]},
+    {"outTypeFloat":["random"]},
+    {"operation":["random_bgemm"]},
+    {"sbReuse":["random"]},
+    {"signalMode":["desc"]},
+    {"ySizes":["random", "random", "random", "random", "random"]},
+    {"wSizes":["random", "random", "random", "random", "random"]},
+    {"xSizes":["random", "random", "random", "random", "random"]},
+    {"dedwPattern":["random"]},
+    {"geometry":["random"]}
+  ]
+  ]
+}

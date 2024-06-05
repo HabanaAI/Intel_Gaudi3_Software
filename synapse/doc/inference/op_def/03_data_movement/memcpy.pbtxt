@@ -1,0 +1,22 @@
+op {
+  name: "Mem Copy"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+  input {
+    name: "The source tensor"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  output {
+    name: "The destination tensor"
+    type: "T"
+    description: "Output tensor with the same size as input"
+  }
+  summary: "Copies source tensor to destination tensor"
+  description: ""
+  constraints: ["int4 supported platform: Greco"]
+  guid: "memcpy"
+}

@@ -1,0 +1,16 @@
+#pragma once
+
+#include "types.h"
+#include "smf/shape_func_registry.h"
+
+extern non_ptr_smf_t patchOnZeroSizeShapeManipulationFunction;
+extern non_ptr_smf_t patchOnZeroSizeFirstInputShapeManipulationFunction;
+extern non_ptr_smf_t dynamicOffsetShapeManipulationFunction;
+extern non_ptr_smf_t dynamicMmePaddingShapeManipulationFunction;
+extern non_ptr_smf_t viewSizeStrideShapeManipulationFunction;
+extern non_ptr_smf_t viewBaseAddressShapeManipulationFunction;
+extern non_ptr_smf_t sliceStrideShapeManipulationFunction;
+extern non_ptr_smf_t sliceBaseAddressShapeManipulationFunction;
+extern non_ptr_smf_t bulkSizeStrideShapeManipulationFunction;
+extern non_ptr_smf_t lastStrideShapeManipulationFunction;
+extern non_ptr_smf_t dmaBaseAddressManipulationFunction;

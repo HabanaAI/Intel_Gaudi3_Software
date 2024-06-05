@@ -1,0 +1,2 @@
+-r ${SYNAPSE_ROOT}/.ci/requirements/requirements-synapse.txt
+-r ${AUTOMATION_ROOT}/ci/requirements-test.txt

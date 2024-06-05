@@ -1,0 +1,20 @@
+{ 
+  "programInSram":"true",
+  "tests":[[{"testName":["simple_dedx"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["fp16"]},
+    {"operation":["dedx"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["false"]},
+    {"xSizes":["256", "512", "1", "1", "1"]},
+    {"wSizes":["512", "256", "1", "1", "1"]},
+    {"ySizes":["512", "512", "1", "1", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"convPattern":["skf"]},
+    {"geometry":["2xh"]}
+  ]]
+
+}

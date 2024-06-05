@@ -1,0 +1,41 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+    - repository: mme
+    - repository: 3rd-parties
+    - repository: swtools_sdk
+    - repository: specs
+    - repository: specs_h9
+  dependencies:
+    - CORAL_SIM
+    - HL_THUNK
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - TPCSIM
+    - SWTOOLS_SDK
+  config:
+    testCommand: run_and_rollup_mme_perf
+    loadLKD: true
+    testXMLOutputKey: -x
+    startSim: false
+    releaseFlag: true
+testsMap:
+  Test_synapse_gaudi3_sim_mme_perf_tests:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    preTestStages:
+        Build mme:
+          command:
+            build_mme -m -C H9 -r
+    stages:
+      Run mme gaudi3 sim perf tests:
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 3000

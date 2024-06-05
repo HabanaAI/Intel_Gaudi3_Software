@@ -1,0 +1,17 @@
+{ 
+    "programInSram":"true",
+    "tests":
+    [
+    [{"testName":["random test"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["fwd"]},
+    {"dilation":["random", "random", "random"]},
+    {"strides":["random", "random", "random"]},
+    {"padding":["random", "random", "random"]},
+    {"wSizes":["random", "random", "random", "random", "random"]},
+    {"ySizes":["random", "random", "random", "random", "random"]},
+    {"xSizes":["random", "random", "random", "random", "random"]},
+    {"geometry":["random"]},
+    {"convPattern":["random"]}]
+    ]}

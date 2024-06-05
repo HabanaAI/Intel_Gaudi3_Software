@@ -1,0 +1,42 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - CORAL_SIM
+    - RDMA_CORE
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPCSIM
+  config:
+    testCommand: run_engines_fw_test
+    loadLKD: true
+    testXMLOutputKey: -x
+    releaseFlag: true
+  envVars:
+    SCAL_TIMEOUT_VALUE_SECONDS: "1000"
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi3_sim_engines_fw_full_test:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run engines fw gaudi3 test:
+        filter: -n -C gaudi3 -b -sudo -s *full*
+  Test_synapse_gaudi2_sim_engines_fw_full_test:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run engines fw gaudi2 test:
+        filter: -n -C gaudi2 -b -sudo -s *full*

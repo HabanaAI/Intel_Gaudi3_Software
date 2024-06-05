@@ -1,0 +1,23 @@
+{
+    "programInSram":"true",
+    "tests":[[{"testName":["random conv test"]},
+        {"inTypeFloat":["random"]},
+        {"outTypeFloat":["random"]},
+        {"operation":["random_conv"]},
+        {"lowerEn":["random"]},
+        {"sbReuse":["random"]},
+        {"signalMode":["desc"]},
+        {"memsetVoidPixels":["true"]},
+        {"dilation":["random", "random", "random"]},
+        {"strides":["random", "random", "random"]},
+        {"padding":["random", "random", "random"]},
+        {"ySizes":["random", "random", "random", "random", "random"]},
+        {"wSizes":["random", "random", "random", "random", "random"]},
+        {"xSizes":["random", "random", "random", "random", "random"]},
+        {"convPattern":["random"]},
+        {"dedwPattern":["random"]},
+        {"geometry":["random"]},
+        {"secondaryOutput": ["random"]}
+    ]
+    ]
+}

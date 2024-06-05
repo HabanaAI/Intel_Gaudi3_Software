@@ -1,0 +1,33 @@
+op {
+  name: "Transpose"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  input {
+    name: "Input tensor"
+    type: "T"
+    description: "The input tensor to be transposed."
+  }
+  output {
+    name: "Transposed tensor"
+    type: "T"
+    description: "transpose result."
+  }
+  c_structure: "synTransposeParams"
+  attr {
+    name: "permutation[rank(Input tensor)]"
+    type: "unsigned int"
+    description: "Each location in the permutation array defines to which dimention this location will be transposed to."
+  }
+  attr {
+    name: "tensorDim"
+    type: "unsigned int"
+    description: "Number of valid entries in the permutation array."
+  }
+  constraints: "All input/output tensors must be of the same datatype, dimensions number and total elements number."
+  summary: "Performs the transpose operation."
+  description: "Produces a transposed tensor of the input tensor along multiple axes.\n(https://github.com/onnx/onnx/blob/rel-1.9.0/docs/Operators.md#Transpose)"
+  guid: "transpose"
+}

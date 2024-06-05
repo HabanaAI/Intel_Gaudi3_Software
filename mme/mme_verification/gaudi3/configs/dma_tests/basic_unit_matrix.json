@@ -1,0 +1,114 @@
+{
+  "programInSram":"true",
+  "tests":[
+    [{"testName":["gemm_transpose simple"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["256", "256", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["256", "256", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry": ["4xh"]}
+    ],
+
+    [{"testName":["gemm_transpose tiny"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["28", "63", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["63", "28", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry": ["4xh"]}
+    ],
+
+    [{"testName":["gemm_transpose wide"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["28", "670", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["670", "28", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry": ["4xw", "2xw", "2xh", "4xh"]}
+    ],
+
+    [{"testName":["gemm_transpose narrow"]},
+      {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["720", "57", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["57", "720", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry": ["4xw", "2xw", "2xh", "4xh"]}
+    ],
+
+    [{"testName":["gemm_transpose basic steps"]},
+    {"inTypeFloat":["fp8_152", "bf16", "fp32"]},
+    {"outTypeFloat":["asInput"]},
+    {"operation":["gemm_transpose"]},
+    {"xSizes":["1024", "256", "1", "1", "1"]},
+    {"wSizes":["256", "1", "1", "1", "1"]},
+    {"ySizes":["256", "1024", "1", "1", "1"]},
+    {"dedwPattern":["fck"]},
+    {"geometry": ["4xw"]}
+    ],
+
+    [{"testName":["gemm_transpose with odd CD"]},
+      {"inTypeFloat":["bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["157", "256", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["256", "157", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["gemm_transpose "]},
+      {"inTypeFloat":["bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["1570", "125", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["125", "1570", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["gemm_transpose with higher sp dims"]},
+      {"inTypeFloat":["bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["1024", "256", "2", "3", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["256", "1024", "2", "3", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["gemm_transpose with steps"]},
+      {"inTypeFloat":["bf16", "fp32"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["400", "1024", "2", "2", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["1024", "400", "2", "2", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry": ["4xw"]}
+    ],
+
+    [{"testName":["gemm_transpose steps and offsets"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["asInput"]},
+      {"operation":["gemm_transpose"]},
+      {"xSizes":["2048", "2048", "1", "1", "1"]},
+      {"wSizes":["256", "1", "1", "1", "1"]},
+      {"ySizes":["2048", "2048", "1", "1", "1"]},
+      {"dedwPattern":["fck"]},
+      {"geometry": ["4xw", "2xw", "2xh", "4xh"]}
+    ]
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "programInSram":"true",
+  "tests":[
+    [{"testName":["bgemm 8x - full batch"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"sbReuse":["false"]},
+      {"xSizes":["20", "130", "8", "2", "1"]},
+      {"ySizes":["150", "130", "8", "2", "1"]},
+      {"wSizes":["150", "20", "8", "2", "1"]},
+      {"dedwPattern":["random"]},
+      {"geometry":["random"]}],
+
+    [{"testName":["bgemm 8x - missing batch"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["20", "130", "6", "2", "1"]},
+      {"ySizes":["150", "130", "6", "2", "1"]},
+      {"wSizes":["150", "20", "6", "2", "1"]},
+      {"dedwPattern":["random"]},
+      {"geometry":["random"]}],
+
+    [{"testName":["basic dedw 2x on second dim"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["dedw"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"dedw2x":["false"]},
+    {"xSizes":["310", "32", "32", "1", "1"]},
+    {"ySizes":["350", "16", "16", "1", "1"]},
+    {"wSizes":["350", "310", "3", "3", "1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["2", "2", "1"]},
+    {"padding":["1", "1", "0"]},
+    {"dedwPattern":["kfc"]},
+    {"geometry":["2xw"]}
+  ]]
+}

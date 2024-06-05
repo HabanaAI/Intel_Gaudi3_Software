@@ -1,0 +1,52 @@
+op {
+  name: "Slice"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+  type {
+    name: "S"
+    definition: "Tensor Shape Type"
+    description: "A shape tensor"
+  }
+  input {
+    name: "Real tensor"
+    type: "T"
+    description: "The input tensor to be sliced."
+  }
+  input {
+    name: "Output shape"
+    type: "S"
+    description: "The output tensor shape information. Optional (for dynamic shapes usage)."
+  }
+  output {
+    name: "Aliased tensor"
+    type: "T"
+    description: "Slice result."
+  }
+  c_structure: "synSliceParams"
+  attr {
+    name: "axes[rank(Real tensor)]"
+    type: "unsigned int"
+    description: "1-D array of axes that `starts` and `ends` apply to. the range must cover [0, r-1] where r = rank(Real tensor)."
+  }
+  attr {
+    name: "starts[rank(Real tensor)]"
+    type: "unsigned int"
+    description: "1-D array of starting indices of corresponding axis in `axes`"
+  }
+  attr {
+    name: "ends[rank(Real tensor)]"
+    type: "unsigned int"
+    description: "1-D array of slice step of corresponding axis in `axes`. 'steps' cannot be 0. The FCD mapped axis step must be 1."
+  }
+  attr {
+    name: "steps[rank(Real tensor)]"
+    type: "unsigned int"
+    description: "Mapping of the input tensor axes to the output axes"
+  }
+  summary: "Performs the slice operation."
+  description: "produces a slice of the input tensor along multiple axes.\n(https://github.com/onnx/onnx/blob/master/docs/Operators.md#Slice)"
+  guid: "slice"
+}

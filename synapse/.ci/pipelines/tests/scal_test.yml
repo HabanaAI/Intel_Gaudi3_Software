@@ -1,0 +1,48 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+    - repository: scal
+  dependencies:
+    - CORAL_SIM
+    - RDMA_CORE
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPCSIM
+  config:
+    testCommand: run_scal_test
+    loadLKD: true
+    releaseFlag: true
+    testXMLOutputKey: -x
+  envVars:
+    SCAL_TIMEOUT_VALUE_SECONDS: "400"
+testsMap:
+  Test_synapse_gaudi2_sim_scal_test:
+    config:
+      lkdSimHealtcheckParams:
+        #lkdParam: 'timeout_locked=400'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Scal Gaudi2 tests:
+        envVars:
+          HABANA_SCAL_BIN_PATH: "${ENGINES_FW_RELEASE_BUILD}"
+
+  Test_synapse_gaudi3_sim_scal_test:
+    config:
+      lkdSimHealtcheckParams:
+        #lkdParam: 'timeout_locked=400'
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Scal Gaudi3 tests:
+        filter: -c gaudi3
+        envVars:
+          HABANA_SCAL_BIN_PATH: "${ENGINES_FW_RELEASE_BUILD}"

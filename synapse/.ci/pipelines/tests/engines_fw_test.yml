@@ -1,0 +1,79 @@
+common:
+  testRepos:
+    - repository: synapse
+    - repository: automation
+    - repository: pytorch-training-tests
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: coral-sim
+    - repository: engines-arc
+  dependencies:
+    - HL_THUNK
+    - RDMA_CORE
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPCSIM
+  config:
+    testCommand: run_engines_fw_test
+    loadLKD: true
+    testXMLOutputKey: -x
+    releaseFlag: true
+  envVars:
+    SCAL_TIMEOUT_VALUE_SECONDS: "1000"
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi3_sim_engines_fw_test:
+    dependencies:
+      - CORAL_SIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse gaudi3 tests:
+        filter: -n -C gaudi3 -b -sudo
+  Test_synapse_gaudi3_sim_engines_fw_test_0:
+    dependencies:
+      - CORAL_SIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse gaudi3 tests:
+        filter: -n -C gaudi3 -b --shard-index 0 --total-shards 2 -sudo
+  Test_synapse_gaudi3_sim_engines_fw_test_1:
+    dependencies:
+      - CORAL_SIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse gaudi3 tests:
+        filter: -n -C gaudi3 -b --shard-index 1 --total-shards 2 -sudo
+  Test_synapse_gaudi2_sim_engines_fw_test:
+    dependencies:
+      - CORAL_SIM
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse gaudi2 tests:
+        filter: -n -C gaudi2 -b -sudo
+  Test_synapse_gaudi2_asic_engines_fw_test:
+    dependencies:
+      - SYNAPSE_PROFILER
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: true
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run Synapse gaudi2 tests:
+        filter:  -C gaudi2 -n -b

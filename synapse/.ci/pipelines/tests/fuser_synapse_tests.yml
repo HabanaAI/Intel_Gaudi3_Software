@@ -1,0 +1,39 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - COMPLEX_GUID
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_FUSER
+    - TPC_KERNELS
+    - TPCSIM
+    - RDMA_CORE
+  config:
+    testCommand: run_synapse_test
+    loadLKD: true
+    testXMLOutputKey: -x
+    releaseFlag: true
+  envVars:
+    SCAL_TIMEOUT_VALUE_SECONDS: "1000"
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi_sim_fuser_synapse_tests:
+    config:
+      lkdSimHealtcheckParams:
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run fuser synapse gaudi tests:
+        filter: -spdlog 3 -shuffle -c gaudi -m sim
+        envVars:
+          ENABLE_CONSOLE: false

@@ -1,0 +1,10 @@
+# intellisense/compilation db
+/.cache/clangd/**
+compile_commands.json
+
+.cproject
+.project
+build/
+.idea/
+cmake-build*/
+.vscode/

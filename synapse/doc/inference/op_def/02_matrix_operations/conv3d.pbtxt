@@ -1,0 +1,167 @@
+op {
+  name: "Convolution 3D"
+  type {
+    name: "T"
+    definition: "tensor(int4), tensor(int8), tensor(int16), tensor(int32), tensor(uint4), tensor(uint8), tensor(uint16), tensor(uint32), tensor(float32), tensor(bfloat16), tensor(float16)"
+    description: "A 5D tensor of layout *BDHWC* with the elements of type specified in the definition."
+  }
+  type {
+    name: "S"
+    definition: "tensor(int4), tensor(int8), tensor(int16), tensor(int32), tensor(uint4), tensor(uint8), tensor(uint16), tensor(uint32), tensor(float32), tensor(bfloat16), tensor(float16)"
+    description: "A 5D tensor of layout *QRSCK* with the elements of type specified in the definition."
+  }
+  type {
+    name: "R"
+    definition: "tensor(int4), tensor(int8), tensor(int16), tensor(int32), tensor(uint4), tensor(uint8), tensor(uint16), tensor(uint32), tensor(float32), tensor(bfloat16), tensor(float16)"
+    description: "A 5D tensor of layout *BDHWK* with the elements of type specified in the definition."
+  }
+  type {
+    name: "U"
+    definition: "tensor(int4), tensor(int8), tensor(int16), tensor(int32), tensor(uint4), tensor(uint8), tensor(uint16), tensor(uint32), tensor(float32), tensor(bfloat16), tensor(float16)"
+    description: "A 1D tensor of layout *C* with the elements of type specified in the definition."
+  }
+
+  input {
+    name: "Input_feature_map"
+    type: "T"
+    description: "Input Tensor of type ``T`` and dimensions [B, D, H, W, C]."
+  }
+  input {
+    name: "Weights"
+    type: "S"
+    description: "Input Tensor of type ``S`` and dimensions [kD, kH, kW, C, K]."
+  }
+  input {
+    name: "Bias"
+    type: "U"
+    description: "Input Tensor of type ``U`` and dimensions [C]."
+                 " Optional (can be nullptr)"
+  }
+  input {
+    name: "C_In"
+    type: "R"
+    description: "Input Tensor of type ``T`` and dimensions [B, D', H', W', K]."
+                 " Optional (can be nullptr)"
+  }
+  output {
+    name: "Output_feature_map"
+    type: "R"
+    description: "Resultant tensor is the output of the *Convolution* operation and dimensions [B, D', H', W', K]."
+  }
+  attr {
+    name: "kernel[CONV_KERNEL_SIZE]"
+    type: "unsigned int"
+    description: "Kernel dimension [Depth, Height, Width]"
+    default{ s: "[1,1,1]" }
+  }
+  attr {
+    name: "stride[CONV_STRIDE_SIZE]"
+    type: "unsigned int"
+    description: "Stride in each spatial dimension [Depth, Height, Width]"
+    default{ s: "[1,1,1]" }
+  }
+  attr {
+    name: "padding[CONV_PAD_SIZE]"
+    type: "int"
+    description: "Padding in start and end of each spatial dimension [Depth, Height, Width]"
+    default{ s: "[0,0,0,0,0,0]" }
+  }
+  attr {
+    name: "dilation[CONV_KERNEL_SIZE]"
+    type: "int"
+    description: "Dilation in each spatial dimension [Depth, Height, Width]"
+    default{ s: "[1,1,1]" }
+  }
+  attr {
+    name: "activation.reluEnable"
+    type: "bool"
+    description: "If true, the Conv/FC will perform a PWL (piece-wise linear) function on the "
+                 "output (e.g. ReLU, PReLU, LeakyReLU)."
+    default{ b: false }
+  }
+  attr {
+    name: "activation.resAfterPWL"
+    type: "bool"
+    description:  "If true, add residual (CIN) if exists to the output, before applying the PWL function, if "
+                  "enabled in reluEnable. if false (but CIN exists and PWL is enabled) then the residual will be "
+                  "added after applying the PWL on the output."
+    default{ b: false }
+  }
+  attr {
+    name: "activation.numChannels"
+    type: "uint32_t"
+    description: "number of channels in the output - for applying the PWL coefficents per channel. "
+                 "numChannels=1 (the default) indicates global coefficents (apply on the entire output)."
+    default{ i: 1 }
+  }
+  attr {
+    name: "nGroups"
+    type: "unsigned int"
+    description: "Number of convolution groups, 1 means regular convolution."
+    default{ i: 1 }
+  }
+  formula {
+      equation: "DilKernelSize(Dim) = kernel[Dim] + (kernel[Dim] - 1)*(dilation[Dim] - 1)"
+      label: "dilkernel"
+  }
+  formula {
+      equation: "W' = \\frac{W-DilKernelSize(WIDTH)+padding[LEFT]+padding[RIGHT]}{stride[WIDTH]}+1"
+      label: "wtag"
+  }
+  formula {
+      equation: "H' = \\frac{H-DilKernelSize(HEIGHT)+padding[TOP]+padding[BOTTOM]}{stride[HEIGHT]}+1"
+      label: "htag"
+  }
+  formula {
+      equation: "D' = \\frac{D-DilKernelSize(DEPTH)+padding[FRONT]+padding[BACK]}{stride[DEPTH]}+1"
+      label: "dtag"
+  }
+  summary: "The K * 4D filters are applied over spatial dimension [Depth, Height, Width]"
+           " of the image(Input_feature_map)."
+  description: "This kernel applies K filters of shape 4D over Input_feature_map"
+               " of shape 5D. The 4D filter is applied over spatial dimension"
+               " [Depth, Height, Width] of the image and has a separate filter for "
+               "each channel hence the shape 4D. Also, same filter is applied"
+               " for all batches of the image. Filter is moved across the input"
+               " image with a particular stride value along the two spatial "
+               "dimensions resulting in different output sizes along spatial dimension:"
+               "\math{dilkernel} \math{wtag} \math{htag} \math{dtag}"
+  constraints: ["All Inputs must be of the same datatype.\n",
+               "Number of batches in input and output tensors are same.\n",
+               "$**Stride** - Number of pixels by which kernel is shifted along the spatial axis of Ifm.\n",
+               "$**Padding** - Number of pixels added at the beginning and end of spatial axis of Ifm.\n",
+               "$**Dilation** - Controls spacing between kernel points. If set to dilation k > 1, there will be k-1 skipped cells between each filter element on that dimension.\n"]
+  guid: "spatial_convolution3d"
+  c_structure:
+    "enum synConvParamIndex\n"
+    "{\n"
+    "    //Kernel\n"
+    "    CONV_KERNEL_WIDTH    = 0,\n"
+    "    CONV_KERNEL_HEIGHT   = 1,\n"
+    "    CONV_KERNEL_DEPTH    = 2,\n"
+    "    CONV_KERNEL_SIZE     = 3,\n"
+    "\n"
+    "    //Stride\n"
+    "    CONV_STRIDE_WIDTH    = 0,\n"
+    "    CONV_STRIDE_HEIGHT   = 1,\n"
+    "    CONV_STRIDE_DEPTH    = 2,\n"
+    "    CONV_STRIDE_SIZE     = 3,\n"
+    "\n"
+    "    //Padding\n"
+    "    CONV_PAD_LEFT        = 0,\n"
+    "    CONV_PAD_RIGHT       = 1,\n"
+    "    CONV_PAD_TOP         = 2,\n"
+    "    CONV_PAD_BOTTOM      = 3,\n"
+    "    CONV_PAD_FRONT       = 4,\n"
+    "    CONV_PAD_BACK        = 5,\n"
+    "    CONV_PAD_SIZE        = 6,\n"
+    "\n"
+    "    //Dilation\n"
+    "    CONV_DIL_WIDTH       = 0,\n"
+    "    CONV_DIL_HEIGHT      = 1,\n"
+    "    CONV_DIL_DEPTH       = 2,\n"
+    "    CONV_DIL_SIZE        = 3,\n"
+    "};\n"
+    "\n"
+    "struct synConvolution3DParams;"
+}

@@ -1,0 +1,39 @@
+{ "programInSram":"true",
+  "tests":[
+
+  [{"testName":["sbReuse B no fcd movement"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["dedw"]},
+    {"lowerEn":["false"]},
+    {"unrollEn":["false"]},
+    {"sbReuse":["true"]},
+    {"signalMode":["desc"]},
+    {"xSizes": ["550","40","40","1","1"]},
+    {"wSizes": ["256","550","2","2","2"]},
+    {"ySizes": ["256","20","20","1","1"]},
+    {"dilation":["1", "1", "1"]},
+    {"strides":["1", "1", "1"]},
+    {"padding":["0", "0", "0"]},
+    {"dedwPattern":["kcf", "kfc", "fkc", "ckf", "cfk", "fck"]},
+    {"geometry":["4xw"]}
+    ],
+
+    [{"testName":["sbReuse B with fcd movement"]},
+      {"inTypeFloat":["bf16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["dedw"]},
+      {"lowerEn":["false"]},
+      {"unrollEn":["false"]},
+      {"sbReuse":["true"]},
+      {"signalMode":["desc"]},
+      {"xSizes": ["1200","40","40","1","1"]},
+      {"wSizes": ["256","1200","2","2","2"]},
+      {"ySizes": ["256","20","20","1","1"]},
+      {"dilation":["1", "1", "1"]},
+      {"strides":["1", "1", "1"]},
+      {"padding":["0", "0", "0"]},
+      {"dedwPattern":["kcf", "kfc", "fkc", "ckf"]},
+      {"geometry":["4xh"]}
+      ]
+]}

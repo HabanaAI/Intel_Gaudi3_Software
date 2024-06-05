@@ -1,0 +1,202 @@
+// This file contains all the messages that are common. Regardless of chip-type
+
+syntax = "proto2";
+
+import public "protobuf/generic.proto";
+
+package gc_recipe;
+
+// common types and messages
+enum AddressSpace
+{
+    HOST = 1;
+    DRAM = 2;
+    SRAM = 3;
+}
+
+enum FieldAddressPartType
+{
+    FIELD_ADDRESS_PART_LOW  = 1;
+    FIELD_ADDRESS_PART_HIGH = 2;
+    FIELD_ADDRESS_PART_FULL = 3;
+}
+
+// This enum MUST be aligned to the one in "specs/goya/goya_packets.h"
+// Although in Gaudi it is not part of the HW packets, we need this field for Synapse RT operations (mainly patching)
+// REMARK - We may want to move it into a common file that each hw-specific proto will import (TBD)
+//          Pay attention that .proto's import works in the opposite direction of hierarchy in "normal" code-language
+
+enum dma_direction
+{
+    DMA_HOST_TO_DRAM = 0;
+    DMA_HOST_TO_SRAM = 1;
+    DMA_DRAM_TO_SRAM = 2;
+    DMA_SRAM_TO_DRAM = 3;
+    DMA_SRAM_TO_HOST = 4;
+    DMA_DRAM_TO_HOST = 5;
+    DMA_DRAM_TO_DRAM = 6;
+    DMA_SRAM_TO_SRAM = 7;
+    DMA_ENUM_MAX     = 8;
+}
+
+// General comment - Strings are initialize as a single space (" ") due to an unknown issue (as a temporary workaround)
+
+message PatchingInformation
+{
+    required uint64                 commandId          = 1;
+    required uint64                 engineFieldId      = 2;
+    required AddressSpace           fieldAddressSpace  = 3;
+    required uint64                 targetAddress      = 4;
+    required uint32                 fieldIndexOffset   = 5;
+    required FieldAddressPartType   engineFieldPart    = 6;
+    required string                 sectionName        = 7 [default = " "];
+    required uint64                 memoryId           = 8;
+}
+
+message Statistics
+{
+    optional uint32 SramUse = 1;
+    optional uint64 DramUSe = 2;
+    optional uint64 Bandwidth = 3;
+    optional double Utilization = 4;
+    optional double TimeInSec = 5;
+}
+
+message SliceInfo
+{
+    required uint64     SliceOffset     = 1;
+    required uint64     SliceSize       = 2;
+    required uint32     RoiSize         = 3;
+    required uint32     FirstDmaIndex   = 4;
+}
+
+message TensorMetadata
+{
+    required string     Id                  = 1 [default = " "];
+    required uint32     SampleSize          = 2; // In case there is no batch size for graph - this will be the whole tensor size
+    required uint32     ElementType         = 3;
+    required double     zp                  = 4;
+    required double     scale               = 5;
+    required uint32     Dims                = 6;
+    repeated uint32     DimensionsSize      = 7;
+    required uint32     NumOfSlices         = 8;
+    repeated SliceInfo  SliceInformation    = 9;
+}
+
+message Metadata
+{
+    optional uint32             BatchSize       = 1;
+    repeated TensorMetadata     InputMD         = 2;
+    repeated TensorMetadata     OutputMD        = 3;
+    repeated TensorMetadata     IntermediateMD  = 4;
+    required uint64             SramBaseAddress = 5;
+    required uint32             DeviceType      = 6;
+}
+
+message DebugInfoJob
+{
+    required uint32                 number_of_signals_begin = 1;
+    required uint32                 number_of_signals_end   = 2;
+    optional string                 engine_name             = 3 [default = " "];
+}
+
+message DebugInfoNode
+{
+    required uint32                 node_context_id      = 1;
+    required uint32                 node_full_context_id = 2;
+    required string                 node_name            = 3 [default = " "];
+    required string                 node_type            = 4 [default = " "];
+    required string                 data_type            = 5 [default = " "];
+    optional string                 operation            = 6 [default = " "];
+    repeated DebugInfoJob           jobs                 = 7;
+    required uint32                 breakpoint_idx       = 8;
+    repeated DebugInfoTensor        output_tensors       = 9;
+    repeated DebugInfoTensor        input_static_tensors = 10;
+}
+
+message DebugInfoTensor
+{
+    required string                 tensor_name             = 1 [default = " "];
+    required uint64                 address                 = 3;
+    required uint32                 num_dims                = 4;
+    repeated uint32                 shape                   = 5;
+    required string                 data_type               = 6 [default = " "];
+    required bool                   is_dense                = 7;
+    required bool                   in_sram                 = 8;
+    required bool                   is_static_tensor        = 9;
+    required bool                   has_dram_alloc_tensor   = 10;
+    required bool                   has_host_alias_tensor   = 11;
+    optional string                 real_tensor_name        = 12 [default = " "]; // Relevant only when tensor is an alias
+    optional string                 dram_alloc_tensor_name  = 13 [default = " "]; // Relevant only when tensor has a dram allocated tensor
+    optional string                 host_alias_tensor_name  = 14 [default = " "]; // Relevant only when tensor has a host alias
+    optional uint64                 host_alias_offset       = 15; // Relevant for static tensors only
+    optional uint64                 dram_address            = 16; // Relevant for static tensors only
+}
+
+message DebugInfo
+{
+    repeated DebugInfoNode          nodes                = 1;
+    optional string                 version              = 2 [default = " "];
+}
+
+message General
+{
+    optional string                  WorkLoadName            = 1 [default = " "];
+    optional Statistics              Stats                   = 2;
+    optional Metadata                Metadata                = 3;
+    required uint64                  TopologyDramSize        = 4;
+    optional bool                    allocFromDramEnabled    = 5;
+    optional bool                    IOsInDram               = 6;
+    optional DebugInfo               debuginfo               = 7;
+    required uint32                  binaryCRC32             = 8;
+}
+
+// Generic messages that are used in the building-blocks below
+message PqCmd
+{
+    optional uint32     QueueId = 1;
+    optional uint64     Addr    = 2;
+    optional uint32     Size    = 3;
+}
+
+// Building blocks - Recipe <- TopologyPart(s) <- CommandBuffer(s) <- Command(s)
+message Command
+{
+    required generic_packets_container pktsCont  = 1;
+}
+
+message CommandBuffer
+{
+    repeated Command                Cmd          = 1;
+    optional uint32                 QueueId      = 2;
+    repeated PatchingInformation    PatchingInfo = 3;
+}
+
+message LoadTopology
+{
+    repeated CommandBuffer  CB = 1;
+}
+
+message ActivateTopology
+{
+    repeated CommandBuffer  CB = 1;
+    repeated PqCmd          pq = 2;
+}
+
+message Execute
+{
+    repeated CommandBuffer  CB                 = 1;
+    repeated PqCmd          pq                 = 2;
+    repeated uint64         printfAddr         = 3;
+    optional uint32         inputCbNumber      = 4;
+    optional uint32         outputCbNumber     = 5;
+    required uint64         optionalIOSramAddr = 6;
+}
+
+message Recipe
+{
+    optional General           general          = 1;
+    optional LoadTopology      loadTopology     = 2;
+    optional Execute           execute          = 3;
+    optional ActivateTopology  activateTopology = 4;
+}

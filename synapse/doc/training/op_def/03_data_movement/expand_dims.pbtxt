@@ -1,0 +1,32 @@
+op {
+  name: "Expand dims"
+type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int64), tensor(uint64)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS-1 with the elements of type specified in the definition."
+}
+type {
+    name: "U"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int64), tensor(uint64)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+}
+input {
+    name: "Input_Tensor"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+output {
+    name: "Output_Tensor"
+    type: "U"
+    description: "Output_Tensor tensor is the output of the *Expand dims* operation."
+}
+c_structure: "struct synExpandDimsParams;"
+attr {
+    name: "axis"
+    type: "unsigned int"
+    description: "The axis after which add a dimension of size 1."
+  }
+  summary: "This node creates a tensor of size *D+1* from a tensor of size *D* by adding size 1 at the axis parameter.\n"
+           "Example - input of sizes [128,256,12] expanded with *axis=1* expects output of sizes [128,256,1,12]."
+  guid: "expand_dims"
+}

@@ -1,0 +1,24 @@
+op {
+  name: "Broadcast"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int16), tensor(int8), tensor(int4)"
+    description: "A 1D, 2D, 3D, 4D or 5D tensor with the elements of type specified in the definition."
+  }
+  input {
+    name: "The tensor to broadcast"
+    type: "T"
+    description: "Input Tensor of type ``T`` with dimensionality 1-5D."
+  }
+  output {
+    name: "The broadcast tensor"
+    type: "T"
+    description: "Output tensor with the same type as input"
+  }
+  summary: "Makes the input and output tensors to have compatible shapes for arithmetic operations"
+  description: "Performs broadcasting in input based on the broadcasting rules outlined in the ONNX spec: https://github.com/onnx/onnx/blob/rel-1.9.0/docs/Broadcasting.md"
+  constraints: ["All input/output tensors must be of the same datatype and they must have the same dimensionality except in the broadcast support where the dimensionality can be different.",
+                "This operator is agnostic to the data layout."
+                "int4 supported platform: Greco"]
+  guid: "broadcast"
+}

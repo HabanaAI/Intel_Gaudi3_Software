@@ -1,0 +1,27 @@
+op {
+  name: "Reshape"
+  type {
+    name: "T"
+    definition: "tensor(float32), tensor(bfloat16), tensor(int32), tensor(int64), tensor(uint64)"
+    description: "A tensor of rank up to DEVICE_ATTRIBUTE_MAX_DIMS with the elements of type specified in the definition."
+  }
+  input {
+    name: "The tensor to reshape"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+  input {
+    name: "Shape tensor describing output"
+    type: "T"
+    description: "Input Tensor of type ``T``."
+  }
+  output {
+    name: "The reshaped tensor"
+    type: "T"
+    description: "Output tensor with the same type as input."
+  }
+  summary: "Reshapes the input tensor."
+  description: " This operation returns a new tensor that has the same values as input tensor in the same order, except with a new shape given by shape tensor."
+  constraints: ["The number of elements in the input and output tensor must be equal."]
+  guid: "reshape"
+}

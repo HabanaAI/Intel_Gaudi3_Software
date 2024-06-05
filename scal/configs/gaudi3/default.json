@@ -1,0 +1,1499 @@
+{
+	"version" :
+	{
+		"major" : 1,
+		"minor" : 0,
+		"revision" : 0
+	},
+	"gaudi3":
+	{
+		"backward_compatibleness" :
+		{
+			"auto_fetcher" : true
+		},
+		"pdma_channel_config" :
+		{
+			"syncman_idx" : 2,
+			"monitor_idx" : 1023, // must match config_pdma_monitors
+			"cq_idx" : 63,
+			"pdma_channel" : "PDMA_1_5",
+			"fence_idx" : 0
+		},
+		"pdma_clusters" :
+		[
+			{ "name" : "pdma_rx_debug",
+				"engines" :
+				[
+					"PDMA_3"
+				],
+				"channels" :
+				[
+					{
+						"index" : 4,
+						"priority" : 7,
+						"scheduler" :
+						{
+							"name": "compute_media_scheduler",
+							"group" : "PDMA_RX_DEBUG_GROUP"
+						}
+					}
+				]
+			},
+			{ "name" : "pdma_dev2dev_debug",
+				"engines" :
+				[
+					"PDMA_1"
+				],
+				"channels" :
+				[
+					{
+						"index" : 4,
+						"priority" : 7,
+						"scheduler" :
+						{
+							"name": "compute_media_scheduler",
+							"group" : "PDMA_DEV2DEV_DEBUG_GROUP"
+						}
+					}
+				]
+			},
+			{ "name" : "pdma_rx",
+				"is_direct_mode" : true, // In case missing - managed by scheduler
+				"is_isr_enabled" : true, // Only relevant in case isManagedByScheduler is not set
+				"tdr" : true,
+				"cluster_priority": 0,
+				"streams" :
+				[
+					{
+						"engines" :
+						[
+							"PDMA_2_0"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_2_1"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_2_2"
+						]
+					}
+				]
+			},
+			{ "name" : "pdma_tx",
+				"is_direct_mode" : true, // In case missing - managed by scheduler
+				"is_isr_enabled" : true, // Only relevant in case isManagedByScheduler is not set
+				"tdr" : true,
+				"cluster_priority": 7,
+				"streams" :
+				[
+					{
+						"engines" :
+						[
+							"PDMA_1_0"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_1_1"
+						]
+					},
+
+					{
+						"engines" :
+						[
+							"PDMA_1_2"
+						]
+					}
+				]
+			},
+			{ "name" : "pdma_tx_commands",
+				"is_direct_mode" : true, // In case missing - managed by scheduler
+				"is_isr_enabled" : true, // Only relevant in case isManagedByScheduler is not set
+				"tdr" : true,
+				"cluster_priority": 0,
+				"streams" :
+				[
+					{
+						"engines" :
+						[
+							"PDMA_0_0"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_0_1"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_0_2"
+						]
+					}
+				]
+			},
+			{ "name" : "pdma_device2device",
+				"is_direct_mode" : true, // In case missing - managed by scheduler
+				"is_isr_enabled" : true, // Only relevant in case isManagedByScheduler is not set
+				"tdr" : true,
+				"cluster_priority": 7,
+				"streams" :
+				[
+					{
+						"engines" :
+						[
+							"PDMA_3_0"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_3_1"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_3_2"
+						]
+					}
+				]
+			},
+			{ "name" : "pdma_tx_for_network_scheduler_mode",
+				"engines" :
+				[
+					"PDMA_0"
+				],
+				"channels" :
+				[
+					{
+						"index" : 3,
+						"priority" : 0,
+						"scheduler" :
+						{
+							"name" : "scaleout_send",
+							"group" : "PDMA_NETWORK_SCALE_OUT_SEND_GROUP"
+						}
+					}
+				]
+			},
+			{ "name" : "pdma_rx_for_network_scheduler_mode",
+				"engines" :
+				[
+					"PDMA_2"
+				],
+				"channels" :
+				[
+					{
+						"index" : 3,
+						"priority" : 0,
+						"scheduler" :
+						{
+							"name" : "scaleout_receive",
+							"group" : "PDMA_NETWORK_SCALE_OUT_RECV_GROUP"
+						}
+					}
+				]
+			},
+			{ "name" : "pdma_tx_for_network_direct_mode",
+				"is_direct_mode" : true, // In case missing - managed by scheduler
+				"is_isr_enabled" : true, // Only relevant in case isManagedByScheduler is not set
+				"tdr" : true,
+				"cluster_priority": 0,
+				"streams" :
+				[
+					{
+						"engines" :
+						[
+							"PDMA_0_4"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_0_5"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_1_3" // Single low-priority channel
+						]
+					}
+				]
+			},
+			{ "name" : "pdma_rx_for_network_direct_mode",
+				"is_direct_mode" : true, // In case missing - managed by scheduler
+				"is_isr_enabled" : true, // Only relevant in case isManagedByScheduler is not set
+				"tdr" : true,
+				"cluster_priority": 0,
+				"streams" :
+				[
+					{
+						"engines" :
+						[
+							"PDMA_2_4"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_2_5"
+						]
+					},
+					{
+						"engines" :
+						[
+							"PDMA_3_3" // Single low-priority channel
+						]
+					}
+				]
+			}
+		],
+		"memory" :
+		{
+			"tpc_barrier_in_sram" : true,
+			"control_cores_memory_pools" :
+			[
+				{ "name" : "global_hbm",
+					"size" : 0, // use all the HBM that is not used for other pools
+					"type" : "HBM",
+					"region_base" : 0 // not addressable by the cores
+				},
+				{ "name" : "host_shared",
+					"size" : 128, // in MB
+					"type" : "HOST",
+					"region_base" : 9,
+					"fill_region" : true
+				},
+				{ "name" : "hbm_shared",
+					"size" : 128, // in MB
+					"type" : "HBM",
+					"region_base" : 5,
+					"fill_region" : true
+				},
+				{ "name" : "hbm_binary",
+					"size" : 32, // in MB
+					"type" : "HBM",
+					"region_base" : 0,
+					"fill_region" : true
+				},
+				{ "name" : "hbm_pdma",
+					"size" : 72, // in MB
+					"type" : "HBM",
+					"region_base" : 6,
+					"fill_region" : true
+				}
+			],
+			"memory_groups" :
+			[
+				{ "name" : "all_cores",
+					"pools" : ["host_shared", "hbm_shared", "hbm_pdma"],
+					"configuration_pool" : "host_shared"
+				}
+			],
+			"binary_pool"       : "hbm_binary",    // pool for binaries
+			"global_pool"       : "global_hbm",
+			"pdma_pool"         : "hbm_pdma"
+		},
+		"cores" :
+		{
+			"schedulers" :
+			[
+				{ "name" : "compute_media_scheduler",
+					"core" : "ARCFARM_0_0",
+					"binary_name" : "g3_sched_cmpt_media",
+					"memory_group" : "all_cores",
+					"qman" : "TPC_1_0"
+				},
+				{ "name" : "scaleout_receive",
+					"core" : "ARCFARM_3_0",
+					"binary_name" : "g3_sched_scaleout_recv",
+					"memory_group" : "all_cores",
+					"qman" : "TPC_1_1"
+				},
+				{ "name" : "scaleout_send",
+					"core" : "ARCFARM_1_0",
+					"binary_name" : "g3_sched_scaleout_send",
+					"memory_group" : "all_cores",
+					"qman" : "TPC_1_2"
+				},
+				{ "name" : "network_garbage_collector_and_reduction",
+					"core" : "ARCFARM_1_1",
+					"binary_name" : "g3_sched_garbage_reduction",
+					"memory_group" : "all_cores",
+					"qman" : "TPC_1_0"
+				},
+				{ "name" : "scaleup_receive",
+					"core" : "ARCFARM_2_0",
+					"binary_name" : "g3_sched_scaleup_recv",
+					"memory_group" : "all_cores",
+					"qman" : "TPC_1_1"
+				},
+				{ "name" : "scaleup_send",
+					"core" : "ARCFARM_2_1",
+					"binary_name" : "g3_sched_scaleup_send",
+					"memory_group" : "all_cores",
+					"qman" : "TPC_1_2"
+				}
+			],
+			"engine_clusters" :
+			[
+				{ "name" : "compute_tpc",
+					"binary_name" : "g3_eng_tpc_cmpt",
+					"memory_group" : "all_cores",
+					"is_compute" : 1,
+					"is_local_dup" : 1,
+					"engines" :
+					[
+						"TPC_0_0",
+						"TPC_2_0",
+						"TPC_4_0",
+						"TPC_6_0",
+						"TPC_1_0",
+						"TPC_3_0",
+						"TPC_5_0",
+						"TPC_7_0",
+						"TPC_0_1",
+						"TPC_2_1",
+						"TPC_4_1",
+						"TPC_6_1",
+						"TPC_1_1",
+						"TPC_3_1",
+						"TPC_5_1",
+						"TPC_7_1",
+						"TPC_0_2",
+						"TPC_2_2",
+						"TPC_4_2",
+						"TPC_6_2",
+						"TPC_1_2",
+						"TPC_3_2",
+						"TPC_5_2",
+						"TPC_7_2",
+						"TPC_0_3",
+						"TPC_2_3",
+						"TPC_4_3",
+						"TPC_6_3",
+						"TPC_1_3",
+						"TPC_3_3",
+						"TPC_5_3",
+						"TPC_7_3",
+						"TPC_0_4",
+						"TPC_2_4",
+						"TPC_4_4",
+						"TPC_6_4",
+						"TPC_1_4",
+						"TPC_3_4",
+						"TPC_5_4",
+						"TPC_7_4",
+						"TPC_0_5",
+						"TPC_2_5",
+						"TPC_4_5",
+						"TPC_6_5",
+						"TPC_1_5",
+						"TPC_3_5",
+						"TPC_5_5",
+						"TPC_7_5",
+						"TPC_0_6",
+						"TPC_2_6",
+						"TPC_4_6",
+						"TPC_6_6",
+						"TPC_1_6",
+						"TPC_3_6",
+						"TPC_5_6",
+						"TPC_7_6",
+						"TPC_0_7",
+						"TPC_2_7",
+						"TPC_4_7",
+						"TPC_6_7",
+						"TPC_1_7",
+						"TPC_3_7",
+						"TPC_5_7",
+						"TPC_7_7"
+					],
+					"queues" :
+					[
+						{
+							"index" : 0,
+							"scheduler" :
+							{
+								"name": "compute_media_scheduler",
+								"dup_trigger": [{"dup":0}],
+								"group" : "TPC_COMPUTE_GROUP" // either group macro or a number
+							}
+						}
+					]
+				},
+				{ "name" : "mme",
+					"binary_name" : "g3_eng_mme_cmpt",
+					"memory_group" : "all_cores",
+					"is_compute" : 1,
+					"engines" :
+					[
+						"MME_0",
+						"MME_1",
+						"MME_2",
+						"MME_3",
+						"MME_4",
+						"MME_5",
+						"MME_6",
+						"MME_7"
+					],
+					"queues" :
+					[
+						{
+							"index" : 0,
+							"scheduler" :
+							{
+								"name": "compute_media_scheduler",
+								"dup_trigger": [{"dup":1}],
+								"group" : "MME_COMPUTE_GROUP"
+							}
+						}
+					]
+				},
+				{ "name" : "network_edma_0",
+					"binary_name" : "g3_eng_edma_nic",
+					"memory_group" : "all_cores",
+					"engines" :
+					[
+						"EDMA_1_0",
+						"EDMA_3_0",
+						"EDMA_4_0",
+						"EDMA_6_0"
+					],
+					"queues" :
+					[
+						{
+							"index" : 1,
+							"scheduler" :
+							{
+								"name": "scaleup_send",
+								"dup_trigger": [{"dup":3}],
+								"group" : "EDMA_NETWORK_SCALE_UP_SEND_GROUP0"
+							}
+						},
+						{
+							"index" : 2,
+							"scheduler" :
+							{
+								"name": "network_garbage_collector_and_reduction",
+								"dup_trigger": [{"dup":3}],
+								"group" : "EDMA_NETWORK_GC_REDUCTION_GROUP0"
+							}
+						},
+						{
+							"index" : 3,
+							"scheduler" :
+							{
+								"name": "scaleout_send",
+								"dup_trigger": [{"dup":3}],
+								"group" : "EDMA_NETWORK_SCALE_OUT_SEND_GROUP0"
+							}
+						},
+						{
+							"index" : 4,
+							"scheduler" :
+							{
+								"name": "scaleup_receive",
+								"dup_trigger": [{"dup":3}],
+								"group" : "EDMA_NETWORK_SCALE_UP_RECV_GROUP0"
+							}
+						}
+					]
+				},
+				{ "name" : "network_edma_slaves",
+					"binary_name" : "g3_eng_edma_nic_slave",
+					"memory_group" : "all_cores",
+					"engines" :
+					[
+						"EDMA_1_1", // must be in the same order as network_edma_0
+						"EDMA_3_1",
+						"EDMA_4_1",
+						"EDMA_6_1"
+					],
+					"queues" : []
+				},
+				{   "name" : "rotator",
+					"binary_name" : "g3_eng_rot",
+					"memory_group" : "all_cores",
+					"is_compute" : 1,
+					"engines" :
+					[
+						"ROT_1_0",
+						"ROT_1_1",
+						"ROT_3_0",
+						// "ROT_3_1", // 1 rotator per die is binned
+						"ROT_4_0",
+						"ROT_4_1",
+						"ROT_6_0"
+						// "ROT_6_1" // 1 rotator per die is binned
+					],
+					"queues" :
+					[
+						{
+							"index" : 0,
+							"scheduler" :
+							{
+								"name": "compute_media_scheduler",
+								"dup_trigger": [{"dup":4, "queue":0}],
+								"group" : "RTR_COMPUTE_GROUP"
+							}
+						}
+					]
+				},
+				{ "name" : "cme", // 'cme' name is used to detect that it's CME - Cache Management Engine
+					"binary_name" : "g3_sched_cme",
+					"memory_group" : "all_cores",
+					"is_local_dup" : 1,
+					"qman" : "TPC_1_1",
+					"engines" :
+					[
+						"ARCFARM_0_1"
+					],
+					"queues" :
+					[
+						{
+							"index" : 0,
+							"scheduler" :
+							{
+								"name": "compute_media_scheduler",
+								"dup_trigger": [{"dup":6}],
+								"group" : "CME_GROUP" // either group macro or a number
+							}
+						}
+					]
+				}
+			],
+			"nic_clusters" :
+			[
+				{ "name" : "nic_scaleup",
+					"ports" :
+					[
+						{ "name": "NIC_0_0", "mask": 3 },
+						{ "name": "NIC_0_1", "mask": 3 },
+						{ "name": "NIC_0_2", "mask": 3 },
+						{ "name": "NIC_0_3", "mask": 3 },
+						{ "name": "NIC_0_4", "mask": 2 },
+						{ "name": "NIC_0_5", "mask": 3 },
+						{ "name": "NIC_1_0", "mask": 3 },
+						{ "name": "NIC_1_1", "mask": 3 },
+						{ "name": "NIC_1_2", "mask": 3 },
+						{ "name": "NIC_1_3", "mask": 3 },
+						{ "name": "NIC_1_4", "mask": 3 }
+					],
+					"queues" :
+					[
+						{
+							"index" : 0,
+							"scheduler" :
+							{
+								"name": "scaleup_send",
+								"dup_trigger": [{"dup":6}, {"dup":13}],
+								"group" : "NIC_SEND_SCALE_UP_GROUP"
+							}
+						},
+						{
+							"index" : 1,
+							"scheduler" :
+							{
+								"name": "scaleup_receive",
+								"dup_trigger": [{"dup":6}, {"dup":13}],
+								"group" : "NIC_RECEIVE_SCALE_UP_GROUP"
+							}
+						}
+					]
+				},
+				{ "name" : "nic_scaleout",
+					"ports" :
+					[
+						{ "name": "NIC_0_4", "mask": 1 },
+						{ "name": "NIC_1_5", "mask": 3 }
+					],
+					"queues" :
+					[
+						{
+							"index" : 0,
+							"scheduler" :
+							{
+								"name": "scaleout_send",
+								"dup_trigger": [{"dup":8}],
+								"group" : "NIC_SEND_SCALE_OUT_GROUP"
+							}
+						},
+						{
+							"index" : 1,
+							"scheduler" :
+							{
+								"name": "scaleout_receive",
+								"dup_trigger": [{"dup":8}],
+								"group" : "NIC_RECEIVE_SCALE_OUT_GROUP"
+							}
+						}
+					]
+				}
+			]
+		},
+		"streams_sets" :
+		[
+			{ "name_prefix" : "compute",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 0,
+				"streams_nr" : 3,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "pdma_tx_debug",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 3,
+				"streams_nr" : 1,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "pdma_rx_debug",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 4,
+				"streams_nr" : 1,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "pdma_dev2dev_debug",
+				"scheduler" : "compute_media_scheduler",
+				"base_idx" : 5,
+				"streams_nr" : 1,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "network_garbage_collector_and_reduction",
+				"scheduler" : "network_garbage_collector_and_reduction",
+				"base_idx" : 0,
+				"streams_nr" : 32,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleup_receive",
+				"scheduler" : "scaleup_receive",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleup_send",
+				"scheduler" : "scaleup_send",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleout_receive",
+				"scheduler" : "scaleout_receive",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			},
+			{ "name_prefix" : "scaleout_send",
+				"scheduler" : "scaleout_send",
+				"base_idx" : 0,
+				"streams_nr" : 12,
+				"dccm_buffer_size" : 512 // 2 X 256 bytes
+			}
+		],
+		"sync" :
+		{
+			"sync_managers":
+			[
+				{ "index":1,  // This is smIndex, sm 0 is reserved for LKD usage. In Gaudi3 each sm has 8192 SOBs and 1024 monitors. There are 16 SMs, 0..15
+					"map_to_userspace": false,
+					"qman": "TPC_1_0",
+					"sos_pools":
+					[
+						{ "name": "completion_group_credits_sos", // 1 SO per Scheduler-cluster's queue (Double-Buffer)
+							"base_index": 0,
+							"size": 54
+						},
+						{ "name": "distributed_completion_group_credits_sos", // 1 SO per Scheduler's Master-Slaves Cluster (Double-Buffer)
+							"base_index": 54,
+							"size": 10
+						},
+						{ "name" : "local_compute_barrier_sos_hdcore0",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore0",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name": "completion_group_credits_monitors", // 3 Monitors per Scheduler-cluster's queue (Double-Buffer)
+							"base_index": 0,
+							"size": 162
+						},
+						{ "name": "distributed_completion_group_credits_monitors", // 3 Monitors per Scheduler's Master-Slaves Cluster (Double-Buffer)
+							"base_index": 162,
+							"size": 30
+						},
+						{ "name" : "local_compute_barrier_mons_hdcore0",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore0",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				},
+				{ "index":2,
+					"map_to_userspace": true,
+					"qman": "TPC_1_1",
+					"sos_pools":
+					[
+						{ "name": "compute_gp_sos",
+							"base_index": 0,
+							"size": 632
+						},
+						{ "name": "compute_completion_queue_tdr_sos",
+							"base_index": 632,
+							"size": 3
+						},
+						{ "name": "pdma_tx_completion_queue0_tdr_sos",
+								"base_index": 636,
+								"size": 1
+						},
+						{ "name": "pdma_tx_completion_queue1_tdr_sos",
+								"base_index": 637,
+								"size": 1
+						},
+						{ "name": "pdma_tx_completion_queue2_tdr_sos",
+								"base_index": 638,
+								"size": 1
+						},
+						{ "name": "pdma_tx_commands_completion_queue0_tdr_sos",
+								"base_index": 639,
+								"size": 1
+						},
+						{ "name": "pdma_tx_commands_completion_queue1_tdr_sos",
+								"base_index": 640,
+								"size": 1
+						},
+						{ "name": "pdma_tx_commands_completion_queue2_tdr_sos",
+								"base_index": 641,
+								"size": 1
+						},
+						{ "name": "pdma_rx_completion_queue0_tdr_sos",
+								"base_index": 642,
+								"size": 1
+						},
+						{ "name": "pdma_rx_completion_queue1_tdr_sos",
+								"base_index": 643,
+								"size": 1
+						},
+						{ "name": "pdma_rx_completion_queue2_tdr_sos",
+								"base_index": 644,
+								"size": 1
+						},
+						{ "name": "pdma_device2device_completion_queue0_tdr_sos",
+								"base_index": 645,
+								"size": 1
+						},
+						{ "name": "pdma_device2device_completion_queue1_tdr_sos",
+								"base_index": 646,
+								"size": 1
+						},
+						{ "name": "pdma_device2device_completion_queue2_tdr_sos",
+								"base_index": 647,
+								"size": 1
+						},
+						{ "name": "compute_completion_queues_sos",
+							"base_index": 648,
+							"size": 384 // 3 sets (streams), 128 sos each
+						},
+						{ "name": "pdma_tx_debug_completion_queues_sos",
+							"base_index": 1032,
+							"size": 1 // 1 sets (streams), 1 sos each
+						},
+						{ "name": "pdma_rx_debug_completion_queues_sos",
+							"base_index": 1033,
+							"size": 1 // 1 sets (streams), 1 sos each
+						},
+						{ "name": "pdma_dev2dev_debug_completion_queues_sos",
+							"base_index": 1034,
+							"size": 1 // 1 sets (streams), 1 sos each
+						},
+						{ "name": "pdma_rx_for_network_direct_mode_completion_queue0_tdr_sos",
+								"base_index": 1035,
+								"size": 1
+						},
+						{ "name": "pdma_rx_for_network_direct_mode_completion_queue1_tdr_sos",
+								"base_index": 1036,
+								"size": 1
+						},
+						{ "name": "pdma_rx_for_network_direct_mode_completion_queue2_tdr_sos",
+								"base_index": 1037,
+								"size": 1
+						},
+						{ "name": "pdma_tx_for_network_direct_mode_completion_queue0_tdr_sos",
+								"base_index": 1038,
+								"size": 1
+						},
+						{ "name": "pdma_tx_for_network_direct_mode_completion_queue1_tdr_sos",
+								"base_index": 1039,
+								"size": 1
+						},
+						{ "name": "pdma_tx_for_network_direct_mode_completion_queue2_tdr_sos",
+								"base_index": 1040,
+								"size": 1
+						},
+						// quarter 1
+						{ "name": "compute_sos_set_sos",
+							"base_index": 2048,
+							"size": 2048 // 16 sets, 128 sos each
+						},
+						// quarter 2
+						// quarter 3
+						{ "name": "network_init_sos",
+							"base_index": 6240,
+							"size": 16
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name": "pdma_tx_commands_completion_queue0_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 0,
+								"size": 3
+						},
+						{ "name": "pdma_tx_commands_completion_queue1_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 3,
+								"size": 3
+						},
+						{ "name": "pdma_tx_commands_completion_queue2_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 6,
+								"size": 3
+						},
+						{ "name": "pdma_rx_for_network_direct_mode_completion_queue0_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 9,
+								"size": 3
+						},
+						{ "name": "pdma_rx_for_network_direct_mode_completion_queue1_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 12,
+								"size": 3
+						},
+						{ "name": "pdma_rx_for_network_direct_mode_completion_queue2_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 15,
+								"size": 3
+						},
+						{ "name": "pdma_tx_for_network_direct_mode_completion_queue0_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 18,
+								"size": 3
+						},
+						{ "name": "pdma_tx_for_network_direct_mode_completion_queue1_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 21,
+								"size": 3
+						},
+						{ "name": "pdma_tx_for_network_direct_mode_completion_queue2_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 24,
+								"size": 3
+						},
+						//  monitors 0..31  are not currently used
+						{ "name": "cme_engines_monitors",
+							"base_index": 32,
+							"size": 96 // must be even number
+						},
+						{ "name": "compute_sos_set_monitors", // 16 sets - 1 monitor each
+							"base_index": 128,
+							"size": 16
+						},
+						{ "name": "compute_completion_queue_monitors", // 3 cqs * 2 sets of 4 monitors
+							"base_index": 144,
+							"size": 24
+						},
+						{ "name": "compute_engine_monitors", // number of engines * number of engines types -> (64TPCs + 8MME Convolution + 8MME Transpose + 8ROT) * 4
+							"base_index": 168,
+							"size": 352
+						},
+						{ "name": "compute_back2back_monitors", // number of engines * 1
+							"base_index": 520,
+							"size": 88
+						},
+						{ "name": "topology_debugger_monitors_pool", // number of engines * 1 long mon (4)
+							"base_index": 608,
+							"align": 4,
+							"size": 352
+						},
+						{ "name": "compute_completion_queue_tdr_monitors", // compute_completion CQs (3) sets of 3 monitors - must be in the same SM as the CQ
+							"base_index": 960,
+							"size": 9
+						},
+						{ "name": "pdma_tx_completion_queue0_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 969,
+								"size": 3
+						},
+						{ "name": "pdma_tx_completion_queue1_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 972,
+								"size": 3
+						},
+						{ "name": "pdma_tx_completion_queue2_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 975,
+								"size": 3
+						},
+						{ "name": "pdma_rx_completion_queue0_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 978,
+								"size": 3
+						},
+						{ "name": "pdma_rx_completion_queue1_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 981,
+								"size": 3
+						},
+						{ "name": "pdma_rx_completion_queue2_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 984,
+								"size": 3
+						},
+						{ "name": "pdma_device2device_completion_queue0_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 987,
+								"size": 3
+						},
+						{ "name": "pdma_device2device_completion_queue1_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 990,
+								"size": 3
+						},
+						{ "name": "pdma_device2device_completion_queue2_tdr_monitors", // 1 sets of 3 monitors
+								"base_index": 993,
+								"size": 3
+						},
+						{ "name": "pdma_tx_debug_completion_queue_monitors", // 1 sets of 3 monitors * 2 instances
+								"base_index": 996,
+								"size": 3
+						},
+						{ "name": "pdma_rx_debug_completion_queue_monitors", // 1 sets of 3 monitors * 1 instance
+								"base_index": 999,
+								"size": 3
+						},
+						{ "name": "pdma_dev2dev_debug_completion_queue_monitors", // 1 sets of 3 monitors * 2 instances
+								"base_index": 1002,
+								"size": 3
+						},
+						{ "name": "compute_completion_queue_sfg_cq_monitors", // 4 x 4 monitors for SFG.
+							"base_index": 1005,
+							"size": 16
+						},
+						{ "name": "config_pdma_monitors",
+							"base_index": 1021,
+							"size": 1
+						},
+						{
+							"name": "cme_monitors", // 1 monitor for CME
+							"base_index": 1022,
+							"size": 1
+						},
+						{
+							"name": "compute_tdr_irq_mon",
+							"base_index": 1023,
+							"size": 1
+						}
+					],
+					"completion_queues":
+					[
+						{ "name_prefix": "compute_completion_queue",
+							"schedulers": ["compute_media_scheduler"],
+							"force_order": true,
+							"number_of_instances": 3,
+							"sos_pool": "compute_completion_queues_sos",
+							"sos_depth": 128,
+							"monitors_pool": "compute_completion_queue_monitors",
+							"monitors_depth": 2,
+							"is_compute_completion_queue" : true,
+							"tdr" : true,
+							"sfg_enabled" : true
+						},
+						{ "name_prefix": "pdma_tx_debug_completion_queue",
+							"schedulers": ["compute_media_scheduler"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "pdma_tx_debug_completion_queues_sos",
+							"sos_depth": 1,
+							"monitors_pool": "pdma_tx_debug_completion_queue_monitors",
+							"monitors_depth": 1
+						},
+						{ "name_prefix": "pdma_rx_debug_completion_queue",
+							"schedulers": ["compute_media_scheduler"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "pdma_rx_debug_completion_queues_sos",
+							"sos_depth": 1,
+							"monitors_pool": "pdma_rx_debug_completion_queue_monitors",
+							"monitors_depth": 1
+						},
+						{ "name_prefix": "pdma_dev2dev_debug_completion_queue",
+							"schedulers": ["compute_media_scheduler"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "pdma_dev2dev_debug_completion_queues_sos",
+							"sos_depth": 1,
+							"monitors_pool": "pdma_dev2dev_debug_completion_queue_monitors",
+							"monitors_depth": 1
+						}
+					]
+				},
+				{ "index":3,
+					"map_to_userspace": true,
+					"qman": "TPC_1_1",
+					"sos_pools":
+					[
+						{ "name": "network_gp_sos_0",
+							"base_index": 0,
+							"size": 1024
+						},
+						{ "name" : "local_compute_barrier_sos_hdcore1",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore1",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name": "network_gp_monitors_0",
+							"base_index": 0,
+							"size": 384
+						},
+						{ "name" : "local_compute_barrier_mons_hdcore1",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore1",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				},
+				{ "index":4,
+					"map_to_userspace": true,
+					"qman": "TPC_1_2",
+					"sos_pools":
+					[
+						{"name" : "long_sos_network_completion_queue_internal_0",   "base_index" : 0,  "align" : 8, "size" : 8},
+						{"name" : "long_sos_network_completion_queue_internal_1",   "base_index" : 8,  "align" : 8, "size" : 8},
+						{"name" : "long_sos_network_completion_queue_internal_2",   "base_index" : 16, "align" : 8, "size" : 8},
+						{"name" : "long_sos_network_scaleup_init_completion_queue", "base_index" : 32, "align" : 8, "size" : 8},
+						{"name" : "long_sos_network_completion_queue_external_0",   "base_index" : 40, "align" : 8, "size" : 8},
+						{"name" : "long_sos_network_completion_queue_external_1",   "base_index" : 48, "align" : 8, "size" : 8},
+						{"name" : "long_sos_network_completion_queue_external_2",   "base_index" : 56, "align" : 8, "size" : 8},
+						{ "name": "long_sos", // 64-7(57) X 2 long sos - only the even ones are used (4 sos used, 4 sos alignment)
+							"base_index": 64,
+							"align" : 8,
+							"size": 456
+						},
+						{ "name": "pdma_channels_long_sos", // 18 [(4 PDMA-Compute, 2 PDMA-NW) x #StreamsPerType] X 2 long sos - only the even ones are used (4 sos used, 4 sos alignment)
+							"base_index": 520,
+							"align" : 8,
+							"size": 144
+						},
+						{ "name": "host_fence_counters_sos",
+							"base_index": 664,
+							"size": 12 // 1 so per fence counter X 4 fence counters per stream X 3 streams
+						}
+					],
+					"monitors_pools":
+					[
+						// Notes:
+						//	Compute users are the following streams: compute, pdma_rx, pdma_tx, pdma_device2device, pdma_tx_commands
+						//  Network users are the following streams: network_garbage_collector_and_reduction, scaleup_receive, scaleup_send, pdma_tx_for_network, pdma_rx_for_network
+						//
+						//  Tracks long sos, 1 long monitor per stream 77*4 (compute=15(3+3+3+3+3) network=62(32+12+12+3+3)
+						//	Must be on the same SM as completion_queues_long_so_pool
+						{ "name": "compute_gp_monitors",
+							"base_index": 0,
+							"align" : 4,
+							"size": 308
+						},
+						{ "name": "network_long_monitors_0", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+							"base_index": 308,
+							"align" : 4,
+							"size": 128
+						},
+						{ "name": "network_long_monitors_1", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+							"base_index": 436,
+							"align" : 4,
+							"size": 128
+						},
+						{ "name": "network_long_monitors_2", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+							"base_index": 564,
+							"align" : 4,
+							"size": 128
+						},
+						{ "name": "network_long_monitors_3", // 32 x 4 monitors to track the arch SOs. must be on the same SM as completion_queues_long_so_pool
+							"base_index": 692,
+							"align" : 4,
+							"size": 128
+						},
+						{ "name": "host_fence_counters_monitors", // 3 monitors per frnce counter X 4 fence counters per stream X 3 streams
+							"base_index": 820,
+							"size": 36
+						}
+					],
+					"host_fence_counters":
+					[
+						{ "name_prefix": "host_fence_counters_0", // fence counters for stream 0
+							"number_of_instances": 4,
+							"sos_pool": "host_fence_counters_sos",
+							"monitors_pool": "host_fence_counters_monitors",
+							"enable_isr": false  // default is true
+						},
+						{ "name_prefix": "host_fence_counters_1", // fence counters for stream 1
+							"number_of_instances": 4,
+							"sos_pool": "host_fence_counters_sos",
+							"monitors_pool": "host_fence_counters_monitors",
+							"enable_isr": false  // default is true
+						},
+						{ "name_prefix": "host_fence_counters_2", // fence counters for stream 2
+							"number_of_instances": 4,
+							"sos_pool": "host_fence_counters_sos",
+							"monitors_pool": "host_fence_counters_monitors",
+							"enable_isr": false  // default is true
+						}
+					]
+				},
+				{ "index":5,
+					"map_to_userspace": true,
+					"qman": "TPC_1_2",
+					"sos_pools":
+					[
+						{ "name": "compute_completion_queues_sfg_sos",
+							"base_index": 0,
+							"size": 360
+						},
+						{ "name" : "local_compute_barrier_sos_hdcore2",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore2",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name": "compute_completion_queue_sfg_monitors",
+							"base_index": 0,
+							"size": 512
+						},
+						{ "name" : "local_compute_barrier_mons_hdcore2",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore2",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				},
+				{ "index":6,
+					"map_to_userspace": true,
+					"qman": "TPC_1_3",
+					"sos_pools":
+					[
+						// quarter 0
+						{ "name": "network_completion_queue_sos_0",
+							"base_index": 0,
+							"size": 1024
+						},
+						{ "name": "network_gp_sos_1",
+							"base_index": 1024,
+							"size": 1024
+						},
+						// quarter 1
+						{ "name": "network_completion_queue_sos_1",
+							"base_index": 2048,
+							"size": 1024
+						},
+						// quarter 2
+						{ "name": "network_completion_queue_sos_2",
+							"base_index": 4096,
+							"size": 1024
+						},
+						// quarter 3
+						{ "name": "network_completion_queue_init_sos",
+							"base_index": 7168,
+							"size": 16
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name": "network_completion_queue_monitors", // mon_depth * (monitors per set (3) + number of scheduler + is force order (0/1) - 1)
+							"base_index": 0,
+							"size": 144
+						},
+						{ "name": "network_gp_monitors_1",
+							"base_index": 512,
+							"size": 384
+						},
+						{ "name": "network_init_monitors",
+							"base_index": 896,
+							"size": 16
+						}
+					],
+					"completion_queues":
+					[
+						{ "name_prefix": "network_completion_queue_internal_0",
+							"schedulers": ["network_garbage_collector_and_reduction", "scaleup_receive", "scaleup_send", "scaleout_receive", "scaleout_send"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "network_completion_queue_sos_0",
+							"sos_depth": 64,
+							"monitors_pool": "network_completion_queue_monitors",
+							"monitors_depth": 4,
+							"enable_isr" : false,
+							"long_sos" : "long_sos_network_completion_queue_internal_0"
+						},
+						{ "name_prefix": "network_completion_queue_internal_1",
+							"schedulers": ["network_garbage_collector_and_reduction", "scaleup_receive", "scaleup_send", "scaleout_receive", "scaleout_send"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "network_completion_queue_sos_1",
+							"sos_depth": 64,
+							"monitors_pool": "network_completion_queue_monitors",
+							"monitors_depth": 4,
+							"enable_isr" : false,
+							"long_sos" : "long_sos_network_completion_queue_internal_1"
+						},
+						{ "name_prefix": "network_completion_queue_internal_2",
+							"schedulers": ["network_garbage_collector_and_reduction", "scaleup_receive", "scaleup_send", "scaleout_receive", "scaleout_send"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "network_completion_queue_sos_2",
+							"sos_depth": 64,
+							"monitors_pool": "network_completion_queue_monitors",
+							"monitors_depth": 4,
+							"enable_isr" : false,
+							"long_sos" : "long_sos_network_completion_queue_internal_2"
+						},
+						{ "name_prefix": "network_scaleup_init_completion_queue",
+							"schedulers": ["network_garbage_collector_and_reduction", "scaleup_receive", "scaleup_send"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "network_completion_queue_init_sos",
+							"sos_depth": 4,
+							"monitors_pool": "network_init_monitors",
+							"monitors_depth": 1,
+							"enable_isr" : true,
+							"long_sos" : "long_sos_network_scaleup_init_completion_queue"
+						},
+						{ "name_prefix": "network_completion_queue_external_0",
+							"schedulers": ["network_garbage_collector_and_reduction"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "network_completion_queue_sos_0",
+							"sos_depth": 64,
+							"monitors_pool": "network_completion_queue_monitors",
+							"monitors_depth": 4,
+							"long_sos" : "long_sos_network_completion_queue_external_0"
+						},
+						{ "name_prefix": "network_completion_queue_external_1",
+							"schedulers": ["network_garbage_collector_and_reduction"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "network_completion_queue_sos_1",
+							"sos_depth": 64,
+							"monitors_pool": "network_completion_queue_monitors",
+							"monitors_depth": 4,
+							"long_sos" : "long_sos_network_completion_queue_external_1"
+						},
+						{ "name_prefix": "network_completion_queue_external_2",
+							"schedulers": ["network_garbage_collector_and_reduction"],
+							"force_order": true,
+							"number_of_instances": 1,
+							"sos_pool": "network_completion_queue_sos_2",
+							"sos_depth": 64,
+							"monitors_pool": "network_completion_queue_monitors",
+							"monitors_depth": 4,
+							"long_sos" : "long_sos_network_completion_queue_external_2"
+						}
+					]
+				},
+				{ "index":7,
+					"map_to_userspace": true,
+					"qman": "TPC_1_3",
+					"sos_pools":
+					[
+						{ "name": "network_gp_sos_2",
+							"base_index": 0,
+							"size": 1024
+						},
+						{ "name": "network_gp_sos_3",
+							"base_index": 1024,
+							"size": 1024
+						},
+						{ "name" : "local_compute_barrier_sos_hdcore3",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore3",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name": "network_gp_monitors_2",
+							"base_index": 0,
+							"size": 384
+						},
+						{ "name": "network_gp_monitors_3",
+							"base_index": 384,
+							"size": 384
+						},
+						{ "name" : "local_compute_barrier_mons_hdcore3",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore3",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				},
+				{ "index":9,
+					"map_to_userspace": false,
+					"qman": "TPC_1_4",
+					"sos_pools":
+					[
+						{ "name" : "local_compute_barrier_sos_hdcore4",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore4",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name" : "local_compute_barrier_mons_hdcore4",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore4",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				},
+				{ "index":11,
+					"map_to_userspace": false,
+					"qman": "TPC_1_5",
+					"sos_pools":
+					[
+						{ "name" : "local_compute_barrier_sos_hdcore5",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore5",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name" : "local_compute_barrier_mons_hdcore5",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore5",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				},
+				{ "index":13,
+					"map_to_userspace": false,
+					"qman": "TPC_1_6",
+					"sos_pools":
+					[
+						{ "name" : "local_compute_barrier_sos_hdcore6",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore6",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name" : "local_compute_barrier_mons_hdcore6",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore6",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				},
+				{ "index":15,
+					"map_to_userspace": false,
+					"qman": "TPC_1_7",
+					"sos_pools":
+					[
+						{ "name" : "local_compute_barrier_sos_hdcore7",
+							"base_index": 8056,
+							"size": 8
+						},
+						{ "name" : "local_compute_sos_set_sos_hdcore7",
+							"base_index": 8064,
+							"size": 128
+						}
+					],
+					"monitors_pools":
+					[
+						{ "name" : "local_compute_barrier_mons_hdcore7",
+							"base_index": 854,
+							"size": 10
+						},
+						{ "name" : "local_compute_sos_set_mons_hdcore7",
+							"base_index": 864,
+							"size": 160
+						}
+					]
+				}
+			],
+			"completion_queues_long_so_pool" : "long_sos",
+			"direct_mode_pdma_channels_long_sos" : "pdma_channels_long_sos",
+			"sfg_sos_pool": "compute_completion_queues_sfg_sos",
+			"sfg_monitors_pool": "compute_completion_queue_sfg_monitors",
+			"sfg_cq_monitors_pool": "compute_completion_queue_sfg_cq_monitors",
+			"cme_engines_monitors_pool" : "cme_engines_monitors",
+			"sos_sets" : // currently at most one sos set per scheduler
+			[
+				{ "name" : "compute_sos_sets",
+					"scheduler" : "compute_media_scheduler",
+					"set_size" : 128,
+					"num_sets" : 16,
+					"sos_pool" : "compute_sos_set_sos",
+					"local_sos_pool" : "local_compute_sos_set_sos",  // allocated per hdcore with _hdcore# suffix 8 * number of so sets
+					"local_mon_pool" : "local_compute_sos_set_mons", // allocated per hdcore with _hdcore# suffix 10 * number of so sets
+					"reset_monitors_pool" : "compute_sos_set_monitors", // mon pool and so pool must be in the same SM
+					"gc_monitors_pool"    : "compute_engine_monitors",
+					"cme_monitors_pool"   : "cme_monitors",
+					"topology_debugger_monitors_pool" : "topology_debugger_monitors_pool",
+					"compute_back2back_monitors" : "compute_back2back_monitors",
+					"local_barrier_sos_pool" : "local_compute_barrier_sos",
+					"local_barrier_mons_pool" : "local_compute_barrier_mons"
+				}
+			],
+			"completion_group_credits":
+			{
+				"sos_pool": "completion_group_credits_sos",
+				"monitors_pool": "completion_group_credits_monitors"
+			},
+			"distributed_completion_group_credits":
+			{
+				"sos_pool": "distributed_completion_group_credits_sos",
+				"monitors_pool": "distributed_completion_group_credits_monitors"
+			}
+		}
+	}
+}

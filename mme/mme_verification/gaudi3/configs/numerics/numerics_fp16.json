@@ -1,0 +1,25 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["fp16"]},
+      {"inTypeFloat":["fp16", "ufp16"]},
+      {"in2TypeFloat":["fp16", "ufp16"]},
+      {"outTypeFloat":["fp16", "ufp16"]},
+      {"operation":["ab"]},
+      {"xSizes":["128", "256", "1", "1", "1"]},
+      {"ySizes":["256", "256", "1", "1", "1"]},
+      {"wSizes":["256", "128", "1", "1", "1"]},
+      {"geometry":["4xh"]},
+      {"dedwPattern":["random"]},
+      {"fp8BiasIn": ["random"]},
+      {"fp8BiasIn2": ["random"]},
+      {"fp8BiasOut": ["random"]},
+      {"clippingEn":["true"]},
+      {"clipInfIn":["true"]},
+      {"infNanModeA":["fullInfNan", "noInfNan"]},
+      {"infNanModeB":["fullInfNan", "noInfNan"]},
+      {"infNanModeOut":["fullInfNan", "noInfNan"]},
+      {"flushDenormals":["true"]},
+      {"stochasticFlush":["true"]},
+      {"accRoundingMode":["rn"]}]
+  ]
+}

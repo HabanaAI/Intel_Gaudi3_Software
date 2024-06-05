@@ -1,0 +1,75 @@
+{
+  "tests": [
+  [
+    {"testName": ["small spatial size, effectively no constraint"]},
+    {"inTypeFloat": ["bf16"]},
+    {"outTypeFloat": ["bf16"]},
+    {"operation": ["abt"]},
+    {"useBrain": ["true"]},
+    {"ySizes": ["256","1","8","1","1"]},
+    {"wSizes": ["256","256","8","1","1"]},
+    {"xSizes": ["256","1","8","1","1"]},
+    {"dedw2x": ["true"]},
+    {"dedwCDConcurrency":["false"]},
+    {"optimizationTest": {"batchConcurrency": "4"}}
+  ],
+
+  [
+    {"testName": ["small spatial size, effectively no constraint"]},
+    {"inTypeFloat": ["bf16"]},
+    {"outTypeFloat": ["bf16"]},
+    {"operation": ["ab"]},
+    {"useBrain": ["true"]},
+    {"ySizes": ["256","1","8","1","1"]},
+    {"wSizes": ["256","2048","8","1","1"]},
+    {"xSizes": ["2048","1","8","1","1"]},
+    {"dedw2x": ["true"]},
+    {"dedwCDConcurrency":["false"]},
+    {"optimizationTest": {"batchConcurrency": "4"}}
+  ],
+
+  [
+    {"testName": ["a non transposed, non interleaving solution"]},
+    {"inTypeFloat": ["fp32"]},
+    {"outTypeFloat": ["fp32"]},
+    {"operation": ["atbt"]},
+    {"dedwPattern":["fck"]},
+    {"geometry": ["4xw"]},
+    {"useBrain": ["true"]},
+    {"ySizes": ["200","60","8","3","1"]},
+    {"wSizes": ["66","200","8","3","1"]},
+    {"xSizes": ["60","66","8","3","1"]},
+    {"dedw2x": ["true"]},
+    {"dedwCDConcurrency":["false"]},
+    {"optimizationTest": {"batchConcurrency": "4"}}
+  ],
+
+    [
+      {"testName": ["partial width"]},
+      {"inTypeFloat": ["bf16"]},
+      {"outTypeFloat": ["bf16"]},
+      {"operation": ["ab"]},
+      {"useBrain": ["true"]},
+      {"xSizes": ["256","1","8","1","1"]},
+      {"wSizes": ["128","256","8","1","1"]},
+      {"ySizes": ["128","1","8","1","1"]},
+      {"dedw2x": ["true"]},
+      {"dedwCDConcurrency":["false"]},
+      {"optimizationTest": {"batchConcurrency": "4"}}
+    ],
+
+    [
+      {"testName": ["Roman test"]},
+      {"inTypeFloat": ["bf16"]},
+      {"outTypeFloat": ["bf16"]},
+      {"operation": ["abt"]},
+      {"useBrain": ["true"]},
+      {"xSizes": ["128","1","32","1","1"]},
+      {"wSizes": ["128","256","32","1","1"]},
+      {"ySizes": ["256","1","32","1","1"]},
+      {"dedw2x": ["true"]},
+      {"dedwCDConcurrency":["false"]},
+      {"optimizationTest": {"batchConcurrency": "4"}}
+    ]
+  ]
+}

@@ -1,0 +1,69 @@
+[
+    // must be in descending order
+    { "op": "replace", "path" : "/gaudi3/cores/engine_clusters/5/qman", "value": "TPC_2_0" }, // 5 is cme
+    { "op": "remove", "path" : "/gaudi3/cores/engine_clusters/4" }, // 4 is rotator
+    { "op": "replace", "path" : "/gaudi3/cores/engine_clusters/1/engines", // 1 is mme
+        "value":
+        [
+            "MME_0",
+            "MME_2",
+            "MME_4",
+            "MME_6"
+        ]
+    },
+    { "op": "replace", "path" : "/gaudi3/cores/engine_clusters/0/engines", // 0 is compute_tpc
+        "value":
+        [
+            "TPC_0_0",
+            "TPC_2_0",
+            "TPC_4_0",
+            "TPC_6_0",
+            "TPC_0_1",
+            "TPC_2_1",
+            "TPC_4_1",
+            "TPC_6_1",
+            "TPC_0_2",
+            "TPC_2_2",
+            "TPC_4_2",
+            "TPC_6_2",
+            "TPC_0_3",
+            "TPC_2_3",
+            "TPC_4_3",
+            "TPC_6_3",
+            "TPC_0_4",
+            "TPC_2_4",
+            "TPC_4_4",
+            "TPC_6_4",
+            "TPC_0_5",
+            "TPC_2_5",
+            "TPC_4_5",
+            "TPC_6_5",
+            "TPC_0_6",
+            "TPC_2_6",
+            "TPC_4_6",
+            "TPC_6_6",
+            "TPC_0_7",
+            "TPC_2_7",
+            "TPC_4_7",
+            "TPC_6_7"
+        ]
+    },
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/0/qman", "value": "TPC_2_0"}, // compute_media_scheduler
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/1/qman", "value": "TPC_2_1"}, // scaleout_receive
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/2/qman", "value": "TPC_2_2"}, // scaleout_send
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/3/qman", "value": "TPC_2_3"}, // network_garbage_collector_and_reduction
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/4/qman", "value": "TPC_2_4"}, // scaleup_receive
+    { "op": "replace", "path" : "/gaudi3/cores/schedulers/5/qman", "value": "TPC_2_5"}, // scaleup_send
+    // must be in descending order
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/0/qman", "value": "TPC_2_0" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/1/qman", "value": "TPC_2_1" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/2/qman", "value": "TPC_2_2" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/3/qman", "value": "TPC_2_3" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/4/qman", "value": "TPC_2_4" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/5/qman", "value": "TPC_2_5" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/6/qman", "value": "TPC_2_6" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/7/qman", "value": "TPC_2_7" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/8/qman", "value": "TPC_4_0" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/9/qman", "value": "TPC_4_1" },
+    { "op": "replace", "path" : "/gaudi3/sync/sync_managers/10/qman", "value": "TPC_4_2" }
+]

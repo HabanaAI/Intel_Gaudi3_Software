@@ -1,0 +1,22 @@
+{
+    "fp8EpsilonAbsoluteError": 0.01,
+    "fp8EpsilonRelativeError": 0.01,
+    "bf16EpsilonAbsoluteError": 0.01,
+    "bf16EpsilonRelativeError": 0.01,
+    "fp16EpsilonAbsoluteError": 0.01,
+    "fp16EpsilonRelativeError": 0.01,
+    "bitAccurate": false,
+    "breakOnFirstError": true,
+    "f32EpsilonAbsoluteError": 0.001,
+    "f32EpsilonRelativeError": 0.001,
+    "l2NormMinRatio": 0.8,
+    "maxLenAbsError": 1,
+    "maxLenAverageVsStdev": 15,
+    "pearsonThreshold": 0.95,
+    "dumpTensorsData": [],
+    "ignoredTensors": [],
+    "ignoredGuids": [
+        "non_zero",
+        "nms"
+    ]
+}

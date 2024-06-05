@@ -1,0 +1,74 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: mpm-test-data
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - COMPLEX_GUID
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_PROFILER
+    - SYNAPSE_UTILS
+    - TPC_FUSER
+    - TPC_KERNELS
+    - TPC_LLVM
+    - TPCSIM
+    - RDMA_CORE
+  config:
+    testCommand: models_tests_job --test-type accuracy --unit-tests --keep-going --execution-time-limit 10 --models-folder ${MPM_TEST_DATA_ROOT}/models
+    loadLKD: true
+    releaseFlag: false
+  preTestStages:
+      Fetch LFS data:
+        runOutsideDocker: true
+        command: "fetch_git_lfs mpm-test-data ${MPM_TEST_DATA_ROOT}"
+  envVars:
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi_sim_rec_tests:
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=5000'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run rec tests Gaudi:
+        filter: --test-name g1_$(date +"%Y%m%d-%H%M%S") --chip-type gaudi
+        envVars:
+          ENABLE_CONSOLE: false
+          LOG_LEVEL_ALL: 2
+  Test_synapse_gaudi2_sim_rec_tests:
+    config:
+      lkdSimHealtcheckParams:
+        #lkdParam: 'timeout_locked=5000'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run rec tests Gaudi2:
+        filter: --test-name g2_$(date +"%Y%m%d-%H%M%S") --chip-type gaudi2
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 5000
+          ENABLE_CONSOLE: false
+          LOG_LEVEL_ALL: 2
+  Test_synapse_gaudi3_sim_rec_tests:
+    config:
+      lkdSimHealtcheckParams:
+        #lkdParam: 'timeout_locked=5000'
+        startNetworkIfs: false
+        rebootOnFailure: true
+        checkDmesg: false
+    stages:
+      Run rec tests Gaudi3:
+        filter: --test-name g3_$(date +"%Y%m%d-%H%M%S") --chip-type gaudi3
+        envVars:
+          SCAL_TIMEOUT_VALUE_SECONDS: 5000
+          ENABLE_CONSOLE: false
+          LOG_LEVEL_ALL: 2

@@ -1,0 +1,39 @@
+common:
+  testRepos:
+    - repository: automation
+    - repository: coral-sim
+    - repository: engines-arc
+    - repository: habanalabs
+    - repository: nic_kmd
+    - repository: synapse
+  dependencies:
+    - CORAL_SIM
+    - HCL
+    - HL_THUNK
+    - SWTOOLS_SDK
+    - SYNAPSE_UTILS
+    - TPC_KERNELS
+    - TPCSIM
+    - RDMA_CORE
+    - COMPLEX_GUID
+    - TPC_FUSER
+  config:
+    testCommand: run_synapse_test
+    loadLKD: true
+    releaseFlag: true
+    testXMLOutputKey: --xml
+  envVars:
+    LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${RDMA_CORE_ROOT}/build/lib
+testsMap:
+  Test_synapse_gaudi_sim_8cards_multi_device:
+    config:
+      lkdSimHealtcheckParams:
+        lkdParam: 'timeout_locked=1000'
+        startNetworkIfs: false
+        checkDmesg: false
+        numOfSimInstances: 8
+        simParams: '-spdlog 4'
+        DRAMAllocation: 4
+    stages:
+      Run synapse gaudi multi device test:
+        filter: -d -n 8 -s SynGaudiMultiDevicesSimple.*:SynMultiGaudiDeviceHCLSimple.*

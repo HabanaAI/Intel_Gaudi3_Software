@@ -1,0 +1,46 @@
+{
+  "programInSram":"true",
+  "tests":[
+
+      [{"testName":["test_ab"]},
+      {"inTypeFloat":["fp16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["ab"]},
+      {"xSizes":["256", "512", "1", "1", "1"]},
+      {"wSizes":["512", "256", "1", "1", "1"]},
+      {"ySizes":["512", "512", "1", "1", "1"]},
+      {"geometry":["2xw"]},
+      {"dedwPattern":["ckf"]},
+      {"memsetOutput":["false"]},
+      {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+      {"reductionRm":["random"]}],
+
+
+      [{"testName":["test_abt"]},
+      {"inTypeFloat":["fp16"]},
+      {"outTypeFloat":["bf16"]},
+      {"operation":["abt"]},
+      {"xSizes":["256", "512", "1", "1", "1"]},
+      {"wSizes":["256", "512", "1", "1", "1"]},
+      {"ySizes":["512", "512", "1", "1", "1"]},
+      {"geometry":["2xw"]},
+      {"dedwPattern":["ckf"]},
+      {"memsetOutput":["false"]},
+      {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+      {"reductionRm":["random"]}],
+
+      [{"testName":["test_atb"]},
+      {"inTypeFloat":["fp16"]},
+      {"outTypeFloat":["fp16"]},
+      {"operation":["atb"]},
+      {"xSizes":["512", "256", "1", "1", "1"]},
+      {"wSizes":["512", "256", "1", "1", "1"]},
+      {"ySizes":["512", "512", "1", "1", "1"]},
+      {"geometry":["2xw"]},
+      {"dedwPattern":["ckf"]},
+      {"memsetOutput":["false"]},
+      {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+      {"reductionRm":["random"]}]
+  ]
+
+}

@@ -1,0 +1,23 @@
+{ "programInSram":"true",
+  "tests":[
+    [{"testName":["basic DMA"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["memcpy"]},
+    {"xSizes":["2048", "128", "1", "1", "1"]},
+    {"ySizes":["2048", "128", "1", "1", "1"]},
+    {"geometry":["2xw", "4xw"]},
+    {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+    {"reductionRm":["random"]}],
+
+    [{"testName":["DMA with steps"]},
+    {"inTypeFloat":["bf16"]},
+    {"outTypeFloat":["bf16"]},
+    {"operation":["memcpy"]},
+    {"xSizes":["3500", "300", "1", "1", "1"]},
+    {"ySizes":["3500", "300", "1", "1", "1"]},
+    {"geometry":["2xw", "4xw"]},
+    {"reductionOp":["add", "sub", "min", "max", "max_0"]},
+    {"reductionRm":["random"]}]
+    ]
+}

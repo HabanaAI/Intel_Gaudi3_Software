@@ -1,0 +1,23 @@
+{ 
+  "tests":
+  [
+      [
+          {"testName":["layer3_downsample"]},
+          {"inTypeFloat":["bf16"]},
+          {"outTypeFloat":["bf16"]},
+          {"operation":["dedx"]},
+          {"sbReuse":["false"]},
+          {"pipelineLevel": ["3"]},
+          {"signalMode":["output"]},
+          {"memsetVoidPixels":["true"]},
+          {"xSizes":["512", "28", "28", "64", "1"]},
+          {"wSizes":["1024", "512", "1", "1", "1"]},
+          {"ySizes":["1024", "14", "14", "64", "1"]},
+          {"dilation":["1", "1", "1"]},
+          {"strides":["2", "2", "1"]},
+          {"padding":["0", "0", "0"]},
+          {"convPattern":["skf"]},
+          {"geometry":["2xh"]}
+  ]]
+
+}
