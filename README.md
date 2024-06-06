@@ -74,10 +74,6 @@ HABANA Synapse is an open-source project shared by HABANA LABS with the AI commu
 - For **libhlib.so**: export RDMA_CORE_LIB=PATH/IN/YOUR/SYSTEM/trees/npu-stack/rdma-core/build/lib
 
 
-## Contributing
-
-Guidelines for contributing to the project. Include information on how to report bugs, suggest enhancements, or submit pull requests.
-
 ## License
 
 Information about the project's license. Specify the license type and provide a link to the full license text if applicable.
