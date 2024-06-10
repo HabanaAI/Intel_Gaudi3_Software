@@ -1,4 +1,4 @@
-# MME stack - Habana Labs MME management library
+# MME stack - Intel Gaudi Software MME management library
 
 This library will contain all files related to MME-stack .
 both for graph-compiler to use in deployment and for HW-verification
