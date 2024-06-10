@@ -1,4 +1,4 @@
-# SPP - Habana Labs Synapse Performance Primitives library
+# SPP - Intel&reg; Gaudi&reg; Software Performance Primitives library
 
 ## Requirements
 
