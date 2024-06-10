@@ -1,4 +1,4 @@
-# Intel Gaudi library
+# Intel Gaudi scal library
 
 ## Coding Style
 We are working with clang-format. please run the following command on your media repo:
