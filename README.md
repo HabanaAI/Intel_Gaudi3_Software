@@ -1,6 +1,6 @@
-# HABANA Synapse
+# Intel&reg; Gaudi%reg; Software Open Source Project
 
-HABANA open source project
+Intel Gaudi Software for Open Source
 
 ## Table of Contents
 
@@ -11,9 +11,9 @@ HABANA open source project
 
 ## Introduction
 
-Welcome to HABANA Synapse!
+Welcome to the Intel Gaudi Software Open Source Project 
 
-HABANA Synapse is an open-source project shared by HABANA LABS with the AI community. By providing this project to the open-source community, HABANA LABS encourages the development of cutting-edge AI technologies and solutions that benefit researchers, developers, and enthusiasts worldwide.
+The Intel Gaudi Software Open Source Project is shared by the Intel Gaudi team with the broader AI community. By providing this project to the open-source community, The Intel Gaudi team encourages the development of cutting-edge AI technologies and solutions that benefit researchers, developers, and enthusiasts worldwide.
 
 ## Installation
 
