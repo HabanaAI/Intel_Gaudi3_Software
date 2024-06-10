@@ -1,4 +1,4 @@
-# Intel&reg; Gaudi%reg; Software Open Source Project
+# Intel&reg; Gaudi&reg; Software Open Source Project
 
 Intel Gaudi Software for Open Source
 
