@@ -1,5 +1,5 @@
 protobuf==3.20.3
 pillow==10.3.0
-reportlab==3.6.8
+reportlab==3.6.13
 rst2pdf==0.101
 matplotlib==3.8.3
